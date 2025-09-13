@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainActivityNav"
-    app:startDestination="@id/adreslerFragment">
+    app:startDestination="@id/anasayfaFragment">
 
     <fragment
         android:id="@+id/adreslerFragment"
@@ -15,4 +15,19 @@
         android:name="com.ecemm.yumico.ui.fragment.AnasayfaFragment"
         android:label="fragment_anasayfa"
         tools:layout="@layout/fragment_anasayfa" />
+    <fragment
+        android:id="@+id/favorilerFragment"
+        android:name="com.ecemm.yumico.ui.fragment.FavorilerFragment"
+        android:label="fragment_favoriler"
+        tools:layout="@layout/fragment_favoriler" />
+    <fragment
+        android:id="@+id/urunDetayFragment"
+        android:name="com.ecemm.yumico.ui.fragment.UrunDetayFragment"
+        android:label="fragment_urun_detay"
+        tools:layout="@layout/fragment_urun_detay" />
+    <fragment
+        android:id="@+id/sepetFragment"
+        android:name="com.ecemm.yumico.ui.fragment.SepetFragment"
+        android:label="fragment_sepet"
+        tools:layout="@layout/fragment_sepet" />
 </navigation>
