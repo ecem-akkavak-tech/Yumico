@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivityNav"
+    app:startDestination="@id/adreslerFragment">
+
+    <fragment
+        android:id="@+id/adreslerFragment"
+        android:name="com.ecemm.yumico.ui.fragment.AdreslerFragment"
+        android:label="fragment_adresler"
+        tools:layout="@layout/fragment_adresler" />
+    <fragment
+        android:id="@+id/anasayfaFragment"
+        android:name="com.ecemm.yumico.ui.fragment.AnasayfaFragment"
+        android:label="fragment_anasayfa"
+        tools:layout="@layout/fragment_anasayfa" />
+</navigation>
