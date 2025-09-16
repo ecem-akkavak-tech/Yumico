@@ -1,60 +1,45 @@
 package com.ecemm.yumico.ui.fragment
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ecemm.yumico.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ecemm.yumico.data.entity.Yemekler
+import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AnasayfaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AnasayfaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+   private lateinit var binding: FragmentAnasayfaBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_anasayfa, container, false)
+        binding = FragmentAnasayfaBinding.inflate(inflater, container, false) //viewbinding
+
+
+        //todo- dataBinding kurulum
+        //binding = DataBindingUtil.inflate(inflater, R.layout.fragment_homepage , container, false)
+        //binding.homepageObject = this
+        //binding.toolbarHomepageTitle = "Yemekler"
+
+
+       //todo- geçici verilerle recyclerview
+        binding.recyclerviewYemekler.layoutManager = LinearLayoutManager(requireContext())
+        val yemekListesi = ArrayList<Yemekler>()
+        val yemek1 = Yemekler(1,"Mantı","manti_img.jpg",250)
+        val yemek2 = Yemekler(2,"Baklava","baklava_img.jpg",300)
+        val yemek3 = Yemekler(3,"Sarma","sarma_img.jpg",170)
+        val yemek4 = Yemekler(4,"Pizza","pizza_img.jpg",380)
+        yemekListesi.add(yemek1)
+        yemekListesi.add(yemek2)
+        yemekListesi.add(yemek3)
+        yemekListesi.add(yemek4)
+
+
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AnasayfaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AnasayfaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
