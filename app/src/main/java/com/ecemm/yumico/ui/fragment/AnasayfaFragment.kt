@@ -30,11 +30,11 @@ class AnasayfaFragment : Fragment() {
         val yemek1 = Yemekler(1,"Mantı","manti_img.jpg",250)
         val yemek2 = Yemekler(2,"Baklava","baklava_img.jpg",300)
         val yemek3 = Yemekler(3,"Sarma","tortilla_img.png",170)
-        val yemek4 = Yemekler(4,"Pizza","pizza_img.png",380)
+
         yemekListesi.add(yemek1)
         yemekListesi.add(yemek2)
         yemekListesi.add(yemek3)
-        yemekListesi.add(yemek4)
+        yemekListesi.add(yemek3)
 
         //adapter & recyclerview arası veri aktarma işlemi
         val yemeklerAdapter = YemeklerAdapter(requireContext(),yemekListesi)
