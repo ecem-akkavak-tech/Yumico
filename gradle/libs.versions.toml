@@ -13,6 +13,8 @@ navigationFragmentKtx = "2.9.1"
 navigationUiKtx = "2.9.1"
 hilt = "2.51"
 glide = "4.16.0"
+databindingRuntime = "8.13.0"
+library = "3.2.0-alpha11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +31,8 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide"}
+androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
+androidx-library = { group = "androidx.databinding", name = "library", version.ref = "library" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
