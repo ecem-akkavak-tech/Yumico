@@ -1,17 +1,20 @@
 package com.ecemm.yumico.ui.adapter
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.CardDesignBinding
-import kotlinx.coroutines.flow.internal.NoOpContinuation.context
+import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
 
 class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
+
+    //!!!!todo-  Favori Icon tıklanma durumlarını burada tutuyoruz (yemek_id üzerinden)
+    val favoriSet = mutableSetOf<Int>()
 
     inner class CardDesignHolder(var cardBinding: CardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
 
@@ -37,21 +40,19 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
         val yemek = yemeklerList.get(position)
         cBinding.yemekObj = yemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
 
-//yemek_resim_ad
+
        //todo:resmi almak için (sonra sil )
         val imageId = mContext.resources.getIdentifier(
             yemek.yemek_resim_adi,
-            "drawable", mContext.packageName
+            "drawable",
+            mContext.packageName
         )
-
         if (imageId != 0) {
-            // Geçerli drawable bulundu
             cBinding.imageViewYemekImg.setImageResource(imageId)
         } else {
-            // Drawable yok, default resim kullan
             cBinding.imageViewYemekImg.setImageResource(R.drawable.favblank_img)
-            Log.e("YemeklerAdapter", "Drawable bulunamadı: ${yemek.yemek_resim_adi }")
         }
+
 
 //        todo: retrofit & glide ile internete yüklenen resmi alma
 //        val imgUrl = "http://kasimadalan.pe.hu/filmler_yeni/resimler/${film.resim}"
@@ -60,16 +61,33 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
 //            .override(500,700)
 //            .into(cBinding.imageViewFilmImg)
 //
-//        /** card View tıklama & veri transferi & sayfa geçişi
-//         * 4-cardView'a (her bir card'a ) tıklanınca detailFragment sayfasına geçiş yapılsın ve her bir filmin detayı görüntülensin
-//         * hatırlatma : cardView yapısı HomePageFragment içinde, o yüzden **directions** o sayfa **args** DetailFragment
-//         * hatırlatma : main_activity_nav içinde film nesnesi argument olarak ekli olmalı
-//         **/
-//        cBinding.cardViewFilm.setOnClickListener{
-//            val gecis = HomepageFragmentDirections.detailPageGecis(film=film)
-//            Navigation.findNavController(it).navigate(gecis)
-//        }
-//
+       /*todo-  card View tıklama & veri transferi & sayfa geçişi - - geçici verilerle
+        * hatırlatma : cardView yapısı AnasayfaFragment içinde, o yüzden **directions** o sayfa **args** UrunDetayFragment
+        * hatırlatma : main_activity_nav içinde yemek nesnesi argument olarak ekli olmalı
+        */
+
+         cBinding.cardViewYemekler.setOnClickListener {
+             val gecis= AnasayfaFragmentDirections.urunDetayGecis(yemek = yemek)
+             Navigation.findNavController(it).navigate(gecis)
+         }
+
+      //todo- favori iconu güncellemek
+        if (favoriSet.contains(yemek.yemek_id)) {
+            cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
+        } else {
+            cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
+        }
+
+        cBinding.imageViewFav.setOnClickListener {
+            if (favoriSet.contains(yemek.yemek_id)) {
+                favoriSet.remove(yemek.yemek_id)
+            } else {
+                favoriSet.add(yemek.yemek_id)
+            }
+            notifyItemChanged(position)
+        }
+
+
 //        /**Sepet butonuna tıklama işlemi**
 //         */
 //        cBinding.buttonSepet.setOnClickListener {
