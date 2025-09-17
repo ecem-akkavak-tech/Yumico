@@ -1,5 +1,6 @@
 package com.ecemm.yumico.ui.adapter
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -38,8 +39,19 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
 
 //yemek_resim_ad
        //todo:resmi almak için (sonra sil )
-        val imageId = context.resources.getIdentifier(yemek.yemek_resim_ad, "drawable", context.packageName)
-        cBinding.imageViewYemekImg.setImageResource(imageId)
+        val imageId = mContext.resources.getIdentifier(
+            yemek.yemek_resim_adi,
+            "drawable", mContext.packageName
+        )
+
+        if (imageId != 0) {
+            // Geçerli drawable bulundu
+            cBinding.imageViewYemekImg.setImageResource(imageId)
+        } else {
+            // Drawable yok, default resim kullan
+            cBinding.imageViewYemekImg.setImageResource(R.drawable.favblank_img)
+            Log.e("YemeklerAdapter", "Drawable bulunamadı: ${yemek.yemek_resim_adi }")
+        }
 
 //        todo: retrofit & glide ile internete yüklenen resmi alma
 //        val imgUrl = "http://kasimadalan.pe.hu/filmler_yeni/resimler/${film.resim}"
