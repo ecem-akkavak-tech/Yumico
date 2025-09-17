@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
@@ -25,15 +26,18 @@ class AnasayfaFragment : Fragment() {
 
 
        //todo- geçici verilerle recyclerview
-        binding.recyclerviewYemekler.layoutManager = LinearLayoutManager(requireContext())
+        //binding.recyclerviewYemekler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerviewYemekler.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         val yemekListesi = ArrayList<Yemekler>()
         val yemek1 = Yemekler(1,"Mantı","manti_img.jpg",250)
         val yemek2 = Yemekler(2,"Baklava","baklava_img.jpg",300)
-        val yemek3 = Yemekler(3,"Sarma","tortilla_img.png",170)
+        val yemek3 = Yemekler(3,"Tortilla","tortilla_img.png",170)
 
         yemekListesi.add(yemek1)
         yemekListesi.add(yemek2)
         yemekListesi.add(yemek3)
+        yemekListesi.add(yemek1)
+        yemekListesi.add(yemek2)
         yemekListesi.add(yemek3)
 
         //adapter & recyclerview arası veri aktarma işlemi
