@@ -74,10 +74,16 @@ class UrunDetayFragment : Fragment() {
         }
 
 
-
+        //todo ürün fiyatı
+        urunFiyatHesapla(binding.urunAdet,alinanYemek.yemek_fiyat)
         return binding.root
     }
 
+    fun urunFiyatHesapla(urunAdet:Int,yemekFiyat:Int):String{
+        var toplam =  binding.urunToplamFiyat
+        toplam = ( urunAdet * yemekFiyat )
+        return "${toplam} ₺"
+    }
 
 
 }
