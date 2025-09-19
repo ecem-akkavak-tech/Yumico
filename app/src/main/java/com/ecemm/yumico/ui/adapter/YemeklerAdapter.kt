@@ -66,12 +66,13 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
         * hatırlatma : main_activity_nav içinde yemek nesnesi argument olarak ekli olmalı
         */
 
-         cBinding.cardViewYemekler.setOnClickListener {
+       cBinding.cardViewYemekler.setOnClickListener {
              val gecis= AnasayfaFragmentDirections.urunDetayGecis(yemek = yemek)
              Navigation.findNavController(it).navigate(gecis)
          }
 
-      //todo- favori iconu güncellemek
+
+      /*todo- favori iconu güncellemek */
         if (favoriSet.contains(yemek.yemek_id)) {
             cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
         } else {
@@ -84,7 +85,7 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
             } else {
                 favoriSet.add(yemek.yemek_id)
             }
-            notifyItemChanged(position)
+            notifyItemChanged(position) //anlık değişimi gösterir
         }
 
 

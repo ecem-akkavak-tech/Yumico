@@ -36,6 +36,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAnasayfa"
+            app:title="@{tbAnasayfaTitle}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:titleTextColor="@color/white"
@@ -45,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{tbAnasayfaTitle}" />
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewYemekler"
