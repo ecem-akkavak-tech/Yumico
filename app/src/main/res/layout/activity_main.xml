@@ -21,14 +21,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/activity_main_nav" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="76dp"
-        android:background="#EBE3FA"
-        app:itemPaddingBottom="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_design" />
 </androidx.constraintlayout.widget.ConstraintLayout>

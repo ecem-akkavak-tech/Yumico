@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import android.widget.SearchView
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.Yemekler
@@ -60,6 +62,12 @@ class AnasayfaFragment : Fragment() {
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
 
+        //Integrating NavHostFragment & BottomNavigationView
+        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        NavigationUI.setupWithNavController(
+            binding.bottomNavigationView,
+            navHostFragment.navController
+        )
 
         return binding.root
     }

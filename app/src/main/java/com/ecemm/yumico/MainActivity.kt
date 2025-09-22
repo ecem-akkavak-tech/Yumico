@@ -1,6 +1,5 @@
 package com.ecemm.yumico
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -16,8 +15,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Integrating NavHostFragment & BottomNavigationView
-        val navHostFragment1 = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        NavigationUI.setupWithNavController( binding.bottomNavigationView,navHostFragment1.navController )
+
     }
 }

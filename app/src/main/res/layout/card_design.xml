@@ -69,7 +69,7 @@
                     app:srcCompat="@drawable/plus_img" />
 
                 <TextView
-                    android:id="@+id/textViewYemekAdi"
+                    android:id="@+id/textViewYemekUcret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"

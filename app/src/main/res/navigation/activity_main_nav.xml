@@ -18,6 +18,11 @@
         <action
             android:id="@+id/urunDetayGecis"
             app:destination="@id/urunDetayFragment" />
+        <action
+            android:id="@+id/action_anasayfaFragment_pop"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/anasayfaFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/favorilerFragment"
@@ -32,6 +37,9 @@
         <argument
             android:name="yemek"
             app:argType="com.ecemm.yumico.data.entity.Yemekler" />
+        <action
+            android:id="@+id/sepetGecis"
+            app:destination="@id/sepetFragment" />
     </fragment>
     <fragment
         android:id="@+id/sepetFragment"
