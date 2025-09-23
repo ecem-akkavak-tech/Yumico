@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ecemm.yumico.R
+import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
+import com.google.android.material.snackbar.Snackbar
 
 class UrunDetayFragment : Fragment() {
     private lateinit var binding:FragmentUrunDetayBinding
@@ -30,6 +32,7 @@ class UrunDetayFragment : Fragment() {
         val alinanYemek = bundle.yemek
         binding.yemekObject = alinanYemek //xml ve fragment tarafındaki nesneler eşleşir
 
+
         //todo:resmi almak için (sonra sil )
         val imageId = requireContext().resources.getIdentifier(alinanYemek.yemek_resim_adi, "drawable", requireContext().packageName)
         if (imageId != 0) {
@@ -46,8 +49,7 @@ class UrunDetayFragment : Fragment() {
 //            .into(binding.imageViewFilm)
 
         //todo- ürün adedi işlemi
-
-        binding.urunAdet=0
+        binding.urunAdet = 0
         binding.btnAzalt.setOnClickListener {
             if(binding.urunAdet==0){
                 AlertDialog.Builder(requireContext())
@@ -77,8 +79,17 @@ class UrunDetayFragment : Fragment() {
                 binding.urunAdet += 1
             }
         }
-        //bu sayfadan sepet butonuna tıkladığımız anda veri göndericez burası şu an directions**
-        //ama
+
+        //todo- !!bu sayfadan sepet butonuna tıkladığımız anda SepetFragment'a veri göndericez (burası Liste olabilir ya da yeni entity)
+        // UrunDetayFragment **directions** | SepetFragment **args
+        binding.buttonSepeteEkle.setOnClickListener {
+            if(binding.urunAdet > 0){
+                Snackbar.make(it," \"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet}) ",Snackbar.LENGTH_SHORT).show()
+                val gecis = UrunDetayFragmentDirections.sepetGecis(yemek=alinanYemek, adet = binding.urunAdet)
+                Navigation.findNavController(it).navigate(gecis)
+            }
+
+        }
         return binding.root
     }
 

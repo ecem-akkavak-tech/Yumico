@@ -45,7 +45,15 @@
         android:id="@+id/sepetFragment"
         android:name="com.ecemm.yumico.ui.fragment.SepetFragment"
         android:label="fragment_sepet"
-        tools:layout="@layout/fragment_sepet" />
+        tools:layout="@layout/fragment_sepet" >
+        <argument
+            android:name="yemek"
+            app:argType="com.ecemm.yumico.data.entity.Yemekler" />
+        <argument
+            android:name="adet"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/kullaniciFragment"
         android:name="com.ecemm.yumico.ui.fragment.KullaniciFragment"
