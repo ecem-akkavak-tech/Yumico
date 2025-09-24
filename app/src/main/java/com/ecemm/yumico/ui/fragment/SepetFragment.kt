@@ -41,7 +41,6 @@ class SepetFragment : Fragment() {
 
         val sepetAdapter = SepetAdapter(requireContext(),sepetListesi)
         binding.sepetAdapter = sepetAdapter //adapterlar eşleştirilir
-        sepetAdapter.notifyDataSetChanged()
         return binding.root
     }
 

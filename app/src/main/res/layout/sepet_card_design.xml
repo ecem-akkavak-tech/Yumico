@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="yemekObj"
-            type="com.ecemm.yumico.data.entity.Yemekler" />
+            name="yemekSepetiObj"
+            type="com.ecemm.yumico.data.entity.YemekSepeti" />
     </data>
 
     <LinearLayout
@@ -34,7 +34,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageViewYemekImg"
+                    android:id="@+id/imageViewSepetYemekImg"
                     android:layout_width="89dp"
                     android:layout_height="108dp"
                     android:layout_marginStart="18dp"
@@ -44,37 +44,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textViewYemekUcret"
-                    android:layout_width="2dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="64dp"
-                    android:text="27₺"
-                    android:textColor="@color/purpBlue"
-                    android:textSize="21sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewYemekSepetiAd"
+                    android:layout_width="3dp"
+                    android:layout_height="16dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="TextView"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewYemekImg"
+                    android:text="@{yemekSepetiObj.yemek.yemek_adi}"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewSepetYemekImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewFiyat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="23dp"
                     android:text="Fiyat:"
                     app:layout_constraintStart_toEndOf="@+id/imageViewYemekImg"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewYemekSepetiAd" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -87,32 +74,44 @@
                     app:layout_constraintStart_toEndOf="@+id/imageViewYemekImg" />
 
                 <TextView
-                    android:id="@+id/textViewSayi"
+                    android:id="@+id/textViewYemekSepetiAdet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="84dp"
-                    android:text="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewYemekUcret" />
+                    android:layout_marginBottom="48dp"
+                    android:text="@{yemekSepetiObj.yemekAdet}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView4" />
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="39dp"
                     android:layout_height="42dp"
-                    app:srcCompat="@drawable/delete_img"
-                    tools:layout_editor_absoluteX="235dp"
-                    tools:layout_editor_absoluteY="32dp" />
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/delete_img" />
 
                 <TextView
                     android:id="@+id/textViewUrunToplamUcret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    tools:layout_editor_absoluteX="226dp"
-                    tools:layout_editor_absoluteY="146dp" />
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text='@{(yemekSepetiObj.yemek.yemek_fiyat * yemekSepetiObj.yemekAdet)+" ₺"}'
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/textViewYemekSepetiFiyat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="53dp"
+                    android:text='@{yemekSepetiObj.yemek.yemek_fiyat+" ₺"}'
+                    app:layout_constraintStart_toEndOf="@+id/textViewFiyat"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

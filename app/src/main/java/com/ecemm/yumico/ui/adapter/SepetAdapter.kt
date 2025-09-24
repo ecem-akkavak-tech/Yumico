@@ -26,6 +26,22 @@ class SepetAdapter(var mContext: Context, var yemeklerListesi:List<YemekSepeti>)
 
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
 
+        val cBinding = holder.cardBinding
+        val sepeteEklenenYemek = yemeklerListesi.get(position)
+        cBinding.yemekSepetiObj = sepeteEklenenYemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
+
+
+        //todo:resmi almak için (sonra sil )
+        val imageId = mContext.resources.getIdentifier(
+            sepeteEklenenYemek.yemek.yemek_resim_adi,
+            "drawable",
+            mContext.packageName
+        )
+        if (imageId != 0) {
+            cBinding.imageViewSepetYemekImg.setImageResource(imageId)
+        } else {
+            cBinding.imageViewSepetYemekImg.setImageResource(R.drawable.favblank_img)
+        }
     }
 
     override fun getItemCount(): Int {
