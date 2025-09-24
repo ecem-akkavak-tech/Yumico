@@ -12,108 +12,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewSepet"
-            android:layout_width="300dp"
-            android:layout_height="185dp"
-            android:layout_margin="6dp"
-            android:descendantFocusability="blocksDescendants"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="6dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="6dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
+            android:foreground="?attr/selectableItemBackground">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLYemekler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="wrap_content"
+                android:padding="12dp">
 
-
+                <!-- Yemek Resmi -->
                 <ImageView
                     android:id="@+id/imageViewSepetYemekImg"
-                    android:layout_width="89dp"
-                    android:layout_height="108dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="32dp"
-                    android:clickable="false"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+                <!-- Yemek Adı -->
                 <TextView
                     android:id="@+id/textViewYemekSepetiAd"
-                    android:layout_width="3dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:text="@{yemekSepetiObj.yemek.yemek_adi}"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewSepetYemekImg"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
+                    app:layout_constraintTop_toTopOf="@id/imageViewSepetYemekImg"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewSil"
+                    android:layout_marginStart="12dp"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+
+                <!-- Silme Butonu -->
+                <ImageView
+                    android:id="@+id/imageViewSil"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:srcCompat="@drawable/delete_img"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textViewFiyat"
+                <!-- Fiyat ve Adet Etiketleri grubu -->
+                <LinearLayout
+                    android:id="@+id/linearFiyatAdet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    android:text="Fiyat:"
-                    app:layout_constraintEnd_toStartOf="@+id/imageViewSepetYemekImg"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewYemekSepetiAd" />
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
+                    app:layout_constraintTop_toBottomOf="@id/textViewYemekSepetiAd"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="48dp"
-                    android:text="Adet:"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewYemekImg" />
+                    <!-- Fiyat Etiketi -->
+                    <TextView
+                        android:id="@+id/textViewFiyatEtiketi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fiyat:"
+                        android:textStyle="bold"
+                        android:textSize="14sp"/>
 
-                <TextView
-                    android:id="@+id/textViewYemekSepetiAdet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginBottom="48dp"
-                    android:text="@{yemekSepetiObj.yemekAdet}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView4" />
+                    <!-- Yemek Fiyatı -->
+                    <TextView
+                        android:id="@+id/textViewYemekSepetiFiyat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{yemekSepetiObj.yemek.yemek_fiyat + " ₺"}'
+                        android:textSize="14sp"
+                        android:layout_marginStart="4dp"/>
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="39dp"
-                    android:layout_height="42dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/delete_img" />
+                    <!-- Adet Etiketi -->
+                    <TextView
+                        android:id="@+id/textViewAdetEtiketi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adet:"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginStart="12dp"/>
 
+                    <!-- Yemek Adedi -->
+                    <TextView
+                        android:id="@+id/textViewYemekSepetiAdet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{String.valueOf(yemekSepetiObj.yemekAdet)}'
+                        android:textSize="14sp"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <!-- Toplam Ücret -->
                 <TextView
                     android:id="@+id/textViewUrunToplamUcret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text='@{(yemekSepetiObj.yemek.yemek_fiyat * yemekSepetiObj.yemekAdet)+" ₺"}'
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <TextView
-                    android:id="@+id/textViewYemekSepetiFiyat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="53dp"
-                    android:text='@{yemekSepetiObj.yemek.yemek_fiyat+" ₺"}'
-                    app:layout_constraintStart_toEndOf="@+id/textViewFiyat"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    android:text='@{(yemekSepetiObj.yemek.yemek_fiyat * yemekSepetiObj.yemekAdet) + " ₺"}'
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

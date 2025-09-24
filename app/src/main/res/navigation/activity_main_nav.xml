@@ -50,6 +50,7 @@
             android:name="yemek"
             app:argType="com.ecemm.yumico.data.entity.Yemekler"
             app:nullable="true"
+            android:defaultValue="@null"
             />
         <argument
             android:name="adet"

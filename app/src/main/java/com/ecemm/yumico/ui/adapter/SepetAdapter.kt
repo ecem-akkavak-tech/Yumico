@@ -17,7 +17,7 @@ class SepetAdapter(var mContext: Context, var yemeklerListesi:List<YemekSepeti>)
         // todo: data binding işlemi**/
         val binding:SepetCardDesignBinding = DataBindingUtil.inflate(
             LayoutInflater.from(mContext),
-            R.layout.card_design,parent,
+            R.layout.sepet_card_design,parent,
             false
         )
         return CardDesignHolder(binding)

@@ -28,21 +28,27 @@ class SepetFragment : Fragment() {
         val gelenAdet =bundle.adet
 
         //TODO- Eğer aynı yemek zaten varsa sadece yemek adetini güncelle
+        val newList = sepetListesi.toMutableList()
+
         gelenYemek?.let { yemek ->
             // burası sadece gelenYemek null değilse çalışır
-            val mevcutYemek = sepetListesi.find { it.yemek.yemek_id == gelenYemek.yemek_id }
+            val mevcutYemek = newList.find { it.yemek.yemek_id == gelenYemek.yemek_id }
             if (mevcutYemek != null) {
-               // Eğer yemek zaten varsa adeti artır
-               mevcutYemek.yemekAdet += gelenAdet
+                // Eğer yemek zaten varsa adeti artır
+                mevcutYemek.yemekAdet += gelenAdet
             } else {
-               // Yoksa yeni ekle
-                sepetListesi.add(YemekSepeti(gelenYemek, gelenAdet))
+                newList.add(YemekSepeti(gelenYemek, gelenAdet))
             }
         }
 
+        sepetListesi.clear()
+        sepetListesi.addAll(newList)
 
         val sepetAdapter = SepetAdapter(requireContext(),sepetListesi)
-        binding.sepetAdapter = sepetAdapter //adapterlar eşleştirilir
+        binding.recyclerViewSepet.adapter = sepetAdapter //adapterlar eşleştirilir
+        sepetAdapter.notifyDataSetChanged()
+
+
         return binding.root
     }
 
