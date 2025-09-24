@@ -1,9 +1,8 @@
 package com.ecemm.yumico.data.entity
-
 import java.io.Serializable
 
 data class YemekSepeti(
-    var yemekler:List<Yemekler>,
+    var yemek:Yemekler,
     var yemekAdet:Int,
 
 ):Serializable {

@@ -80,12 +80,21 @@ class UrunDetayFragment : Fragment() {
             }
         }
 
-        //todo- !!bu sayfadan sepet butonuna tıkladığımız anda SepetFragment'a veri göndericez (burası Liste olabilir ya da yeni entity)
-        // UrunDetayFragment **directions** | SepetFragment **args
+        //todo: bu sayfadan sepet butonuna tıkladığımız anda SepetFragment'a veri göndericez
+        //todo: UrunDetayFragment sadece “sipariş” iletiyor.
+        // UrunDetayFragment-> **directions**    &&    SepetFragment-> **args
+
         binding.buttonSepeteEkle.setOnClickListener {
             if(binding.urunAdet > 0){
-                Snackbar.make(it," \"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet}) ",Snackbar.LENGTH_SHORT).show()
-                val gecis = UrunDetayFragmentDirections.sepetGecis(yemek=alinanYemek, adet = binding.urunAdet)
+                Snackbar.make(it,
+                    " \"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet}) ",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+
+                val gecis = UrunDetayFragmentDirections.sepetGecis(
+                    yemek=alinanYemek,
+                    adet = binding.urunAdet
+                )
                 Navigation.findNavController(it).navigate(gecis)
             }
 
