@@ -96,6 +96,8 @@ class UrunDetayFragment : Fragment() {
                     adet = binding.urunAdet
                 )
                 Navigation.findNavController(it).navigate(gecis)
+                /* todo
+                not: hata almamak için activity_main_nav kısmındaki sepetFragment içindeki yemek entitysi nullable yapılmalı */
             }
 
         }

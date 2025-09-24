@@ -48,7 +48,9 @@
         tools:layout="@layout/fragment_sepet" >
         <argument
             android:name="yemek"
-            app:argType="com.ecemm.yumico.data.entity.Yemekler" />
+            app:argType="com.ecemm.yumico.data.entity.Yemekler"
+            app:nullable="true"
+            />
         <argument
             android:name="adet"
             app:argType="integer"
