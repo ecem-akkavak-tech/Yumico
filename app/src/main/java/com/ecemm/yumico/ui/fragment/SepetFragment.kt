@@ -28,15 +28,17 @@ class SepetFragment : Fragment() {
         val gelenAdet =bundle.adet
 
         //TODO- Eğer aynı yemek zaten varsa sadece yemek adetini güncelle
-        val mevcutYemek = sepetListesi.find { it.yemek.yemek_id == gelenYemek.yemek_id }
-        if (mevcutYemek != null) {
-            // Eğer yemek zaten varsa adeti artır
-            mevcutYemek.yemekAdet += gelenAdet
-        } else {
-            // Yoksa yeni ekle
-            sepetListesi.add(YemekSepeti(gelenYemek, gelenAdet))
+        gelenYemek?.let { yemek ->
+            // burası sadece gelenYemek null değilse çalışır
+            val mevcutYemek = sepetListesi.find { it.yemek.yemek_id == gelenYemek.yemek_id }
+            if (mevcutYemek != null) {
+               // Eğer yemek zaten varsa adeti artır
+               mevcutYemek.yemekAdet += gelenAdet
+            } else {
+               // Yoksa yeni ekle
+                sepetListesi.add(YemekSepeti(gelenYemek, gelenAdet))
+            }
         }
-
 
 
         val sepetAdapter = SepetAdapter(requireContext(),sepetListesi)
