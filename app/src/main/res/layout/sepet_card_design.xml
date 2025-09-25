@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:padding="12dp">
 
-                <!-- Yemek Resmi -->
+
                 <ImageView
                     android:id="@+id/imageViewSepetYemekImg"
                     android:layout_width="100dp"
@@ -40,7 +40,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
-                <!-- Yemek Adı -->
+
+
                 <TextView
                     android:id="@+id/textViewYemekSepetiAd"
                     android:layout_width="0dp"
@@ -55,7 +56,7 @@
                     android:ellipsize="end"
                     android:singleLine="true" />
 
-                <!-- Silme Butonu -->
+
                 <ImageView
                     android:id="@+id/imageViewSil"
                     android:layout_width="36dp"
@@ -64,56 +65,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Fiyat ve Adet Etiketleri grubu -->
+
                 <LinearLayout
                     android:id="@+id/linearFiyatAdet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
-                    app:layout_constraintTop_toBottomOf="@id/textViewYemekSepetiAd"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
+                    app:layout_constraintTop_toBottomOf="@id/textViewYemekSepetiAd">
 
-                    <!-- Fiyat Etiketi -->
                     <TextView
-                        android:id="@+id/textViewFiyatEtiketi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fiyat:"
-                        android:textStyle="bold"
-                        android:textSize="14sp"/>
-
-                    <!-- Yemek Fiyatı -->
-                    <TextView
-                        android:id="@+id/textViewYemekSepetiFiyat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{yemekSepetiObj.yemek.yemek_fiyat + " ₺"}'
+                        android:id="@+id/textViewFiyatAdet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text='@{"Fiyat: " + yemekSepetiObj.yemek.yemek_fiyat + " ₺\nAdet: " + yemekSepetiObj.yemekAdet}'
                         android:textSize="14sp"
-                        android:layout_marginStart="4dp"/>
-
-                    <!-- Adet Etiketi -->
-                    <TextView
-                        android:id="@+id/textViewAdetEtiketi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Adet:"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:layout_marginStart="12dp"/>
-
-                    <!-- Yemek Adedi -->
-                    <TextView
-                        android:id="@+id/textViewYemekSepetiAdet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{String.valueOf(yemekSepetiObj.yemekAdet)}'
-                        android:textSize="14sp"
-                        android:layout_marginStart="4dp"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Toplam Ücret -->
+
                 <TextView
                     android:id="@+id/textViewUrunToplamUcret"
                     android:layout_width="wrap_content"
