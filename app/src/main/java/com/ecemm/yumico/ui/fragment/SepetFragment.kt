@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
@@ -49,6 +50,11 @@ class SepetFragment : Fragment() {
         sepetAdapter.notifyDataSetChanged()
 
 
+
+        binding.imageViewCloseSepet.setOnClickListener {
+            findNavController().popBackStack(R.id.urunDetayFragment, false)
+            //urunDetayFragment geçiş yapar
+        }
         return binding.root
     }
 

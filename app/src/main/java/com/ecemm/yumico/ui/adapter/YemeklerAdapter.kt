@@ -10,11 +10,12 @@ import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.CardDesignBinding
 import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
 
-class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
+class YemeklerAdapter(
+    var mContext:Context ,
+    var yemeklerList:List<Yemekler> ,
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
 
-    //!!!!todo-  Favori Icon tıklanma durumlarını burada tutuyoruz (yemek_id üzerinden)
-    val favoriSet = mutableSetOf<Int>()
+    val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)
 
     inner class CardDesignHolder(var cardBinding: CardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
 
@@ -87,17 +88,8 @@ class YemeklerAdapter(var mContext:Context , var yemeklerList:List<Yemekler>
             }
             notifyItemChanged(position) //anlık değişimi gösterir
         }
-
-
-//        /**Sepet butonuna tıklama işlemi**
-//         */
-//        cBinding.buttonSepet.setOnClickListener {
-//            Snackbar.make(it," \"${film.ad}\" sepete eklendi. ",Snackbar.LENGTH_SHORT).show()
-//        }
-//
-//
-
 }
+
 
 
     override fun getItemCount(): Int {
