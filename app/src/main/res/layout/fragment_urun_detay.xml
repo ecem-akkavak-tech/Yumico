@@ -185,7 +185,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
 
-            android:text="Ücretsiz Teslimat"
+            android:text="20-30 dk"
             android:textColor="@android:color/white"
             android:textSize="11sp"
             app:cornerRadius="8dp"

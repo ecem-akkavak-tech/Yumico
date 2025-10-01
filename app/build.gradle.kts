@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.safeargs) //veri transferi için
     alias(libs.plugins.hilt) // Hilt plugin
     kotlin("kapt") // kapt ekle
-   // id("com.google.gms.google-services") version "4.4.3" //firestore için
 }
 
 android {
@@ -12,7 +11,7 @@ android {
     compileSdk = 36
     buildFeatures{
         viewBinding = true
-        dataBinding = true
+        dataBinding  true
     }
 
     defaultConfig {
@@ -67,8 +66,8 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    //firestore için
-    //implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
-    //implementation("com.google.firebase:firebase-firestore")
-    // https://firebase.google.com/docs/android/setup#available-libraries
+    // Retrofit & Gson Converter & OkHttp Logging Interceptor (en güncel)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }
