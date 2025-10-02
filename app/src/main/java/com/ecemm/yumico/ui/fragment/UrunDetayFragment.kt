@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
@@ -33,20 +34,13 @@ class UrunDetayFragment : Fragment() {
         binding.yemekObject = alinanYemek //xml ve fragment tarafındaki nesneler eşleşir
 
 
-        //todo:resmi almak için (sonra sil )
-        val imageId = requireContext().resources.getIdentifier(alinanYemek.yemek_resim_adi, "drawable", requireContext().packageName)
-        if (imageId != 0) {
-            binding.imageViewYemekImg.setImageResource(imageId)
-        } else {
-            binding.imageViewYemekImg.setImageResource(R.drawable.favblank_img)
-        }
+        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
+        val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${alinanYemek.yemek_resim_adi}"
+        Glide.with(requireContext())
+            .load(imgUrl)
+            .override(500,700)
+            .into(binding.imageViewYemekImg)
 
-        //todo- asıl gereken glide ile resim alma
-//        val imgUrl = "http://kasimadalan.pe.hu/filmler_yeni/resimler/${film.resim}"
-//        Glide.with(this)
-//            .load(imgUrl)
-//            .override(500,700)
-//            .into(binding.imageViewFilm)
 
         //todo- ürün adedi işlemi
         binding.urunAdet = 0

@@ -3,16 +3,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.CardDesignBinding
 import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
+import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 
 class YemeklerAdapter(
     var mContext:Context ,
     var yemeklerList:List<Yemekler> ,
+    var viewModel: AnasayfaViewModel
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
 
     val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)
@@ -55,22 +60,22 @@ class YemeklerAdapter(
         }
 
 
-//        todo: retrofit & glide ile internete yüklenen resmi alma
-//        val imgUrl = "http://kasimadalan.pe.hu/filmler_yeni/resimler/${film.resim}"
-//        Glide.with(mContext)
-//            .load(imgUrl)
-//            .override(500,700)
-//            .into(cBinding.imageViewFilmImg)
-//
-       /*todo-  card View tıklama & veri transferi & sayfa geçişi - - geçici verilerle
+       /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
+        val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"
+        Glide.with(mContext)
+            .load(imgUrl)
+            .override(500,700)
+            .into(cBinding.imageViewYemekImg)
+
+       /*todo-  card View tıklama & veri transferi & sayfa geçişi
         * hatırlatma : cardView yapısı AnasayfaFragment içinde, o yüzden **directions** o sayfa **args** UrunDetayFragment
         * hatırlatma : main_activity_nav içinde yemek nesnesi argument olarak ekli olmalı
         */
 
-       cBinding.cardViewYemekler.setOnClickListener {
-             val gecis= AnasayfaFragmentDirections.urunDetayGecis(yemek = yemek)
-             Navigation.findNavController(it).navigate(gecis)
-         }
+       cBinding.cardViewYemekler.setOnClickListener { view ->
+               val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek)
+               Navigation.findNavController(view).navigate(gecis)
+       }
 
 
       /*todo- favori iconu güncellemek */
