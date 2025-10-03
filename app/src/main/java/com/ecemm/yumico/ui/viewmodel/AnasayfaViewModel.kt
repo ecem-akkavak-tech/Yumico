@@ -34,11 +34,15 @@ class AnasayfaViewModel @Inject constructor(var yemeklerRepository: YemeklerRepo
 
     //TODO- Yemek ara
     fun yemekFiltresiyleAra(aramaKelimesi:String){
-        val tumListe = yemeklerListesi.value ?: listOf()
-        CoroutineScope(Dispatchers.Main).launch {
-            yemeklerListesi.value = yemeklerRepository.yemekAra(aramaKelimesi,tumListe)
-           
-        }
+            if (aramaKelimesi.isBlank()) {
+                //arama kısmı boşsa tüm listeyi tekrar çağır
+                yemekleriGetir()
+            } else {
+                val tumListe = yemeklerListesi.value ?: listOf()
+                CoroutineScope(Dispatchers.Main).launch {
+                    yemeklerListesi.value = yemeklerRepository.yemekAra(aramaKelimesi, tumListe)
+                }
+            }
     }
 }
 
