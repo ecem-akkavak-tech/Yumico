@@ -15,4 +15,9 @@ class YemeklerRepository(var yemeklerDataSource : YemeklerDataSource) {
     suspend fun yemekAra(aramaKelimesi:String,tumYemekler:List<Yemekler>) : List<Yemekler>{
         return yemeklerDataSource.yemekAra(aramaKelimesi,tumYemekler)
     }
+
+    //TODO- Sepete yemek ekle
+    suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int){
+        return yemeklerDataSource.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat)
+    }
 }

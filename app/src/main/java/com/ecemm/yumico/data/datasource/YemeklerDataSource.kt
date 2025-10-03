@@ -1,5 +1,6 @@
 package com.ecemm.yumico.data.datasource
 
+import android.util.Log
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.retrofit.YemeklerDao
 import kotlinx.coroutines.Dispatchers
@@ -18,5 +19,11 @@ class YemeklerDataSource(var yemeklerDao : YemeklerDao) {
       tumYemekler.filter {
           it.yemek_adi.contains(aramaKelimesi,ignoreCase = true)
       }
+    }
+
+    //TODO- Sepete yemek ekle
+    suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int){
+        yemeklerDao.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat)
+        Log.e("eklendi: ","Yemek Adı: ${yemekAdi} Fiyat: ${yemekFiyat} ")
     }
 }
