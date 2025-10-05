@@ -59,6 +59,7 @@ class AnasayfaFragment : Fragment() {
         val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf(), viewModel)
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
+        //yemekleri getir - get
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){ yemekListesi ->
             yemeklerAdapter.yemeklerList = yemekListesi
             yemeklerAdapter.notifyDataSetChanged()

@@ -1,5 +1,4 @@
 package com.ecemm.yumico.data.repo
-
 import com.ecemm.yumico.data.datasource.YemeklerDataSource
 import com.ecemm.yumico.data.entity.Yemekler
 
@@ -17,7 +16,7 @@ class YemeklerRepository(var yemeklerDataSource : YemeklerDataSource) {
     }
 
     //TODO- Sepete yemek ekle
-    suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int){
-        return yemeklerDataSource.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat)
+    suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){
+        return yemeklerDataSource.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
     }
 }
