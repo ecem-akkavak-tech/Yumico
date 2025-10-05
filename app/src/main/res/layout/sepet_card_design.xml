@@ -46,7 +46,7 @@
                     android:id="@+id/textViewYemekSepetiAd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{yemekSepetiObj.yemek.yemek_adi}"
+                    android:text="@{yemekSepetiObj.yemek_adi}"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
@@ -80,7 +80,7 @@
                         android:id="@+id/textViewFiyatAdet"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text='@{"Fiyat: " + yemekSepetiObj.yemek.yemek_fiyat + " ₺\nAdet: " + yemekSepetiObj.yemekAdet}'
+                        android:text='@{"Fiyat: " + yemekSepetiObj.yemek_fiyat + " ₺\nAdet: " + yemekSepetiObj.yemek_siparis_adet}'
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -90,7 +90,7 @@
                     android:id="@+id/textViewUrunToplamUcret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{(yemekSepetiObj.yemek.yemek_fiyat * yemekSepetiObj.yemekAdet) + " ₺"}'
+                    android:text='@{(yemekSepetiObj.yemek_fiyat * yemekSepetiObj.yemek_siparis_adet) + " ₺"}'
                     android:textStyle="bold"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"

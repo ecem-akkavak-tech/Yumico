@@ -33,7 +33,7 @@ class SepetAdapter(var mContext: Context, var yemeklerListesi:List<YemekSepeti>)
 
         //todo:resmi almak için (sonra sil )
         val imageId = mContext.resources.getIdentifier(
-            sepeteEklenenYemek.yemek.yemek_resim_adi,
+            sepeteEklenenYemek.yemek_resim_adi,
             "drawable",
             mContext.packageName
         )

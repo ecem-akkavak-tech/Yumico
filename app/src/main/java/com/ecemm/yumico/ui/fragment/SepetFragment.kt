@@ -25,20 +25,19 @@ class SepetFragment : Fragment() {
 
         //TODO: Veriyi alan taraftayız,bu yüzden **args**  && xml ve fragment tarafındaki nesneler eşleşir **/
         val bundle:SepetFragmentArgs by navArgs()
-        val gelenYemek = bundle.yemek
-        val gelenAdet =bundle.adet
+        val gelenYemek = bundle.yemekSepeti
 
         //TODO- Eğer aynı yemek zaten varsa sadece yemek adetini güncelle
         val newList = sepetListesi.toMutableList()
 
         gelenYemek?.let { yemek ->
             // burası sadece gelenYemek null değilse çalışır
-            val mevcutYemek = newList.find { it.yemek.yemek_id == gelenYemek.yemek_id }
+            val mevcutYemek = newList.find{it.yemek_adi == gelenYemek.yemek_adi}
             if (mevcutYemek != null) {
                 // Eğer yemek zaten varsa adeti artır
-                mevcutYemek.yemekAdet += gelenAdet
+                mevcutYemek.yemek_siparis_adet += gelenYemek.yemek_siparis_adet
             } else {
-                newList.add(YemekSepeti(gelenYemek, gelenAdet))
+                newList.add(gelenYemek)
             }
         }
 

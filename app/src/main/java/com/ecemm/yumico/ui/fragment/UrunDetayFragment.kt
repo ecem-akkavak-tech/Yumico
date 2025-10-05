@@ -122,6 +122,6 @@ class UrunDetayFragment : Fragment() {
         val gecis = UrunDetayFragmentDirections.sepetGecis(
             yemekSepeti = YemekSepeti(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
         )
-        Navigation.findNavController( binding.buttonSepeteEkle).navigate(gecis)
+        Navigation.findNavController(binding.buttonSepeteEkle).navigate(gecis)
     }
 }
