@@ -120,7 +120,7 @@ class UrunDetayFragment : Fragment() {
     fun yemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){
         viewModel.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
         val gecis = UrunDetayFragmentDirections.sepetGecis(
-            yemekSepeti = YemekSepeti(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
+            yemekSepeti = YemekSepeti(0,yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
         )
         Navigation.findNavController(binding.buttonSepeteEkle).navigate(gecis)
     }

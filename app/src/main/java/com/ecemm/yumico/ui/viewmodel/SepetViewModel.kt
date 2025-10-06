@@ -16,11 +16,6 @@ import javax.inject.Inject
 class SepetViewModel@Inject constructor(var yemeklerRepository: YemeklerRepository) : ViewModel() {
     val sepetListesi = MutableLiveData<List<YemekSepeti>>()
 
-    init{
-        /* Todo: Uygulamanın ilk açıldığı anda veri getirmesi için init gerekir  */
-
-    }
-
     //TODO- Sepetteki Tüm yemekleri  getir
      fun sepettekiYemekleriGetir(kullanici_adi:String){
         CoroutineScope(Dispatchers.Main).launch {

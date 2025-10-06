@@ -20,8 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SepetFragment : Fragment() {
 
-    private val sepetListesi = mutableListOf<YemekSepeti>() //
-
     private lateinit var binding: FragmentSepetBinding
 
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
@@ -34,26 +32,38 @@ class SepetFragment : Fragment() {
         // TODO: dataBinding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sepet , container, false)
 
+        
+        binding.imageViewCloseSepet.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.anasayfaFragment)
+        }
+
         //TODO: Veriyi alan taraftayız,bu yüzden **args**  && xml ve fragment tarafındaki nesneler eşleşir **/
         val bundle:SepetFragmentArgs by navArgs()
         val gelenYemekSepeti = bundle.yemekSepeti
 
 
         //TODO- Eğer aynı yemek zaten varsa sadece yemek adetini güncelle
-        val newList = sepetListesi.toMutableList()
+
         gelenYemekSepeti?.let { yemek ->
-            // burası sadece gelenYemek null değilse çalışır
-            val mevcutYemek = newList.find{it.yemek_adi == gelenYemekSepeti.yemek_adi}
-            if (mevcutYemek != null) {
-                // Eğer yemek zaten varsa adeti artır
-                mevcutYemek.yemek_siparis_adet += gelenYemekSepeti.yemek_siparis_adet
-            } else {
-                newList.add(gelenYemekSepeti)
-            }
+         /* LiveData’daki mevcut listeyi al.
+            Eğer liste varsa onu değiştirilebilir (tuMutableList) hâle getir, yoksa boş bir değiştirilebilir liste (mutableListOf) oluştur.
+         */
+          val mevcutSepetList = viewModel.sepetListesi.value?.toMutableList() ?: mutableListOf()
+
+          val mevcutYemek = mevcutSepetList.find{it.yemek_adi == yemek.yemek_adi}
+
+          if (mevcutYemek != null) {
+              // Eğer yemek zaten varsa adeti artır
+              mevcutYemek.yemek_siparis_adet += gelenYemekSepeti.yemek_siparis_adet
+          }else {
+              mevcutSepetList.add(gelenYemekSepeti)
+          }
+
+            //livedata güncellenir
+            viewModel.sepetListesi.value = mevcutSepetList
         }
 
-        sepetListesi.clear()
-        sepetListesi.addAll(newList)
+
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
@@ -66,17 +76,14 @@ class SepetFragment : Fragment() {
             sepetAdapter.notifyDataSetChanged()
         }
 
-        binding.imageViewCloseSepet.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.anasayfaFragment)
-        }
+
         return binding.root
     }
 
-
-    // TODO-2-:  VIEW MODEL için gerekli (fragmentlarda)
+    // TODO-2:  VIEW MODEL için gerekli (fragmentlarda)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel: SepetViewModel by viewModels()
+        val tempViewModel:SepetViewModel by viewModels()
         viewModel = tempViewModel
     }
 
