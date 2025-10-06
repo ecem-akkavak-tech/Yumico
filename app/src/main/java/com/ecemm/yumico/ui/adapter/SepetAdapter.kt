@@ -5,11 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.SepetCardDesignBinding
+import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 
-class SepetAdapter(var mContext: Context, var yemeklerListesi:List<YemekSepeti>) : RecyclerView.Adapter<SepetAdapter.CardDesignHolder>(){
+class SepetAdapter(
+    var mContext: Context,
+    var sepettekiYemeklerListesi:List<YemekSepeti>,
+    var viewModel: SepetViewModel
+) : RecyclerView.Adapter<SepetAdapter.CardDesignHolder>(){
+
     inner class CardDesignHolder(var cardBinding : SepetCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
@@ -27,24 +34,19 @@ class SepetAdapter(var mContext: Context, var yemeklerListesi:List<YemekSepeti>)
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
 
         val cBinding = holder.cardBinding
-        val sepeteEklenenYemek = yemeklerListesi.get(position)
+        val sepeteEklenenYemek = sepettekiYemeklerListesi.get(position)
         cBinding.yemekSepetiObj = sepeteEklenenYemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
 
 
-        //todo:resmi almak için (sonra sil )
-        val imageId = mContext.resources.getIdentifier(
-            sepeteEklenenYemek.yemek_resim_adi,
-            "drawable",
-            mContext.packageName
-        )
-        if (imageId != 0) {
-            cBinding.imageViewSepetYemekImg.setImageResource(imageId)
-        } else {
-            cBinding.imageViewSepetYemekImg.setImageResource(R.drawable.favblank_img)
-        }
+        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
+        val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${sepeteEklenenYemek.yemek_resim_adi}"
+        Glide.with(mContext)
+            .load(imgUrl)
+            .override(500,700)
+            .into(cBinding.imageViewSepetYemekImg)
     }
 
     override fun getItemCount(): Int {
-        return yemeklerListesi.size
+        return sepettekiYemeklerListesi.size
     }
 }

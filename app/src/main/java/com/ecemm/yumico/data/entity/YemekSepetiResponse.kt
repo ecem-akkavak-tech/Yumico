@@ -1,4 +1,6 @@
 package com.ecemm.yumico.data.entity
 
-class YemekSepetiResponse {
-}
+data class YemekSepetiResponse(
+    var yemekSepeti:List<YemekSepeti>,
+    var success:Int
+){}

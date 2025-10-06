@@ -47,17 +47,6 @@ class YemeklerAdapter(
         cBinding.yemekObj = yemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
 
 
-       //todo:resmi almak için (sonra sil )
-        val imageId = mContext.resources.getIdentifier(
-            yemek.yemek_resim_adi,
-            "drawable",
-            mContext.packageName
-        )
-        if (imageId != 0) {
-            cBinding.imageViewYemekImg.setImageResource(imageId)
-        } else {
-            cBinding.imageViewYemekImg.setImageResource(R.drawable.favblank_img)
-        }
 
 
        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */

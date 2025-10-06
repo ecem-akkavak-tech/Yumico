@@ -1,5 +1,6 @@
 package com.ecemm.yumico.retrofit
 import com.ecemm.yumico.data.entity.CrudResponse
+import com.ecemm.yumico.data.entity.YemekSepetiResponse
 import com.ecemm.yumico.data.entity.YemeklerResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -25,5 +26,14 @@ interface YemeklerDao {
         @Field("yemek_siparis_adet")  yemek_siparis_adet:Int,
         @Field("kullanici_adi") kullanici_adi:String
     ):CrudResponse
+
+
+    //TODO- **POST** Sepetteki Tüm yemekleri getir -kullanıcıya göre
+    @POST("yemekler/sepettekiYemekleriGetir.php")
+    @FormUrlEncoded
+    suspend fun sepettekiTumYemekleriGetir(
+         @Field("kullanici_adi") kullanici_adi:String
+    ):YemekSepetiResponse
+
 
 }

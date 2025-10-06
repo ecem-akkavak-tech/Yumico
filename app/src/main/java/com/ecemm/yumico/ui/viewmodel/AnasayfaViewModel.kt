@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /** Todo: Repository ile bağlama işlemi
-  * Todo: Sayfaya veri aktarma işlemi olduğu için Livedata (içinde Yemekler türünde liste içermeli) kullanılmalı
+  * Todo: Sayfaya veri aktarma işlemi olduğu için MutableLivedata (içinde Yemekler türünde liste içermeli) kullanılmalı
  **/
 
 @HiltViewModel
