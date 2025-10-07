@@ -29,7 +29,7 @@ class SepetViewModel@Inject constructor(var yemeklerRepository: YemeklerReposito
         }
     }
 
-    //TODO- Sepetteki yemeği sil -filtre yemek_adina göre
+    //TODO- Sepetteki yemeği sil -*filtre yemek_adina göre*
     fun yemekSil(sepet_yemek_id:Int, kullanici_adi:String, yemek_adi:String){
         CoroutineScope(Dispatchers.Main).launch {
             val mevcutListe = sepetListesi.value?.toMutableList() ?: mutableListOf()
@@ -47,6 +47,15 @@ class SepetViewModel@Inject constructor(var yemeklerRepository: YemeklerReposito
             }
         }
     }
+
+    fun toplamSepetHesapla():Int{
+            val mevcutListe = sepetListesi.value?.toMutableList() ?: mutableListOf()
+            var toplam = 0
+            mevcutListe.forEach {
+                toplam = toplam + (it.yemek_fiyat * it.yemek_siparis_adet)
+            }
+            return toplam
+        }
 
 
 }

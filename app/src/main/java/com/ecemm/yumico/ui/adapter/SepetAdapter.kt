@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class SepetAdapter(
     var mContext: Context,
     var sepettekiYemeklerListesi:List<YemekSepeti>,
-    var viewModel: SepetViewModel
+    var viewModel: SepetViewModel,
 ) : RecyclerView.Adapter<SepetAdapter.CardDesignHolder>(){
 
     inner class CardDesignHolder(var cardBinding : SepetCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
@@ -61,12 +61,14 @@ class SepetAdapter(
         }
     }
 
+    override fun getItemCount(): Int {
+        return sepettekiYemeklerListesi.size
+    }
+
     //TODO- Sepetteki yemeği sil
     fun yemekSil(sepet_yemek_id:Int,kullanici_adi:String,yemek_adi:String){
            viewModel.yemekSil(sepet_yemek_id, kullanici_adi,yemek_adi)
     }
 
-    override fun getItemCount(): Int {
-        return sepettekiYemeklerListesi.size
-    }
+
 }

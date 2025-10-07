@@ -1,9 +1,12 @@
 package com.ecemm.yumico.ui.fragment
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -72,9 +75,48 @@ class SepetFragment : Fragment() {
         viewModel.sepetListesi.observe(viewLifecycleOwner){ list ->
             sepetAdapter.sepettekiYemeklerListesi = list
             sepetAdapter.notifyDataSetChanged()
+            binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla() //sepetten ürün silinse de observe sayesinde güncel hesap yapar
         }
 
-        return binding.root
+
+        //sepeti onayla - Alert Dialog
+        binding.buttonSepetiOnayla.setOnClickListener {
+            binding.buttonSepetiOnayla.setOnClickListener {
+                val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                builder.setTitle("❓ Sipariş Onayı")
+                builder.setMessage("Sepetinizdeki yemekleri onaylıyor musunuz?\nToplam: ₺${viewModel.toplamSepetHesapla()}")
+
+                builder.setPositiveButton("EVET") { dialog, _ ->
+                    dialog.dismiss()
+                    val confirmDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setMessage("\uD83C\uDF7D\uFE0F Siparişiniz başarıyla alındı! ")
+                        .setPositiveButton("TAMAM") { itDialog, _ -> itDialog.dismiss() }
+                        .create()
+
+                    confirmDialog.show()
+                    confirmDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                        ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+                    confirmDialog.window?.setBackgroundDrawable(
+                        ColorDrawable(ContextCompat.getColor(requireContext(), R.color.purp))
+                    )
+                }
+
+                builder.setNegativeButton("HAYIR") { dialog, _ -> dialog.dismiss() }
+                val dialog = builder.create()
+                dialog.show()
+
+                dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                    ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
+                    ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+                dialog.window?.setBackgroundDrawable(
+                    ColorDrawable(ContextCompat.getColor(requireContext(), R.color.purp))
+                )
+            }
+        }
+            return binding.root
     }
 
 
