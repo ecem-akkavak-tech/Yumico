@@ -1,6 +1,7 @@
 package com.ecemm.yumico.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,10 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.SepetCardDesignBinding
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SepetAdapter(
     var mContext: Context,
@@ -44,6 +49,21 @@ class SepetAdapter(
             .load(imgUrl)
             .override(500,700)
             .into(cBinding.imageViewSepetYemekImg)
+
+
+        cBinding.imageViewSil.setOnClickListener {
+            Snackbar.make(it,"${sepeteEklenenYemek.yemek_adi} silinsin mi? ",Snackbar.LENGTH_SHORT)
+                .setAction("EVET"){
+                    yemekSil(sepeteEklenenYemek.sepet_yemek_id,sepeteEklenenYemek.kullanici_adi,sepeteEklenenYemek.yemek_adi)
+
+                }.show()
+            Log.e("sepettekiYemeklerListesi",sepettekiYemeklerListesi.toString())
+        }
+    }
+
+    //TODO- Sepetteki yemeği sil
+    fun yemekSil(sepet_yemek_id:Int,kullanici_adi:String,yemek_adi:String){
+           viewModel.yemekSil(sepet_yemek_id, kullanici_adi,yemek_adi)
     }
 
     override fun getItemCount(): Int {

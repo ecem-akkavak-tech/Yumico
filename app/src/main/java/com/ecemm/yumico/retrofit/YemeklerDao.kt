@@ -35,5 +35,11 @@ interface YemeklerDao {
          @Field("kullanici_adi") kullanici_adi:String
     ):YemekSepetiResponse
 
-
+    //TODO- **POST** Sepetteki Yemeği sil -kullanıcıya & idsine göre
+    @POST("yemekler/sepettenYemekSil.php")
+    @FormUrlEncoded
+    suspend fun yemekSil(
+        @Field("sepet_yemek_id") sepet_yemek_id:Int,
+        @Field("kullanici_adi") kullanici_adi:String,
+    ):CrudResponse
 }

@@ -28,4 +28,25 @@ class SepetViewModel@Inject constructor(var yemeklerRepository: YemeklerReposito
             }
         }
     }
+
+    //TODO- Sepetteki yemeği sil -filtre yemek_adina göre
+    fun yemekSil(sepet_yemek_id:Int, kullanici_adi:String, yemek_adi:String){
+        CoroutineScope(Dispatchers.Main).launch {
+            val mevcutListe = sepetListesi.value?.toMutableList() ?: mutableListOf()
+//            android.util.Log.e("SepetVM", "Silinecek id: $sepet_yemek_id")
+//            mevcutListe.forEach {
+//                android.util.Log.e("SepetVM", "Listedeki id: ${it.sepet_yemek_id} - ${it.yemek_adi}")
+//            }
+            val yeniListe = mevcutListe.filter { it.yemek_adi != yemek_adi}
+            sepetListesi.value = yeniListe //live data update edilir
+ //           android.util.Log.e("SepetVM", "Yeni liste: ${yeniListe.map { it.yemek_adi }}")
+            try {
+                yemeklerRepository.yemekSil(sepet_yemek_id, kullanici_adi)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
 }

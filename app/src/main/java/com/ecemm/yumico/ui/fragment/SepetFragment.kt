@@ -24,7 +24,7 @@ class SepetFragment : Fragment() {
     private lateinit var binding: FragmentSepetBinding
 
     // **TODO-1-:  ATIVITY VIEW MODEL BAĞLAMA-> ActivityViewModels ile shared olarak çalıştırır ve liste 0lanmadan güncel veriler korunur
-    private val viewModel: SepetViewModel by activityViewModels() //activityViewModels: ViewModel’i fragmentlar arasında ortak yapar
+    private val viewModel: SepetViewModel by activityViewModels() //activityViewModels: ViewModel’i fragmentlar arasında ortak(shared) yapar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

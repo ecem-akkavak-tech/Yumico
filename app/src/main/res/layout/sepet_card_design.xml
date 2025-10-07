@@ -48,24 +48,26 @@
                     android:id="@+id/textViewYemekSepetiAd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{yemekSepetiObj.yemek_adi}"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
-                    app:layout_constraintTop_toTopOf="@id/imageViewSepetYemekImg"
-                    app:layout_constraintEnd_toStartOf="@id/imageViewSil"
                     android:layout_marginStart="12dp"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="@{yemekSepetiObj.yemek_adi}"
+                    android:textColor="@color/purpBlue"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewSil"
+                    app:layout_constraintStart_toEndOf="@id/imageViewSepetYemekImg"
+                    app:layout_constraintTop_toTopOf="@id/imageViewSepetYemekImg" />
 
 
                 <ImageView
                     android:id="@+id/imageViewSil"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    app:srcCompat="@drawable/delete_img"
+                    android:clickable="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/delete_img" />
 
 
                 <LinearLayout

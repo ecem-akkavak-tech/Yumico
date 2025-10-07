@@ -5,6 +5,7 @@ import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.retrofit.YemeklerDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.http.Field
 
 class YemeklerDataSource(var yemeklerDao : YemeklerDao) {
 
@@ -30,5 +31,10 @@ class YemeklerDataSource(var yemeklerDao : YemeklerDao) {
     //TODO- Sepetteki Tüm yemekleri  kullanıcıya göre getir -POST
     suspend fun sepettekiYemekleriGetir(kullanici_adi:String) : List<YemekSepeti> = withContext(Dispatchers.IO){
          return@withContext yemeklerDao.sepettekiTumYemekleriGetir(kullanici_adi).yemekSepeti
+    }
+
+    //TODO- Sepetteki Yemeği sil -kullanıcıya & idsine göre -POST
+    suspend fun yemekSil(sepet_yemek_id:Int,kullanici_adi:String){
+         yemeklerDao.yemekSil(sepet_yemek_id,kullanici_adi)
     }
 }
