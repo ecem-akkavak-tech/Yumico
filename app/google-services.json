@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "756925947033",
+    "project_id": "yumicoapp",
+    "storage_bucket": "yumicoapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756925947033:android:22c38666446b06752fec08",
+        "android_client_info": {
+          "package_name": "com.ecemm.yumico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMm0QQ9bMohjUQfmc2xcYu0thnVLTv72M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
