@@ -63,10 +63,26 @@
         android:id="@+id/loginFragment"
         android:name="com.ecemm.yumico.ui.fragment.auth.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signoutFragment"
+            app:destination="@id/signoutFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.ecemm.yumico.ui.fragment.auth.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" />
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signoutFragment"
+        android:name="com.ecemm.yumico.ui.fragment.auth.SignoutFragment"
+        android:label="fragment_signout"
+        tools:layout="@layout/fragment_signout" />
 </navigation>

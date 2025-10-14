@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 //DAO interfaceinin amacı web servislerini çalışmasını sağlamaktır (bu servisleri dataSource'ta kullanıyoruz)
+
 interface YemeklerDao {
 
     //TODO- **GET** Tüm yemekleri getir

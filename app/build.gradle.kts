@@ -1,18 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.safeargs) //veri transferi için
-    alias(libs.plugins.hilt) // Hilt plugin
-    kotlin("kapt") // kapt ekle
-    id("com.google.gms.google-services") version "4.4.3" //firestore için
+    alias(libs.plugins.safeargs)          // Navigation SafeArgs
+    alias(libs.plugins.hilt)              // Dagger Hilt
+    kotlin("kapt")                        // Annotation processor (Hilt & Glide için)
+    id("com.google.gms.google-services")  // Firebase:  id("com.google.gms.google-services") version "4.4.3"
 }
 
 android {
     namespace = "com.ecemm.yumico"
     compileSdk = 36
-    buildFeatures{
+
+    buildFeatures {
         viewBinding = true
-        dataBinding =  true
+        dataBinding = true
     }
 
     defaultConfig {
@@ -34,45 +35,51 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
+    // Core & UI
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.activity:activity-ktx:1.10.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.1")
+
     // ViewModel & LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    // Location
-    //implementation ("com.google.android.gms:play-services-location:21.2.0")
-    //Map
-    //implementation("com.google.android.gms:play-services-maps:19.2.0")
-    //glide
-    implementation(libs.glide)
-    kapt(libs.compiler)
-    //Hilt
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
+    implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
+    implementation ("com.google.firebase:firebase-auth-ktx:22.3.0")
+
+    // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    // Glide
+    implementation(libs.glide)
+    kapt(libs.compiler)
+
     // Retrofit & Gson Converter & OkHttp Logging Interceptor (en güncel)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    //firestore için
-    implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
-    implementation("com.google.firebase:firebase-firestore")
-    // https://firebase.google.com/docs/android/setup#available-libraries
+    // Test
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
+
