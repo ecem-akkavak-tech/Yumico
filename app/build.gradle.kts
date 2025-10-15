@@ -69,9 +69,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    //firestore için
-    implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
-    implementation ("com.google.firebase:firebase-auth-ktx:22.3.0")
+    // Firebase (BOM üzerinden)
+    implementation(platform(libs.firebase.bom))
+    implementation("com.google.firebase:firebase-auth-ktx")
     // Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
