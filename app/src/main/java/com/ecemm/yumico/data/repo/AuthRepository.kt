@@ -5,56 +5,43 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@ViewModelScoped
-class AuthRepository @Inject constructor() {
+@Singleton
+class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) {
+    private val _user = MutableLiveData<FirebaseUser?>() //güncellenebilen liste
+    val user: LiveData<FirebaseUser?> get() = _user      //encapsulation sayesinde sadece diğer classlarca okunabilen liste
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
 
-    // Kullanıcı bilgisi ve giriş durumu
-    private val _firebaseUser = MutableLiveData<FirebaseUser?>()
-    val firebaseUser: LiveData<FirebaseUser?> = _firebaseUser
-
-    private val _isUserLoggedIn = MutableLiveData<Boolean>()
-    val isUserLoggedIn: LiveData<Boolean> = _isUserLoggedIn
-
-    // Hata mesajlarını ViewModel üzerinden göndermek için
-    private val _authError = MutableLiveData<String>()
-    val authError: LiveData<String> = _authError
-
-    init {
-        _firebaseUser.value = auth.currentUser
-        _isUserLoggedIn.value = auth.currentUser != null
-    }
-
-    // Ortak authenticate fonksiyonu
-    private fun authenticate(email: String, password: String, isLogin: Boolean) {
-        val task = if (isLogin) {
-            auth.signInWithEmailAndPassword(email, password)
-        } else {
-            auth.createUserWithEmailAndPassword(email, password)
-        }
-
-        task.addOnCompleteListener { result ->
-            if (result.isSuccessful) {
-                _firebaseUser.postValue(auth.currentUser)
-                _isUserLoggedIn.postValue(true)
-            } else {
-                _authError.postValue(result.exception?.message ?: "Authentication failed")
+    //Signup işlemi
+    fun signUp(email: String, password: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    _user.value = firebaseAuth.currentUser //_user.value güncellenir, yani LiveData üzerinden UI bilgilendirilir.
+                } else {
+                    _errorMessage.value = task.exception?.message
+                }
             }
-        }
     }
 
-    // Kullanıcı girişi
-    fun login(email: String, password: String) = authenticate(email, password, true)
-
-    // Kullanıcı kaydı
-    fun register(email: String, password: String) = authenticate(email, password, false)
-
-    // Çıkış
+    //Signout işlemi
     fun signOut() {
-        auth.signOut()
-        _firebaseUser.postValue(null)
-        _isUserLoggedIn.postValue(false)
+        firebaseAuth.signOut()
+        _user.value = null //_user.value’ı null yapar, yani kullanıcı artık giriş yapmamış olarak görünür oturum kapanır
     }
+
+
 }
+/*Hatırlatma
+ 1) @ViewModelScoped: Bu annotation Hilt (Dependency Injection) yapısından gelir.
+ 2) @Inject constructor(...): Hilt’in FirebaseAuth nesnesini otomatik olarak bu sınıfa enjekte etmesini sağlar.
+
+ Yani  AuthRepository oluştururken, FirebaseAuth’u manuel olarak vermemize gerek kalmaz.
+
+ 3) _user → içerde güncellenebilir bir MutableLiveData.
+ 4) user → dışarıya sadece okunabilir LiveData olarak açılmış hali.
+ Bu yapı “encapsulation (kapsülleme)” prensibidir. ViewModel veya Fragment sadece gözlemler ama değiştiremez.
+*/

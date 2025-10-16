@@ -17,7 +17,6 @@ class SignupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentSignupBinding.inflate(inflater, container, false)
         //todo- dataBinding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_signup , container, false)
         binding.signupObject = this

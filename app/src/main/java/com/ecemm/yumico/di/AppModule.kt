@@ -1,8 +1,10 @@
 package com.ecemm.yumico.di
 import com.ecemm.yumico.data.datasource.YemeklerDataSource
 import com.ecemm.yumico.data.repo.YemeklerRepository
+import com.ecemm.yumico.data.repository.AuthRepository
 import com.ecemm.yumico.retrofit.ApiUtils
 import com.ecemm.yumico.retrofit.YemeklerDao
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +14,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth) : AuthRepository {
+        return AuthRepository(firebaseAuth)
+    }
+
     @Provides
     @Singleton
     fun provideYemeklerDao() : YemeklerDao{
@@ -29,4 +43,6 @@ class AppModule {
     fun provideYemeklerRepository(yemeklerDataSource:YemeklerDataSource) : YemeklerRepository {
         return YemeklerRepository(yemeklerDataSource)
     }
+
+
 }
