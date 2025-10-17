@@ -10,12 +10,6 @@
         <variable
             name="foodTitle"
             type="String" />
-        <variable
-            name="emailField"
-            type="String" />
-        <variable
-            name="passwordField"
-            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +56,6 @@
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:text="@{emailField}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -79,7 +72,6 @@
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:text="@{passwordField}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

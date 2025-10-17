@@ -88,8 +88,10 @@ class AnasayfaFragment : Fragment() {
 
         //firebase - signup sayfasından email alma işlemi
         val bundle:AnasayfaFragmentArgs by navArgs()
-        val userEmail = bundle.email?.substringBefore("@") //@ öncesini alır
-        binding.tbAnasayfaTitle = "Hoşgeldin, ${userEmail}"
+        val userEmail = bundle.email
+        val email = userEmail!!.substringBefore("@") //@ öncesini alır
+
+        binding.tbAnasayfaTitle = "Hoşgeldin, ${email}"
 
         return binding.root
     }

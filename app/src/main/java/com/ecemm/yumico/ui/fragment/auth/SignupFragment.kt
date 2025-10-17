@@ -29,8 +29,9 @@ class SignupFragment : Fragment() {
         //Authentication -Signup
         observeProcess()
         binding.buttonSignup.setOnClickListener {
-            val email = binding.emailField!!.trim()
-            val password = binding.passwordField!!.trim()
+            val email = binding.editTextEmail.text.toString().trim()
+            val password = binding.editTextPassword.text.toString().trim()
+
             if(email.isNotEmpty() && password.isNotEmpty()){
                 authViewModel.signup(email, password)
             }else {
