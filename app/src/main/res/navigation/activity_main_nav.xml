@@ -65,11 +65,11 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_signoutFragment"
-            app:destination="@id/signoutFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_anasayfaFragment"
+            app:destination="@id/anasayfaFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -81,6 +81,8 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_signupFragment_to_anasayfaFragment"
+            app:popUpTo="@id/signupFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/anasayfaFragment" />
     </fragment>
     <fragment

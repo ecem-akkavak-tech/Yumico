@@ -10,6 +10,12 @@
         <variable
             name="foodTitle"
             type="String" />
+        <variable
+            name="emailField"
+            type="String" />
+        <variable
+            name="passwordField"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,6 +62,7 @@
 
         <EditText
             android:id="@+id/editTextEmail"
+            android:text="@{emailField}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -72,6 +79,7 @@
 
         <EditText
             android:id="@+id/editTextPassword"
+            android:text="@{passwordField}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -108,30 +116,29 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="TextView"
+            android:layout_marginTop="18dp"
+            android:text="Already Registered ? Log in"
             android:textAlignment="center"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonSignup"
-            tools:text="Already Registered ? Log in" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonSignup" />
 
         <TextView
             android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
             android:clickable="true"
             android:text="Log in"
             android:textAlignment="center"
-            android:textColor="#FF5722"
+            android:textColor="#E45747"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

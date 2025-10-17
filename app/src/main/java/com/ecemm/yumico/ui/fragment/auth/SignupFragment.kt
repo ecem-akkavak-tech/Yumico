@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.ecemm.yumico.R
@@ -24,10 +25,33 @@ class SignupFragment : Fragment() {
         binding.foodTitle = "Discover \ndelicious food"
 
 
+        //Authentication -Signup
+        observeProcess()
+        binding.buttonSignup.setOnClickListener {
+            val email = binding.emailField!!.trim()
+            val password = binding.passwordField!!.trim()
+
+
+        }
+
         return binding.root
     }
 
+  fun observeProcess(){
+      authViewModel.user.observe(viewLifecycleOwner){ user->
+          if(user != null){
+              Toast.makeText(requireContext(), "Signup successful: ${user.email}", Toast.LENGTH_SHORT).show()
+              //sayfa ve username yönlendirme
 
+          }
+      }
+
+      authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
+          error?.let {
+              Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+          }
+      }
+  }
 }
 
 /*
