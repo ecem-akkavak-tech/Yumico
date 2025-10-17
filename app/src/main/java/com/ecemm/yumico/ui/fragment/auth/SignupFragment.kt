@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentSignupBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
@@ -12,7 +13,7 @@ import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 
 class SignupFragment : Fragment() {
     private lateinit var binding:FragmentSignupBinding
-    private lateinit var viewModel: AuthViewModel
+    private val authViewModel: AuthViewModel by activityViewModels() //todo: shared view model
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -28,3 +29,16 @@ class SignupFragment : Fragment() {
 
 
 }
+
+/*
+  by viewModels():
+     -ViewModel sadece bu fragment’a özgüyse
+     -Ekran değiştiğinde sıfırlanır
+
+  by activityViewModels():
+     -ViewModel Activity’deki tüm fragment’larda ortak kullanılacaksa
+     -Fragment’lar arası veri paylaşımı sağlanır
+     -örneğin: Auth işlemleri, FirebaseUser state
+*/
+
+

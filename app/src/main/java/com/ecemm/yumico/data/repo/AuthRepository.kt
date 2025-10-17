@@ -38,9 +38,7 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
 /*Hatırlatma
  1) @ViewModelScoped: Bu annotation Hilt (Dependency Injection) yapısından gelir.
  2) @Inject constructor(...): Hilt’in FirebaseAuth nesnesini otomatik olarak bu sınıfa enjekte etmesini sağlar.
-
  Yani  AuthRepository oluştururken, FirebaseAuth’u manuel olarak vermemize gerek kalmaz.
-
  3) _user → içerde güncellenebilir bir MutableLiveData.
  4) user → dışarıya sadece okunabilir LiveData olarak açılmış hali.
  Bu yapı “encapsulation (kapsülleme)” prensibidir. ViewModel veya Fragment sadece gözlemler ama değiştiremez.

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activityMainNav"
-    app:startDestination="@id/anasayfaFragment">
+    app:startDestination="@id/signupFragment">
 
     <fragment
         android:id="@+id/adreslerFragment"
@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_anasayfaFragment"
+            app:destination="@id/anasayfaFragment" />
     </fragment>
     <fragment
         android:id="@+id/signoutFragment"
