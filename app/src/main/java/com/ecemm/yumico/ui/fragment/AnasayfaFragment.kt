@@ -9,6 +9,7 @@ import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
@@ -34,7 +35,6 @@ class AnasayfaFragment : Fragment() {
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa , container, false)
         binding.anasayfaObject = this
-        binding.tbAnasayfaTitle = "Hoşgeldin,"
         binding.recyclerviewYemekler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
@@ -70,7 +70,6 @@ class AnasayfaFragment : Fragment() {
         }
 
 
-
         // TODO-  NavHostFragment + BottomNavigationView safe setup
         val navHostFragment = requireActivity()
                               .supportFragmentManager
@@ -84,6 +83,13 @@ class AnasayfaFragment : Fragment() {
             }
             true
         }
+
+
+
+        //firebase - signup sayfasından email alma işlemi
+        val bundle:AnasayfaFragmentArgs by navArgs()
+        val userEmail = bundle.email?.substringBefore("@") //@ öncesini alır
+        binding.tbAnasayfaTitle = "Hoşgeldin, ${userEmail}"
 
         return binding.root
     }

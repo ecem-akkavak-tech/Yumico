@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentSignupBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
@@ -30,7 +31,11 @@ class SignupFragment : Fragment() {
         binding.buttonSignup.setOnClickListener {
             val email = binding.emailField!!.trim()
             val password = binding.passwordField!!.trim()
-
+            if(email.isNotEmpty() && password.isNotEmpty()){
+                authViewModel.signup(email, password)
+            }else {
+                Toast.makeText(requireContext(), "Lütfen tüm alanları doldurun", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -40,12 +45,11 @@ class SignupFragment : Fragment() {
   fun observeProcess(){
       authViewModel.user.observe(viewLifecycleOwner){ user->
           if(user != null){
-              Toast.makeText(requireContext(), "Signup successful: ${user.email}", Toast.LENGTH_SHORT).show()
-              //sayfa ve username yönlendirme
-
+              //anasayfaya yönlendirme & email değerini gönderme
+              val anasayfaGecis= SignupFragmentDirections.signupAnasayfaGecis(user.email?:"")
+              Navigation.findNavController(binding.root).navigate(anasayfaGecis)
           }
       }
-
       authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
           error?.let {
               Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
