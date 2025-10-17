@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentLoginBinding
 import com.ecemm.yumico.databinding.FragmentSignupBinding
@@ -21,9 +22,12 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         //todo- dataBinding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        //binding.anasayfaObject = this
+        binding.loginObject = this
+        binding.titleFood= "Discover \ndelicious food"
 
-
+        binding.textViewSignup.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.signupFragment)
+        }
         return binding.root
 
     }

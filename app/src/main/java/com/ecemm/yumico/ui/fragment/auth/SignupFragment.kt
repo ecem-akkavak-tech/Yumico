@@ -40,6 +40,11 @@ class SignupFragment : Fragment() {
 
         }
 
+
+        //login fragment'a geçiş
+        binding.textViewLogin.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.loginFragment)
+        }
         return binding.root
     }
 
