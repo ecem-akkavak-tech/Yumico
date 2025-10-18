@@ -13,7 +13,7 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
     val user: LiveData<FirebaseUser?> get() = _user      //encapsulation sayesinde sadece diğer classlarca okunabilen liste
 
     private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> get() = _errorMessage
+    val errorMessage: LiveData<String?> get() = _errorMessage  //encapsulation sayesinde sadece diğer classlarca okunabilen liste
 
     //Signup işlemi
     fun signUp(email: String, password: String) {
@@ -33,6 +33,23 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
         _user.value = null //_user.value’ı null yapar, yani kullanıcı artık giriş yapmamış olarak görünür oturum kapanır
     }
 
+    //Login işlemi
+    fun login(email:String , password:String){
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener{ task ->
+                if(task.isSuccessful){
+                    _user.value = firebaseAuth.currentUser
+                }else{
+                    _errorMessage.value = task.exception?.message
+                }
+
+        }
+    }
+
+    //Aktif kullanıcıyı döndür
+    fun getCurrentUser(): FirebaseUser? {
+        return firebaseAuth.currentUser
+    }
 
 }
 /*Hatırlatma

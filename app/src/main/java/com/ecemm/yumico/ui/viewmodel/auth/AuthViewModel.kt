@@ -20,4 +20,13 @@ class AuthViewModel@Inject constructor(var authRepository: AuthRepository) : Vie
     fun signout(){
         authRepository.signOut()
     }
+    
+    fun login(email:String,password:String){
+        authRepository.login(email, password)
+    }
+
+    //aktif kullanıcı
+    fun getCurrentUser():FirebaseUser? {
+        return authRepository.getCurrentUser()
+    }
 }

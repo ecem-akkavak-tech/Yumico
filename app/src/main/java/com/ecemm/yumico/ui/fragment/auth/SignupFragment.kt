@@ -41,7 +41,7 @@ class SignupFragment : Fragment() {
         }
 
 
-        //login fragment'a geçiş
+        //Login fragment'a geçiş
         binding.textViewLogin.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.loginFragment)
         }
@@ -52,13 +52,14 @@ class SignupFragment : Fragment() {
       authViewModel.user.observe(viewLifecycleOwner){ user->
           if(user != null){
               //anasayfaya yönlendirme & email değerini gönderme
+              Toast.makeText(requireContext(), "Hoşgeldin ${user.email}", Toast.LENGTH_SHORT).show()
               val anasayfaGecis= SignupFragmentDirections.signupAnasayfaGecis(user.email?:"")
               Navigation.findNavController(binding.root).navigate(anasayfaGecis)
           }
       }
       authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
           error?.let {
-              Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+              Toast.makeText(requireContext(), "Hata: $it", Toast.LENGTH_SHORT).show()
           }
       }
   }

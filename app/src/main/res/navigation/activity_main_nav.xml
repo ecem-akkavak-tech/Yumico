@@ -72,7 +72,7 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_anasayfaFragment"
+            android:id="@+id/loginAnasayfaGecis"
             app:destination="@id/anasayfaFragment" />
     </fragment>
     <fragment
