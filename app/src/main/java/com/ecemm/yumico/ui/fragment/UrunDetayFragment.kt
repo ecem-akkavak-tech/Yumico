@@ -34,7 +34,7 @@ class UrunDetayFragment : Fragment() {
 
 
 
-        binding.imageViewClose.setOnClickListener {
+        binding.buttonCloseUrun.setOnClickListener {
             findNavController().popBackStack(R.id.anasayfaFragment, false)
             //anasayfaya geçiş yapar ve anasayfadan geriye gidersek arkada bu sayfayı bırakmaz
         }

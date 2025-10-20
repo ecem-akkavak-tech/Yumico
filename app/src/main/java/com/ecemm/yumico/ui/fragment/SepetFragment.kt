@@ -37,7 +37,7 @@ class SepetFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sepet , container, false)
 
         
-        binding.imageViewCloseSepet.setOnClickListener {
+        binding.buttonCloseSepet.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.anasayfaFragment)
         }
 

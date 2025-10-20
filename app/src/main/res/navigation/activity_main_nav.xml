@@ -60,9 +60,9 @@
     </fragment>
     <fragment
         android:id="@+id/kullaniciFragment"
-        android:name="com.ecemm.yumico.ui.fragment.KullaniciFragment"
+        android:name="com.ecemm.yumico.ui.fragment.HesabimFragment"
         android:label="fragment_kullanici"
-        tools:layout="@layout/fragment_kullanici" />
+        tools:layout="@layout/fragment_hesabim" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ecemm.yumico.ui.fragment.auth.LoginFragment"
@@ -93,5 +93,9 @@
         android:id="@+id/signoutFragment"
         android:name="com.ecemm.yumico.ui.fragment.auth.SignoutFragment"
         android:label="fragment_signout"
-        tools:layout="@layout/fragment_signout" />
+        tools:layout="@layout/fragment_signout" >
+        <action
+            android:id="@+id/action_signoutFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
 </navigation>
