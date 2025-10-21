@@ -2,6 +2,7 @@ package com.ecemm.yumico
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.ecemm.yumico.databinding.ActivityMainBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
@@ -20,16 +21,24 @@ class MainActivity : AppCompatActivity() {
         //Session için öncelikle -  Navigation Controller'ı bul
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
+
         val navController = navHostFragment.navController
 
-        // Kullanıcı durumu kontrolü
-        if (authViewModel.isUserLoggedIn()) {
-            if (navController.currentDestination?.id != R.id.anasayfaFragment) {
-                navController.navigate(R.id.anasayfaFragment)
-            }
-        } else {
-            if (navController.currentDestination?.id != R.id.signupFragment) {
-                navController.navigate(R.id.signupFragment)
+        //geri tuşuna basınca signup’a geri dönülmemesi için stackten signupı çıkarmalıyız:
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.signupFragment, true) // signupFragment’ı stack’ten temizle
+            .build()
+
+        // Bu işlemle kullanıcı login durumunu “hatırlar” logout olana kadar hep açık kalır
+        binding.root.post {
+            if (authViewModel.isUserLoggedIn()) {
+                if (navController.currentDestination?.id != R.id.anasayfaFragment) {
+                    navController.navigate(R.id.anasayfaFragment, null, navOptions)
+                }
+            } else {
+                if (navController.currentDestination?.id != R.id.signupFragment) {
+                    navController.navigate(R.id.signupFragment)
+                }
             }
         }
 
