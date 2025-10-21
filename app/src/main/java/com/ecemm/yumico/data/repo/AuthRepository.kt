@@ -46,11 +46,16 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
         }
     }
 
-    //Aktif kullanıcıyı döndür
-    fun getCurrentUser(): FirebaseUser? {
-        return firebaseAuth.currentUser
+
+    //todo- Session check - current user
+    //Kullanıcı login olduysa currentUser boş değil demektir
+    fun isUserLoggedIn(): Boolean{
+        return firebaseAuth.currentUser != null
     }
 
+    fun getCurrentUserEmail(): String? {
+        return firebaseAuth.currentUser?.email
+    }
 }
 /*Hatırlatma
  1) @ViewModelScoped: Bu annotation Hilt (Dependency Injection) yapısından gelir.
@@ -59,4 +64,5 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
  3) _user → içerde güncellenebilir bir MutableLiveData.
  4) user → dışarıya sadece okunabilir LiveData olarak açılmış hali.
  Bu yapı “encapsulation (kapsülleme)” prensibidir. ViewModel veya Fragment sadece gözlemler ama değiştiremez.
+
 */

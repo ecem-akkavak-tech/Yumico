@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentHesabimBinding
 import com.ecemm.yumico.ui.fragment.auth.SignoutFragment
@@ -20,10 +21,15 @@ class HesabimFragment : Fragment() {
 
         //todo- Signout fragment'ı container içine eklemek için:
         childFragmentManager.beginTransaction()
-            //böylece hem ilgili fragmentı hem de onun xml'ini veriyoruz
+            //böylece ilgili fragmentı ve onun xml'ini ->hesabim xml'e veriyoruz
             //not: fragmenta ait xml'i FrameLayout ile ver
             .replace(R.id.signoutFragmentContainer, SignoutFragment())
             .commit()
+
+
+        binding.buttonCloseKullanici.setOnClickListener {
+            findNavController().popBackStack() //1 önceki fragmenta gider
+        }
 
         return binding.root
 

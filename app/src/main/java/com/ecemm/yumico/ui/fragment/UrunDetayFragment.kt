@@ -32,12 +32,10 @@ class UrunDetayFragment : Fragment() {
         // TODO: dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_urun_detay , container, false)
 
-
-
         binding.buttonCloseUrun.setOnClickListener {
-            findNavController().popBackStack(R.id.anasayfaFragment, false)
-            //anasayfaya geçiş yapar ve anasayfadan geriye gidersek arkada bu sayfayı bırakmaz
+            findNavController().popBackStack() //1 önceki fragmenta gider
         }
+
         //TODO: Veriyi alan taraftayız,bu yüzden **args**  && xml ve fragment tarafındaki nesneler eşleşir **/
         val bundle:UrunDetayFragmentArgs by navArgs()
         val alinanYemek = bundle.yemek
@@ -78,6 +76,7 @@ class UrunDetayFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .show()
+                binding.urunAdet = 30
             }else{
                 binding.urunAdet += 1
             }

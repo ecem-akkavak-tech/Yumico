@@ -25,8 +25,11 @@ class AuthViewModel@Inject constructor(var authRepository: AuthRepository) : Vie
         authRepository.login(email, password)
     }
 
-    //aktif kullanıcı
-    fun getCurrentUser():FirebaseUser? {
-        return authRepository.getCurrentUser()
+    fun isUserLoggedIn(): Boolean{
+        return authRepository.isUserLoggedIn()
+    }
+
+    fun getCurrentUserEmail(){
+        authRepository.getCurrentUserEmail()
     }
 }
