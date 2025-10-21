@@ -5,9 +5,6 @@
 
     <data>
         <variable
-            name="tbAnasayfaTitle"
-            type="String" />
-        <variable
             name="anasayfaObject"
             type="com.ecemm.yumico.ui.fragment.AnasayfaFragment" />
     </data>
@@ -58,7 +55,6 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAnasayfa"
-            app:title="@{tbAnasayfaTitle}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:titleTextColor="@color/white"

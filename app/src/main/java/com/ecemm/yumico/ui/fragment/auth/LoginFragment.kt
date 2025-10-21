@@ -1,5 +1,4 @@
 package com.ecemm.yumico.ui.fragment.auth
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,13 +38,10 @@ class LoginFragment : Fragment() {
             }
         }
 
-
-
         //Signup fragment'a geçiş
         binding.textViewSignup.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.signupFragment)
         }
-
         return binding.root
 
     }
@@ -61,7 +57,14 @@ class LoginFragment : Fragment() {
         }
         authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             error?.let {
-                Toast.makeText(requireContext(), "Hata: $it", Toast.LENGTH_SHORT).show()
+                val mesaj = when {
+                    it.contains("email") -> "E-posta formatı hatalı"
+                    it.contains("password") -> "Şifre yanlış veya eksik"
+                    it.contains("no user") -> "Bu e-posta ile kayıtlı kullanıcı bulunamadı"
+                    else -> "Bilinmeyen bir hata oluştu"
+                }
+
+                Toast.makeText(requireContext(), mesaj, Toast.LENGTH_SHORT).show()
             }
         }
     }

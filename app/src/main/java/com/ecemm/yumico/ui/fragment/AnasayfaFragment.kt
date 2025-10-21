@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import android.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -17,6 +18,7 @@ import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
+import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,12 +27,12 @@ class AnasayfaFragment : Fragment() {
 
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
     private lateinit var viewModel: AnasayfaViewModel
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentAnasayfaBinding.inflate(inflater, container, false) //viewbinding
 
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa , container, false)
@@ -89,9 +91,12 @@ class AnasayfaFragment : Fragment() {
         //firebase - signup sayfasından email alma işlemi
         val bundle:AnasayfaFragmentArgs by navArgs()
         val userEmail = bundle.email
-        val email = userEmail!!.substringBefore("@") //@ öncesini alır
+        //val email = userEmail!!.substringBefore("@") //@ öncesini alır
 
-        binding.tbAnasayfaTitle = "Hoşgeldin, ${email}"
+        val username = authViewModel.getCurrentUserEmail() ?: "Misafir"
+        binding.toolbarAnasayfa.title = "Hoşgeldin, $username"
+
+
 
         return binding.root
     }

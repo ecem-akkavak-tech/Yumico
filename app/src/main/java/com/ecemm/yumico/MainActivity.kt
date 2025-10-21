@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 if (navController.currentDestination?.id != R.id.signupFragment) {
                     navController.navigate(R.id.signupFragment)
+                }else{
+                    navController.navigate(R.id.loginFragment)
                 }
             }
         }

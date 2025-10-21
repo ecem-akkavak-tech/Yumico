@@ -29,7 +29,7 @@ class AuthViewModel@Inject constructor(var authRepository: AuthRepository) : Vie
         return authRepository.isUserLoggedIn()
     }
 
-    fun getCurrentUserEmail(){
-        authRepository.getCurrentUserEmail()
+    fun getCurrentUserEmail(): String?{
+        return authRepository.getCurrentUserEmail()?.split("@")?.get(0) //"example@gmail.com" -> "example"
     }
 }

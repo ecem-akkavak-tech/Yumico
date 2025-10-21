@@ -57,12 +57,23 @@ class SignupFragment : Fragment() {
               Navigation.findNavController(binding.root).navigate(anasayfaGecis)
           }
       }
+      //Hata mesajları
       authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
           error?.let {
-              Toast.makeText(requireContext(), "Hata: $it", Toast.LENGTH_SHORT).show()
+              // Firebase'den gelen hata mesajını kısa ve net Türkçe ifadeye çeviriyoruz
+              val mesaj = when {
+                  it.contains("email") -> "E-posta formatı hatalı"
+                  it.contains("password") -> "Şifre çok kısa"
+                  it.contains("already in use") -> "Bu e-posta zaten kayıtlı"
+                  else -> "Bilinmeyen bir hata oluştu"
+              }
+
+              Toast.makeText(requireContext(), mesaj, Toast.LENGTH_SHORT).show()
           }
       }
   }
+
+
 }
 
 /*
