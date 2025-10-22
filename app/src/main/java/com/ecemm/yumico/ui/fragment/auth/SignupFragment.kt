@@ -51,10 +51,10 @@ class SignupFragment : Fragment() {
   fun observeProcess(){
       authViewModel.user.observe(viewLifecycleOwner){ user->
           if(user != null){
-              //anasayfaya yönlendirme & email değerini gönderme
+              //profil sayfasına yönlendirme &      değerini gönderme
               Toast.makeText(requireContext(), "Hoşgeldin ${user.email}", Toast.LENGTH_SHORT).show()
-              val anasayfaGecis= SignupFragmentDirections.signupAnasayfaGecis(user.email?:"")
-              Navigation.findNavController(binding.root).navigate(anasayfaGecis)
+              val profilGecis= SignupFragmentDirections.signuptoProfilGecis()
+              Navigation.findNavController(binding.root).navigate(profilGecis)
           }
       }
       //Hata mesajları

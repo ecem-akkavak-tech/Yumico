@@ -6,11 +6,6 @@
     app:startDestination="@id/signupFragment">
 
     <fragment
-        android:id="@+id/adreslerFragment"
-        android:name="com.ecemm.yumico.ui.fragment.AdreslerFragment"
-        android:label="fragment_adresler"
-        tools:layout="@layout/fragment_adresler" />
-    <fragment
         android:id="@+id/anasayfaFragment"
         android:name="com.ecemm.yumico.ui.fragment.AnasayfaFragment"
         android:label="fragment_anasayfa"
@@ -73,7 +68,9 @@
             app:destination="@id/signupFragment" />
         <action
             android:id="@+id/loginAnasayfaGecis"
-            app:destination="@id/anasayfaFragment" />
+            app:destination="@id/anasayfaFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -84,10 +81,8 @@
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/signupAnasayfaGecis"
-            app:popUpTo="@id/signupFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/anasayfaFragment" />
+            android:id="@+id/signuptoProfilGecis"
+            app:destination="@id/profilBilgisiFragment" />
     </fragment>
     <fragment
         android:id="@+id/signoutFragment"
@@ -97,5 +92,14 @@
         <action
             android:id="@+id/action_signoutFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilBilgisiFragment"
+        android:name="com.ecemm.yumico.ui.fragment.ProfilBilgisiFragment"
+        android:label="fragment_profil_bilgisi"
+        tools:layout="@layout/fragment_profil_bilgisi" >
+        <action
+            android:id="@+id/action_profilBilgisiFragment_to_anasayfaFragment"
+            app:destination="@id/anasayfaFragment" />
     </fragment>
 </navigation>
