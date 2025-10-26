@@ -94,7 +94,7 @@ class AnasayfaFragment : Fragment() {
         //val email = userEmail!!.substringBefore("@") //@ öncesini alır
 
         val username = authViewModel.getCurrentUserEmail() ?: "Misafir"
-        binding.toolbarAnasayfa.title = "Hoşgeldin, $username"
+        binding.toolbarAnasayfa.title = "Hoşgeldin $username"
 
 
 

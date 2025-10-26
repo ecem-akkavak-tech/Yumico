@@ -4,16 +4,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ecemm.yumico.R
-import com.ecemm.yumico.databinding.FragmentProfilBilgisiBinding
+import com.ecemm.yumico.databinding.FragmentProfilTamamlaBinding
 
-class ProfilBilgisiFragment : Fragment() {
-    private lateinit var binding:FragmentProfilBilgisiBinding
+class ProfilTamamlaFragment : Fragment() {
+    private lateinit var binding: FragmentProfilTamamlaBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentProfilBilgisiBinding.inflate(inflater, container, false)
+        binding = FragmentProfilTamamlaBinding.inflate(inflater, container, false)
         return binding.root
     }
 

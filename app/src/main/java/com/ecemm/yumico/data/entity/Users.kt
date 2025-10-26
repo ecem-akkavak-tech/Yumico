@@ -2,12 +2,12 @@ package com.ecemm.yumico.data.entity
 import java.io.Serializable
 
 data class Users(
-    var user_id:String? = "",
-    var user_name:String? = "",
-    var user_surname:String? = "",
-    var user_telephone:String? = "",
-    var user_address:String? = "",
-    var user_profileImgUrl:String? = "",
+    var userId:String? = "",
+    var name:String? = "",
+    var surname:String? = "",
+    var telephone:String? = "",
+    var address:String? = "",
+    var profileImgUrl:String? = "", //base64
 ):Serializable{}
 
 
@@ -18,5 +18,5 @@ data class Users(
       ├── surname: "Görüşük"
       ├── telephone: "0534..."
       ├── address: "İzmir"
-      ├── profileImgUrl: "https://firebasestorage..."
+      ├── profileImgUrl: ".."
 */

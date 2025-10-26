@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.ProfilBilgisiFragment">
+    tools:context=".ui.fragment.ProfilTamamlaFragment">
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Lütfen alanları doldurunuz"
+        android:text="Lütfen tüm alanları eksiksiz doldurunuz"
         android:textColor="#673AB7"
         android:textSize="20sp"
         android:textStyle="bold|italic"
@@ -128,9 +128,11 @@
     <ImageView
         android:id="@+id/imageViewProfileImg"
         android:layout_width="124dp"
-        android:layout_height="63dp"
+        android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/account_img"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutName"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,7 +3,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import dagger.hilt.android.scopes.ViewModelScoped
+import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,6 +14,8 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage  //encapsulation sayesinde sadece diğer classlarca okunabilen liste
+
+    private val firestore = FirebaseFirestore.getInstance()
 
     //Signup işlemi
     fun signUp(email: String, password: String) {

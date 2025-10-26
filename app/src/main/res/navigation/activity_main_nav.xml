@@ -95,9 +95,9 @@
     </fragment>
     <fragment
         android:id="@+id/profilBilgisiFragment"
-        android:name="com.ecemm.yumico.ui.fragment.ProfilBilgisiFragment"
+        android:name="com.ecemm.yumico.ui.fragment.ProfilTamamlaFragment"
         android:label="fragment_profil_bilgisi"
-        tools:layout="@layout/fragment_profil_bilgisi" >
+        tools:layout="@layout/fragment_profil_tamamla" >
         <action
             android:id="@+id/action_profilBilgisiFragment_to_anasayfaFragment"
             app:destination="@id/anasayfaFragment" />

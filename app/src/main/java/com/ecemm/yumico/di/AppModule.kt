@@ -26,6 +26,7 @@ class AppModule {
         return AuthRepository(firebaseAuth)
     }
 
+
     @Provides
     @Singleton
     fun provideYemeklerDao() : YemeklerDao{
