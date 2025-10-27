@@ -2,6 +2,7 @@ package com.ecemm.yumico.ui.viewmodel.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.ecemm.yumico.data.entity.Users
 import com.ecemm.yumico.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,5 +32,9 @@ class AuthViewModel@Inject constructor(var authRepository: AuthRepository) : Vie
 
     fun getCurrentUserEmail(): String?{
         return authRepository.getCurrentUserEmail()?.split("@")?.get(0) //"example@gmail.com" -> "example"
+    }
+
+    fun saveUserToFirestore(user: Users, onResult: (Boolean, String?) -> Unit){
+        authRepository.saveUserToFirestore(user,onResult)
     }
 }

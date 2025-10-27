@@ -16,6 +16,7 @@ import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 class SignupFragment : Fragment() {
     private lateinit var binding:FragmentSignupBinding
     private val authViewModel: AuthViewModel by activityViewModels() //todo: shared view model
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

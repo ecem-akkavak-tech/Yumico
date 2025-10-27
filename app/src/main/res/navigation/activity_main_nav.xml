@@ -99,7 +99,7 @@
         android:label="fragment_profil_bilgisi"
         tools:layout="@layout/fragment_profil_tamamla" >
         <action
-            android:id="@+id/action_profilBilgisiFragment_to_anasayfaFragment"
+            android:id="@+id/profilToAnasayfaGecis"
             app:destination="@id/anasayfaFragment" />
     </fragment>
 </navigation>

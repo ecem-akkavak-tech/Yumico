@@ -1,6 +1,7 @@
 package com.ecemm.yumico.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ecemm.yumico.data.entity.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,7 +45,6 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
                 }else{
                     _errorMessage.value = task.exception?.message
                 }
-
         }
     }
 
@@ -58,6 +58,32 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
     fun getCurrentUserEmail(): String? {
         return firebaseAuth.currentUser?.email
     }
+
+
+    //todo- Firestore create
+    fun saveUserToFirestore(user: Users, onResult: (Boolean, String?) -> Unit){
+       val currentUser = firebaseAuth.currentUser
+
+        if(currentUser ==null){
+            onResult(false, "Kullanıcı oturumu bulunamadı.")
+            return
+        }
+
+        user.userId = currentUser.uid             // böylece oturumdaki o anki kullanıcının idsini Users objesine eklemiş olduk
+        firestore.collection("users") // users tablosu oluşmuş olur
+            .document(currentUser.uid)
+            .set(user)
+            .addOnSuccessListener {
+                onResult(true, null)
+            }
+            .addOnFailureListener { e ->
+                onResult(false, e.message)
+            }
+    }
+
+
+
+
 }
 /*Hatırlatma
  1) @ViewModelScoped: Bu annotation Hilt (Dependency Injection) yapısından gelir.
@@ -66,5 +92,4 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
  3) _user → içerde güncellenebilir bir MutableLiveData.
  4) user → dışarıya sadece okunabilir LiveData olarak açılmış hali.
  Bu yapı “encapsulation (kapsülleme)” prensibidir. ViewModel veya Fragment sadece gözlemler ama değiştiremez.
-
 */
