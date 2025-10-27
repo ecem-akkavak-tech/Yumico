@@ -1,4 +1,5 @@
 package com.ecemm.yumico.data.repository
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ecemm.yumico.data.entity.Users
@@ -63,13 +64,14 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
     //todo- Firestore create
     fun saveUserToFirestore(user: Users, onResult: (Boolean, String?) -> Unit){
        val currentUser = firebaseAuth.currentUser
-
+       Log.e("current user:","${currentUser?.email}")
         if(currentUser ==null){
             onResult(false, "Kullanıcı oturumu bulunamadı.")
             return
         }
 
-        user.userId = currentUser.uid             // böylece oturumdaki o anki kullanıcının idsini Users objesine eklemiş olduk
+        user.userId = currentUser.uid             // *böylece oturumdaki o anki kullanıcının idsini Users objesine eklemiş olduk
+
         firestore.collection("users") // users tablosu oluşmuş olur
             .document(currentUser.uid)
             .set(user)
@@ -92,4 +94,17 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
  3) _user → içerde güncellenebilir bir MutableLiveData.
  4) user → dışarıya sadece okunabilir LiveData olarak açılmış hali.
  Bu yapı “encapsulation (kapsülleme)” prensibidir. ViewModel veya Fragment sadece gözlemler ama değiştiremez.
+
+** NOT **
+*Eğer permissions için sorun çıkarsa*
+Firebase Console → Firestore → Rules sekmesine git.*****
+Test için rules’u şöyle değiştir:
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
 */

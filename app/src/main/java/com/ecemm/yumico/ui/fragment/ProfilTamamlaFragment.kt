@@ -1,23 +1,24 @@
 package com.ecemm.yumico.ui.fragment
-import android.content.Intent
+
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import android.util.Base64
+import android.widget.Toast
+import com.ecemm.yumico.R
+import com.ecemm.yumico.data.entity.Users
 import com.ecemm.yumico.databinding.FragmentProfilTamamlaBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import android.app.Activity
-import android.graphics.BitmapFactory
-import android.util.Base64
-import android.widget.Toast
-import androidx.navigation.Navigation
-import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.Users
+import androidx.activity.result.contract.ActivityResultContracts
 
 @AndroidEntryPoint
 class ProfilTamamlaFragment : Fragment() {
@@ -25,29 +26,54 @@ class ProfilTamamlaFragment : Fragment() {
     private val viewModel: AuthViewModel by viewModels()
     private var base64Image: String? = null
 
+    // Modern launcher ile resim seçimi
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            val inputStream = requireContext().contentResolver.openInputStream(it)
+            val bytes = inputStream?.readBytes()
+            base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
+            binding.imageViewProfileImg.setImageURI(it)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentProfilTamamlaBinding.inflate(inflater, container, false)
 
-        // todo- Profil resmi seçimi (galeriden)
+        // Profil resmi seçimi
         binding.imageViewProfileImg.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 100)
+            val permission = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU)
+                Manifest.permission.READ_MEDIA_IMAGES
+            else
+                Manifest.permission.READ_EXTERNAL_STORAGE
+
+            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), 101)
+            } else {
+                pickImageLauncher.launch("image/*")
+            }
         }
 
-        binding.buttonSave.setOnClickListener{
+        binding.buttonSave.setOnClickListener {
             val name = binding.editTextUsername.text.toString().trim()
             val surname = binding.editTextUserSurname.text.toString().trim()
             val tel = binding.editTextUserTelefon.text.toString().trim()
             val address = binding.editTextUserAddress.text.toString().trim()
 
-            val user = Users(userId = "",
-                name=name,
-                surname=surname,
-                telephone=tel,
-                address=address,
+            if (name.isEmpty() || surname.isEmpty() || tel.isEmpty() || address.isEmpty()) {
+                Toast.makeText(requireContext(), "Lütfen tüm alanları doldurunuz.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val user = Users(
+                name = name,
+                surname = surname,
+                telephone = tel,
+                address = address,
                 profileImgUrl = base64Image ?: ""
             )
 
@@ -59,22 +85,8 @@ class ProfilTamamlaFragment : Fragment() {
                     Toast.makeText(requireContext(), "Hata: $error", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
+
         return binding.root
-    }
-
-    // todo- Seçilen resmi Base64’e çevir
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100 && resultCode == AppCompatActivity.RESULT_OK && data != null) {
-            val imageUri = data.data
-            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
-
-            val bytes = inputStream?.readBytes()
-            base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
-            binding.imageViewProfileImg.setImageURI(imageUri)
-
-        }
     }
 }

@@ -8,13 +8,12 @@ import androidx.databinding.DataBindingUtil
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.Yemekler
+import com.ecemm.yumico.data.entity.Users
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
@@ -89,14 +88,8 @@ class AnasayfaFragment : Fragment() {
 
 
         //firebase - signup sayfasından email alma işlemi
-        val bundle:AnasayfaFragmentArgs by navArgs()
-        val userEmail = bundle.email
-        //val email = userEmail!!.substringBefore("@") //@ öncesini alır
-
         val username = authViewModel.getCurrentUserEmail() ?: "Misafir"
         binding.toolbarAnasayfa.title = "Hoşgeldin $username"
-
-
 
         return binding.root
     }
