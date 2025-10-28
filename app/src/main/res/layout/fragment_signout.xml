@@ -22,7 +22,7 @@
             android:background="@drawable/gradient_button"
             android:backgroundTint="@null"
             android:elevation="6dp"
-            android:text="Sign out"
+            android:text="Çıkış Yap"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"

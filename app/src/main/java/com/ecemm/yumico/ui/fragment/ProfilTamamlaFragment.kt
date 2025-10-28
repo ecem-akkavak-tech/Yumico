@@ -77,6 +77,7 @@ class ProfilTamamlaFragment : Fragment() {
                 profileImgUrl = base64Image ?: ""
             )
 
+            //create user - firestore
             viewModel.saveUserToFirestore(user) { success, error ->
                 if (success) {
                     Toast.makeText(requireContext(), "Profil başarıyla kaydedildi!", Toast.LENGTH_SHORT).show()

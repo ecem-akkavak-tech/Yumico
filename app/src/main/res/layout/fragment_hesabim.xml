@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +12,7 @@
         android:padding="16dp"
         tools:context=".ui.fragment.HesabimFragment">
 
+        <!-- Sayfa Başlığı -->
         <TextView
             android:id="@+id/textViewSayfaBaslik"
             android:layout_width="wrap_content"
@@ -22,10 +22,11 @@
             android:textColor="#3F51B5"
             android:textSize="21sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Profil Kartı -->
         <androidx.cardview.widget.CardView
             android:id="@+id/profileCard"
             android:layout_width="0dp"
@@ -43,101 +44,184 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
+                <!-- Profil Resmi -->
                 <ImageView
                     android:id="@+id/imageViewProfil"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="101dp"
+                    android:layout_height="128dp"
                     android:clipToOutline="true"
                     android:contentDescription="Profil Resmi"
-                    android:elevation="20dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/yumico_logo_img"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewIsim"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.202" />
+                    app:layout_constraintVertical_bias="0.5" />
 
-                <TextView
-                    android:id="@+id/textViewIsim"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Ecem"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@id/imageViewProfil"
-                    app:layout_constraintTop_toTopOf="@id/imageViewProfil" />
-
-                <TextView
-                    android:id="@+id/textViewSoyisim"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Akkavak"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewProfil"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewIsim" />
-
-                <TextView
-                    android:id="@+id/textViewEmail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="ecem@gmail.com"
-                    android:textColor="#666"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/textViewSoyisim"
-                    app:layout_constraintTop_toBottomOf="@id/textViewSoyisim" />
-
-                <TextView
-                    android:id="@+id/textViewAdres"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Adres: Örnek Mah. No:123, Şehir/Ülke"
-                    android:textColor="#666"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/textViewIsim"
-                    app:layout_constraintTop_toBottomOf="@id/textViewEmail" />
-
-                <TextView
-                    android:id="@+id/textViewTelefon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="05054327654"
-                    android:textColor="#666"
-                    android:textSize="14sp"
+                    android:layout_marginStart="32dp"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/textViewIsim"
-                    app:layout_constraintTop_toBottomOf="@id/textViewAdres" />
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewProfil"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
+
+                    <!-- İsim -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewIsimLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="İsim:"
+                            android:textAlignment="viewStart"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewIsim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Ecem"
+                            android:textAlignment="viewStart"
+                            android:textColor="#525151"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <!-- Soyisim -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewSoysimLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Soyisim:"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewSoyisim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Akkavak"
+                            android:textAlignment="viewStart"
+                            android:textColor="#525151"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <!-- Email -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewEmailLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email:"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="ecem@gmail.com"
+                            android:textAlignment="viewStart"
+                            android:textColor="#525151"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <!-- Adres -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewAdresLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Adres:"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewAdres"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Örnek Mah. No:123, Şehir/Ülke"
+                            android:textAlignment="viewStart"
+                            android:textColor="#525151"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <!-- Telefon -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewTelefonLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Telefon:"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewTelefon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="05054327654"
+                            android:textAlignment="viewStart"
+                            android:textColor="#525151"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Signout Container -->
         <FrameLayout
             android:id="@+id/signoutFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileCard"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileCard" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Geri Butonu -->
         <ImageButton
             android:id="@+id/buttonCloseKullanici"
             android:layout_width="48dp"
@@ -148,6 +232,7 @@
             android:padding="8dp"
             android:src="@drawable/back_img"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,7 +13,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.Users
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
@@ -84,12 +83,11 @@ class AnasayfaFragment : Fragment() {
             }
             true
         }
+        
 
-
-
-        //firebase - signup sayfasından email alma işlemi
-        val username = authViewModel.getCurrentUserEmail() ?: "Misafir"
-        binding.toolbarAnasayfa.title = "Hoşgeldin $username"
+        authViewModel.getUserFromFirestore() { user->
+            binding.toolbarAnasayfa.title = "Hoşgeldin ${user?.name ?: "Misafir"}"
+        }
 
         return binding.root
     }

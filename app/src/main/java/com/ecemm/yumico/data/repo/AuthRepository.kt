@@ -61,11 +61,12 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
     }
 
 
-    //todo- Firestore create
+    //todo- Firestore User create
     fun saveUserToFirestore(user: Users, onResult: (Boolean, String?) -> Unit){
        val currentUser = firebaseAuth.currentUser
        Log.e("current user:","${currentUser?.email}")
-        if(currentUser ==null){
+
+        if(currentUser == null){
             onResult(false, "Kullanıcı oturumu bulunamadı.")
             return
         }
@@ -74,7 +75,7 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
 
         firestore.collection("users") // users tablosu oluşmuş olur
             .document(currentUser.uid)
-            .set(user)
+            .set(user) //
             .addOnSuccessListener {
                 onResult(true, null)
             }
@@ -85,6 +86,30 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
 
 
 
+     //todo- Firestore User read (current user)
+     fun getUserFromFirestore(onResult: (Users?) -> Unit){
+         val currentUser = firebaseAuth.currentUser
+
+         if(currentUser == null){
+             onResult(null)
+             return
+         }
+
+         firestore.collection("users")
+             .document(currentUser.uid)
+             .get() //
+             .addOnSuccessListener { document ->
+                 if (document.exists()) { //eğer user varsa Users objesine çevir ve getir
+                     val user = document.toObject(Users::class.java)
+                     onResult(user)
+                 } else {
+                     onResult(null)
+                 }
+             }
+             .addOnFailureListener {
+                 onResult(null)
+             }
+     }
 
 }
 /*Hatırlatma

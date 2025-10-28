@@ -31,10 +31,15 @@ class AuthViewModel@Inject constructor(var authRepository: AuthRepository) : Vie
     }
 
     fun getCurrentUserEmail(): String?{
-        return authRepository.getCurrentUserEmail()?.split("@")?.get(0) //"example@gmail.com" -> "example"
+       // return authRepository.getCurrentUserEmail()?.split("@")?.get(0) //"example@gmail.com" -> "example"
+        return authRepository.getCurrentUserEmail()
     }
 
     fun saveUserToFirestore(user: Users, onResult: (Boolean, String?) -> Unit){
         authRepository.saveUserToFirestore(user,onResult)
+    }
+
+    fun getUserFromFirestore(onResult: (Users?) -> Unit){
+        authRepository.getUserFromFirestore(onResult)
     }
 }
