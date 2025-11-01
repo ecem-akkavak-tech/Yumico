@@ -17,7 +17,6 @@ import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 class YemeklerAdapter(
     var mContext:Context ,
     var yemeklerList:List<Yemekler> ,
-    var viewModel: AnasayfaViewModel
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
 
     val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.data.entity.Yemekler
@@ -13,21 +15,25 @@ import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.databinding.FragmentFavorilerBinding
 import com.ecemm.yumico.ui.adapter.FavoriAdapter
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
+import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
+import com.ecemm.yumico.ui.viewmodel.FavorilerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavorilerFragment : Fragment() {
 
     private val favoriListesi = mutableListOf<Yemekler>() //bir canlı liste göstereceğimizden mutable
-
     private lateinit var binding:FragmentFavorilerBinding
+    private lateinit var viewModel: FavorilerViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentFavorilerBinding.inflate(inflater, container, false) //viewbinding
-
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoriler , container, false)
         binding.favorilerObject = this
+        binding.recyclerViewFavoriler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
 
@@ -50,9 +56,8 @@ class FavorilerFragment : Fragment() {
 
 
         //adapter & recyclerview arası veri aktarma işlemi
-        val favoriAdapter = FavoriAdapter(requireContext(),favoriListesi)
+        val favoriAdapter = FavoriAdapter(requireContext(), listOf())
         binding.recyclerViewFavoriler.adapter = favoriAdapter
-
 
 
 

@@ -6,15 +6,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.Yemekler
-import com.ecemm.yumico.databinding.CardDesignBinding
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
 
-class FavoriAdapter(var mContext: Context, var favoriYemekList:List<Yemekler>
-) : RecyclerView.Adapter<FavoriAdapter.CardDesignHolder>(){
+class FavoriAdapter(
+    var mContext: Context,
+    var favoriYemekList:List<Yemekler>,
+): RecyclerView.Adapter<FavoriAdapter.CardDesignHolder>(){
+
     inner class CardDesignHolder(var cardBinding: FavoriCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
-        //viewBinding kurulumu burada
         // todo: data binding işlemi**/
         val binding: FavoriCardDesignBinding = DataBindingUtil.inflate<FavoriCardDesignBinding>(
             LayoutInflater.from(mContext),
@@ -31,7 +32,7 @@ class FavoriAdapter(var mContext: Context, var favoriYemekList:List<Yemekler>
          * 2-position ise bir döngünün indexi gibi düşün (her 1 nesneye teker teker ulaşacak) **/
         val cBinding = holder.cardBinding
         val favoriYemek = favoriYemekList.get(position)
-        cBinding.favoriYemeklerObj = favoriYemek
+        cBinding.favorilenenYemeklerObj = favoriYemek
 
         //todo:resmi almak için (sonra sil )
         val imageId = mContext.resources.getIdentifier(
@@ -40,9 +41,9 @@ class FavoriAdapter(var mContext: Context, var favoriYemekList:List<Yemekler>
             mContext.packageName
         )
         if (imageId != 0) {
-            cBinding.imageViewYemekImage.setImageResource(imageId)
+            cBinding.imageViewFavYemekImage.setImageResource(imageId)
         } else {
-            cBinding.imageViewYemekImage.setImageResource(R.drawable.favblank_img)
+            cBinding.imageViewFavYemekImage.setImageResource(R.drawable.favblank_img)
         }
 
     }
