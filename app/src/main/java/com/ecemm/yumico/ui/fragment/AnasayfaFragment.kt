@@ -63,7 +63,7 @@ class AnasayfaFragment : Fragment() {
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){ yemekListesi ->
             yemeklerAdapter.yemeklerList = yemekListesi
             yemeklerAdapter.notifyDataSetChanged()
-            /* ESKİ EKSİK USUL:
+            /* ESKİ USUL:
                val kisilerAdapterr = KisilerAdapter(requireContext(),it,viewModel)
                binding.kisilerAdapter = kisilerAdapterr
              */

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
@@ -33,7 +34,7 @@ class FavorilerFragment : Fragment() {
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoriler , container, false)
         binding.favorilerObject = this
-        binding.recyclerViewFavoriler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.recyclerViewFavoriler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
 
@@ -56,7 +57,12 @@ class FavorilerFragment : Fragment() {
 
 
         //adapter & recyclerview arası veri aktarma işlemi
-        val favoriAdapter = FavoriAdapter(requireContext(), listOf())
+        //todo- SİL
+        val yemekNesne1 = Yemekler(1,"Muz","",21)
+        val silinecekList = ArrayList<Yemekler>()
+        silinecekList.add(yemekNesne1)
+        silinecekList.add(yemekNesne1)
+        val favoriAdapter = FavoriAdapter(requireContext(), silinecekList)
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
 

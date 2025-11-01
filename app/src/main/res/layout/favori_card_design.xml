@@ -16,7 +16,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewFavoriler"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="185dp"
             android:layout_margin="6dp"
             android:descendantFocusability="blocksDescendants"
@@ -38,7 +38,7 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="22dp"
                     android:backgroundTint="#83BA45"
                     android:elevation="4dp"
                     android:paddingStart="16dp"
@@ -77,6 +77,7 @@
                     android:layout_marginEnd="24dp"
                     android:text="@{favorilenenYemeklerObj.yemek_adi}"
                     android:textColor="@color/black"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageViewFavYemekImage"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -85,13 +86,14 @@
                     android:id="@+id/textViewFavYemekPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
-                    android:layout_marginEnd="62dp"
+                    android:layout_marginTop="52dp"
                     android:text='@{favorilenenYemeklerObj.yemek_fiyat+" ₺"}'
                     android:textColor="@color/black"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewFavYemekImage"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
