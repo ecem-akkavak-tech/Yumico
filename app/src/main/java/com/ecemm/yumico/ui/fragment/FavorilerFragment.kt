@@ -17,7 +17,6 @@ import com.ecemm.yumico.databinding.FragmentFavorilerBinding
 import com.ecemm.yumico.ui.adapter.FavoriAdapter
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
-import com.ecemm.yumico.ui.viewmodel.FavorilerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +24,7 @@ class FavorilerFragment : Fragment() {
 
     private val favoriListesi = mutableListOf<Yemekler>() //bir canlı liste göstereceğimizden mutable
     private lateinit var binding:FragmentFavorilerBinding
-    private lateinit var viewModel: FavorilerViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

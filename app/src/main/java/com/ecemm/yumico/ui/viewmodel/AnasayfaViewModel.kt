@@ -43,6 +43,8 @@ class AnasayfaViewModel @Inject constructor(var yemeklerRepository: YemeklerRepo
                     yemeklerListesi.value = yemeklerRepository.yemekAra(aramaKelimesi, tumListe)
                 }
             }
+
+
     }
 }
 

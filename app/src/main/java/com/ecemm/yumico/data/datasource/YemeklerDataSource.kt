@@ -3,7 +3,10 @@ import android.util.Log
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.retrofit.YemeklerDao
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import retrofit2.http.Field
 
