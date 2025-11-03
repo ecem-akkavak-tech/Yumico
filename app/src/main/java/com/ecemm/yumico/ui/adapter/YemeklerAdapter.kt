@@ -76,7 +76,7 @@ class YemeklerAdapter(
 
         cBinding.imageViewFav.setOnClickListener {
 
-            // 2️⃣ Favori seti ile UI güncellemesi
+
             if (favoriSet.contains(yemek.yemek_id)) {
                 favoriSet.remove(yemek.yemek_id)
             } else {
