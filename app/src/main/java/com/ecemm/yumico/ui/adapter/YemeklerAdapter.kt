@@ -12,12 +12,12 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.CardDesignBinding
 import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
-import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
+import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 
 class YemeklerAdapter(
     var mContext:Context ,
     var yemeklerList:List<Yemekler> ,
-    var viewModel: AnasayfaViewModel
+    var favoriViewModel: FavoriViewModel
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
 
     val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)
@@ -48,13 +48,13 @@ class YemeklerAdapter(
 
 
 
-
        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
         val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"
         Glide.with(mContext)
             .load(imgUrl)
             .override(500,700)
             .into(cBinding.imageViewYemekImg)
+
 
        /*todo-  card View tıklama & veri transferi & sayfa geçişi
         * hatırlatma : cardView yapısı AnasayfaFragment içinde, o yüzden **directions** o sayfa **args** UrunDetayFragment
@@ -68,21 +68,24 @@ class YemeklerAdapter(
 
 
       /*todo- favori iconu güncellemek */
-        if (favoriSet.contains(yemek.yemek_id)) {
-            cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
-        } else {
-            cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
-        }
-
         cBinding.imageViewFav.setOnClickListener {
-
 
             if (favoriSet.contains(yemek.yemek_id)) {
                 favoriSet.remove(yemek.yemek_id)
+                cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
+
+                favoriViewModel.favoriSil(yemek.yemek_id)
+
             } else {
                 favoriSet.add(yemek.yemek_id)
+                cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
+
+                favoriViewModel.favoriEkle(
+                    yemek.yemek_adi,
+                    yemek.yemek_resim_adi,
+                    yemek.yemek_fiyat
+                )
             }
-            notifyItemChanged(position) // anlık değişimi göster
         }
 
     }

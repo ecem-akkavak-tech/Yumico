@@ -16,6 +16,7 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
 import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
+import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class AnasayfaFragment : Fragment() {
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
     private lateinit var viewModel: AnasayfaViewModel
     private val authViewModel: AuthViewModel by activityViewModels()
+    private lateinit var favoriViewModel: FavoriViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +58,7 @@ class AnasayfaFragment : Fragment() {
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
-        val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,viewModel)
+        val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,favoriViewModel)
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
         //yemekleri getir - get
@@ -97,6 +99,9 @@ class AnasayfaFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val tempViewModel:AnasayfaViewModel by viewModels()
         viewModel = tempViewModel
+
+        val tempFavoriViewModel : FavoriViewModel by viewModels()
+        favoriViewModel = tempFavoriViewModel
     }
 
     //TODO-3-: GÜNCEL LİSTE İÇİN
