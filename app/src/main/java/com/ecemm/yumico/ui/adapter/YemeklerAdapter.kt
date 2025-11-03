@@ -15,19 +15,19 @@ import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 
 class YemeklerAdapter(
-    var mContext:Context ,
-    var yemeklerList:List<Yemekler> ,
-    var viewModel: AnasayfaViewModel
-) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
+    private val mContext: Context,
+    private var yemeklerList: List<Yemekler>,
+    private val viewModel: AnasayfaViewModel
+) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>() {
 
-    val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)
+    // UI anlık favori durumunu tutar
+    private val favoriSet = mutableSetOf<Int>()
 
-    inner class CardDesignHolder(var cardBinding: CardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
+    inner class CardDesignHolder(var cardBinding: CardDesignBinding) :
+        RecyclerView.ViewHolder(cardBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
-        //viewBinding kurulumu burada
-        // todo: data binding işlemi**/
-        val binding: CardDesignBinding = DataBindingUtil.inflate<CardDesignBinding>(
+        val binding: CardDesignBinding = DataBindingUtil.inflate(
             LayoutInflater.from(mContext),
             R.layout.card_design,
             parent,
@@ -37,59 +37,56 @@ class YemeklerAdapter(
     }
 
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
-        /** card View ile ilgili tüm işlemler (tıklama vs) burada olacak
-         * 1-holder nesnesi sayesinde CardDesignHolder classındaki  cardBinding'e ulaşıcaz
-         * 2-position ise bir döngünün indexi gibi düşün (her 1 nesneye teker teker ulaşacak)
-         * 3-AnasayfaFragment içinde oluşturulan recyclerView e gönderilen yemekListesi burada doldurulur (karşılanır)
-         **/
         val cBinding = holder.cardBinding
         val yemek = yemeklerList.get(position)
-        cBinding.yemekObj = yemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
 
+        cBinding.yemekObj = yemek
 
-
-
-       /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
+        // Glide ile resim yükleme
         val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"
         Glide.with(mContext)
             .load(imgUrl)
-            .override(500,700)
+            .override(500, 700)
             .into(cBinding.imageViewYemekImg)
 
-       /*todo-  card View tıklama & veri transferi & sayfa geçişi
-        * hatırlatma : cardView yapısı AnasayfaFragment içinde, o yüzden **directions** o sayfa **args** UrunDetayFragment
-        * hatırlatma : main_activity_nav içinde yemek nesnesi argument olarak ekli olmalı
-        */
-
-       cBinding.cardViewYemekler.setOnClickListener { view ->
-               val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek)
-               Navigation.findNavController(view).navigate(gecis)
-       }
-
-
-      /*todo- favori iconu güncellemek */
-        if (favoriSet.contains(yemek.yemek_id)) {
-            cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
-        } else {
-            cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
+        // Card click → detay sayfası
+        cBinding.cardViewYemekler.setOnClickListener { view ->
+            val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek)
+            Navigation.findNavController(view).navigate(gecis)
         }
 
-        cBinding.imageViewFav.setOnClickListener {
+        // Favori iconu güncelle
+        val isFavori = favoriSet.contains(yemek.yemek_id)
+        cBinding.imageViewFav.setImageResource(
+            if (isFavori) R.drawable.favfill_img else R.drawable.favblank_img
+        )
 
-            // 2️⃣ Favori seti ile UI güncellemesi
+        // Favori click → AnasayfaViewModel üzerinden Firestore güncelle
+        cBinding.imageViewFav.setOnClickListener {
             if (favoriSet.contains(yemek.yemek_id)) {
                 favoriSet.remove(yemek.yemek_id)
+                viewModel.favoriSil(yemek)   // Firestore’dan sil
             } else {
                 favoriSet.add(yemek.yemek_id)
+                viewModel.favoriEkle(yemek)  // Firestore’a ekle
             }
-            notifyItemChanged(position) // anlık değişimi göster
+            notifyItemChanged(position) // UI güncelle
         }
-
     }
 
+    override fun getItemCount(): Int = yemeklerList.size
 
+    // Yeni yemek listesi geldiğinde set et
+    fun updateYemekList(newList: List<Yemekler>) {
+        yemeklerList = newList
+        notifyDataSetChanged()
+    }
 
-    override fun getItemCount(): Int {
-        return yemeklerList.size
+    // Firestore’dan gelen favori id setini UI ile eşle
+    fun updateFavoriSet(newFavoriSet: Set<Int>) {
+        favoriSet.clear()
+        favoriSet.addAll(newFavoriSet)
+        notifyDataSetChanged()
     }
 }
+

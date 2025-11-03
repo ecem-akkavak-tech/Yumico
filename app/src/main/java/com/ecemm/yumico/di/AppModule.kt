@@ -1,10 +1,12 @@
 package com.ecemm.yumico.di
 import com.ecemm.yumico.data.datasource.YemeklerDataSource
+import com.ecemm.yumico.data.repo.FavorilerRepository
 import com.ecemm.yumico.data.repo.YemeklerRepository
 import com.ecemm.yumico.data.repository.AuthRepository
 import com.ecemm.yumico.retrofit.ApiUtils
 import com.ecemm.yumico.retrofit.YemeklerDao
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,11 +16,20 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
     @Provides
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
+
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return  FirebaseFirestore.getInstance()
+    }
+
 
     @Provides
     @Singleton
@@ -46,4 +57,9 @@ class AppModule {
     }
 
 
+    @Provides
+    @Singleton
+    fun provideFavorilerRepository(firebaseFirestore: FirebaseFirestore,firebaseAuth: FirebaseAuth) : FavorilerRepository {
+        return FavorilerRepository(firebaseFirestore,firebaseAuth)
+    }
 }
