@@ -61,14 +61,10 @@ class AnasayfaFragment : Fragment() {
         val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,favoriViewModel)
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
-        //yemekleri getir - get
+        //yemek listesi live data
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){ yemekListesi ->
             yemeklerAdapter.yemeklerList = yemekListesi
             yemeklerAdapter.notifyDataSetChanged()
-            /* ESKİ USUL:
-               val kisilerAdapterr = KisilerAdapter(requireContext(),it,viewModel)
-               binding.kisilerAdapter = kisilerAdapterr
-             */
         }
 
 
@@ -76,7 +72,6 @@ class AnasayfaFragment : Fragment() {
         val navHostFragment = requireActivity()
                               .supportFragmentManager
                               .findFragmentById(R.id.navHostFragment) as NavHostFragment
-
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val navController = navHostFragment.navController
             // duplicate navigate engelle

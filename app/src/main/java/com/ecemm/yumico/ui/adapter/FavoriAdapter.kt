@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.Yemekler
+import com.ecemm.yumico.data.entity.FavoriYemek
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
+import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 
 class FavoriAdapter(
     var mContext: Context,
-    var favoriYemekList:List<Yemekler>,
+    var favoriYemekList:List<FavoriYemek>,
+    var favoriViewModel: FavoriViewModel
 ): RecyclerView.Adapter<FavoriAdapter.CardDesignHolder>(){
 
     inner class CardDesignHolder(var cardBinding: FavoriCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
@@ -32,23 +35,16 @@ class FavoriAdapter(
          * 2-position ise bir döngünün indexi gibi düşün (her 1 nesneye teker teker ulaşacak) **/
         val cBinding = holder.cardBinding
         val favoriYemek = favoriYemekList.get(position)
-        cBinding.favorilenenYemeklerObj = favoriYemek
+        cBinding.favoriYemekObj = favoriYemek
 
-        //todo:resmi almak için (sonra sil )
-        val imageId = mContext.resources.getIdentifier(
-            favoriYemek.yemek_resim_adi,
-            "drawable",
-            mContext.packageName
-        )
-        if (imageId != 0) {
-            cBinding.imageViewFavYemekImage.setImageResource(imageId)
-        } else {
-            cBinding.imageViewFavYemekImage.setImageResource(R.drawable.favblank_img)
-        }
-
+        //favori yemek resmi retrofit ile geldiğinden glide:
+        val resimUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${favoriYemek.yemek_resim_adi}"
+        Glide.with(mContext).load(resimUrl).into(cBinding.imageViewFavYemekImage)
     }
 
     override fun getItemCount(): Int {
         return favoriYemekList.size
     }
+
+    //favorilerden kaldırma işlemi
 }

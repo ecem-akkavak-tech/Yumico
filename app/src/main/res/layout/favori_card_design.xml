@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="favorilenenYemeklerObj"
-            type="com.ecemm.yumico.data.entity.Yemekler" />
+            name="favoriYemekObj"
+            type="com.ecemm.yumico.data.entity.FavoriYemek" />
     </data>
 
     <LinearLayout
@@ -32,13 +32,14 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent">
 
+
                 <Button
                     android:id="@+id/buttonSepetEkle"
-                    android:layout_width="86dp"
-                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="54dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="22dp"
+                    android:layout_marginBottom="16dp"
                     android:backgroundTint="#83BA45"
                     android:elevation="4dp"
                     android:paddingStart="16dp"
@@ -46,14 +47,14 @@
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
                     android:text="Sepete Ekle"
+                    android:textAlignment="center"
                     android:textColor="@android:color/white"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:cornerRadius="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageViewFavYemekImage" />
-
 
                 <ImageView
                     android:id="@+id/imageViewFavYemekImage"
@@ -75,7 +76,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="24dp"
-                    android:text="@{favorilenenYemeklerObj.yemek_adi}"
+                    android:text="@{favoriYemekObj.yemek_adi}"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
-                    android:text='@{favorilenenYemeklerObj.yemek_fiyat+" ₺"}'
+                    android:text='@{favoriYemekObj.yemek_fiyat+" ₺"}'
                     android:textColor="@color/black"
                     android:textSize="21sp"
                     android:textStyle="bold"

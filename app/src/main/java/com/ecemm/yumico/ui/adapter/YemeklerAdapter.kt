@@ -20,7 +20,6 @@ class YemeklerAdapter(
     var favoriViewModel: FavoriViewModel
 ) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
 
-    val favoriSet = mutableSetOf<Int>() //todo-  Favori Iconuna tıklanma durumlarını favoriSet tutuyo (yemek_id üzerinden)
 
     inner class CardDesignHolder(var cardBinding: CardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
 
@@ -68,25 +67,28 @@ class YemeklerAdapter(
 
 
       /*todo- favori iconu güncellemek */
+        // Favori ikonunun ilk durumu
+        if (favoriViewModel.favorilendiMi(yemek.yemek_id)) {
+            cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
+        } else {
+            cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
+        }
+
         cBinding.imageViewFav.setOnClickListener {
+            val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == yemek.yemek_adi }
 
-            if (favoriSet.contains(yemek.yemek_id)) {
-                favoriSet.remove(yemek.yemek_id)
-                cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
-
-                favoriViewModel.favoriSil(yemek.yemek_id)
-
+            if (favoriYemek != null) {
+                // Eğer favoride varsa, gerçek ID ile sil
+                favoriViewModel.favoriSil(favoriYemek.yemek_id)
             } else {
-                favoriSet.add(yemek.yemek_id)
-                cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
-
-                favoriViewModel.favoriEkle(
-                    yemek.yemek_adi,
-                    yemek.yemek_resim_adi,
-                    yemek.yemek_fiyat
-                )
+                // Yoksa ekle
+                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat)
             }
         }
+
+
+
+
 
     }
 

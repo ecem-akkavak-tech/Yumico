@@ -12,14 +12,13 @@ class FavoriDataSource(var favoriDao: FavoriDao) {
     suspend fun favoriEkle(yemek_adi:String,yemek_resim_adi:String,yemek_fiyat:Int){
         val favorilenenYemek = FavoriYemek(0,yemek_adi,yemek_resim_adi,yemek_fiyat)
         favoriDao.favoriEkle(favorilenenYemek)
-        Log.e("favorilere eklenen yemek:",yemek_adi.toString())
+        Log.e("favorilere eklenen yemek:",yemek_resim_adi.toString())
     }
 
     //delete
-    suspend fun favoriSil(yemek_id:Int){
-        val silinecekFavoriYemek = FavoriYemek(yemek_id,"","",0)
-        favoriDao.favoriSil(silinecekFavoriYemek)
-        Log.e("silinen favori yemek:",yemek_id.toString())
+    suspend fun favoriSil(yemek_id: Int) {
+        favoriDao.favoriSilById(yemek_id)
+        Log.e("silinen favori yemek:", yemek_id.toString())
     }
 
     //read

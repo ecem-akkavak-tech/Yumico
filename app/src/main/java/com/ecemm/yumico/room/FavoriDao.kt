@@ -15,8 +15,10 @@ interface FavoriDao {
     suspend fun favoriEkle(favoriYemek :FavoriYemek)
 
     //todo: VERİ SİLME (Delete)
-    @Delete
-    suspend fun favoriSil(favoriYemek: FavoriYemek)
+    // ID ile silme
+    @Query("DELETE FROM favori_yemekler WHERE yemek_id = :yemekId")
+    suspend fun favoriSilById(yemekId: Int)
+
 
     //todo: VERİ GETİRME (Read)
     @Query("SELECT * FROM favori_yemekler")
