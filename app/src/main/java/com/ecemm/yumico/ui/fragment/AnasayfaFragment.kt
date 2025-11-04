@@ -9,7 +9,6 @@ import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
@@ -27,7 +26,7 @@ class AnasayfaFragment : Fragment() {
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
     private lateinit var viewModel: AnasayfaViewModel
     private val authViewModel: AuthViewModel by activityViewModels()
-    private lateinit var favoriViewModel: FavoriViewModel
+    private val favoriViewModel: FavoriViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı (icon ile ekle-sil)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,11 +60,13 @@ class AnasayfaFragment : Fragment() {
         val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,favoriViewModel)
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
+        //TODO- LIVE DATA OBSERVE
         //yemek listesi live data
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){ yemekListesi ->
             yemeklerAdapter.yemeklerList = yemekListesi
             yemeklerAdapter.notifyDataSetChanged()
         }
+
 
 
 
@@ -96,8 +97,6 @@ class AnasayfaFragment : Fragment() {
         val tempViewModel:AnasayfaViewModel by viewModels()
         viewModel = tempViewModel
 
-        val tempFavoriViewModel : FavoriViewModel by viewModels()
-        favoriViewModel = tempFavoriViewModel
     }
 
     //TODO-3-: GÜNCEL LİSTE İÇİN

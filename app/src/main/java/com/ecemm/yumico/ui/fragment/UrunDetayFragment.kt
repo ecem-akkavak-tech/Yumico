@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
+import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +26,7 @@ class UrunDetayFragment : Fragment() {
 
     // TODO:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
     private lateinit var viewModel: UrunDetayViewModel
-
+    private val favoriViewModel: FavoriViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -101,17 +103,42 @@ class UrunDetayFragment : Fragment() {
                   "Ecem"
               )
 
-                /* todonot: hata almamak için activity_main_nav kısmında sepetFragment içindeki yemek entitysi nullable yapılmalı */
+                /* todo not: hata almamak için activity_main_nav kısmında sepetFragment içindeki yemek entitysi nullable yapılmalı */
             }
         }
 
+        //todo- favorilere ekleme & kaldırma için viewmodeldeki listeyi kullandığımızdan observe lazım
+        favoriViewModel.favoriListesi.observe(viewLifecycleOwner){favList->
+
+            if(favList?.any { it.yemek_adi == alinanYemek.yemek_adi } == true){
+                binding.imageViewFavori.setImageResource(R.drawable.favfill_img)
+            }else {
+                binding.imageViewFavori.setImageResource(R.drawable.favblank_img)
+            }
+
+        }
+
+        binding.imageViewFavori.setOnClickListener {
+            val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == alinanYemek.yemek_adi }
+
+            if (favoriYemek != null) {
+                // Eğer favoride varsa, gerçek ID ile sil
+                favoriViewModel.favoriSil(favoriYemek.yemek_id)
+            } else {
+                // Yoksa ekle
+                favoriViewModel.favoriEkle(alinanYemek.yemek_adi, alinanYemek.yemek_resim_adi, alinanYemek.yemek_fiyat)
+
+            }
+
+
+        }
         return binding.root
     }
 
     // TODO:  VIEW MODEL için gerekli (fragmentlarda)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel:UrunDetayViewModel by viewModels() //tempViewModel,viewModels'i temsil ediyor
+        val tempViewModel:UrunDetayViewModel by viewModels()
         viewModel = tempViewModel
     }
 

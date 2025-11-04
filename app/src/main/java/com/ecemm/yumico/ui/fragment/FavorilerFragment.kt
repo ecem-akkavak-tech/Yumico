@@ -43,7 +43,6 @@ class FavorilerFragment : Fragment() {
     //TODO:  VIEW MODEL İÇİN
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val tempViewModel : FavoriViewModel by viewModels()
         favoriViewModel = tempViewModel
     }
@@ -51,7 +50,7 @@ class FavorilerFragment : Fragment() {
 
     //TODO-3-: GÜNCEL LİSTE İÇİN
     override fun onResume() {
-        //ekleme yaptıktan sonra **bu sayfaya geri döndüğümüzde** güncel yemekler listesini görmemizi sağlar
+        //ekleme yaptıktan sonra **bu sayfaya geri döndüğümüzde** güncel favori listesini görmemizi sağlar
         super.onResume()
         favoriViewModel.favoriYemekleriGetir()
 
