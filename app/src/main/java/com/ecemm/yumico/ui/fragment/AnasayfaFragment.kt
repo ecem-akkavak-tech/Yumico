@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import android.widget.SearchView
+import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -82,7 +83,18 @@ class AnasayfaFragment : Fragment() {
             }
             true
         }
-        
+
+        // Geri tuşu davranışı
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val navController = navHostFragment.navController
+            val currentFragmentId = navController.currentDestination?.id
+            if (currentFragmentId == R.id.anasayfaFragment) {
+                requireActivity().finish() // AnaSayfa'da uygulamayı kapat
+            } else {
+                navController.popBackStack()
+            }
+        }
+
 
         authViewModel.getUserFromFirestore() { user->
             binding.toolbarAnasayfa.title = "Hoşgeldin ${user?.name ?: "Misafir"}"

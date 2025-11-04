@@ -25,19 +25,23 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         //geri tuşuna basınca signup’a geri dönülmemesi için stackten signupı çıkarmalıyız:
-        val navOptions = NavOptions.Builder()
+        val navLoginOptions = NavOptions.Builder()
             .setPopUpTo(R.id.signupFragment, true) // signupFragment’ı stack’ten temizle
+            .build()
+
+        val navSignupOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.profilBilgisiFragment, true) // profilBilgisiFragment’ı stack’ten temizle
             .build()
 
         // Bu işlemle kullanıcı login durumunu “hatırlar” logout olana kadar hep açık kalır
         binding.root.post {
             if (authViewModel.isUserLoggedIn()) {
                 if (navController.currentDestination?.id != R.id.anasayfaFragment) {
-                    navController.navigate(R.id.anasayfaFragment, null, navOptions)
+                    navController.navigate(R.id.anasayfaFragment, null, navLoginOptions)
                 }
             } else {
                 if (navController.currentDestination?.id != R.id.signupFragment) {
-                    navController.navigate(R.id.signupFragment)
+                    navController.navigate(R.id.signupFragment, null, navSignupOptions)
                 }else{
                     navController.navigate(R.id.loginFragment)
                 }
