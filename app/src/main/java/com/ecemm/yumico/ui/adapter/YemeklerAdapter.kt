@@ -67,8 +67,9 @@ class YemeklerAdapter(
 
 
       /*todo- favori iconu güncellemek */
-        // Favori ikonunun ilk durumu
-        if (favoriViewModel.favorilendiMi(yemek.yemek_id)) {
+       // FAVORI IKONU: LiveData bazlı
+        val favoriList = favoriViewModel.favoriListesi.value
+        if (favoriList?.any { it.yemek_adi == yemek.yemek_adi } == true) {
             cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
         } else {
             cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
@@ -80,9 +81,11 @@ class YemeklerAdapter(
             if (favoriYemek != null) {
                 // Eğer favoride varsa, gerçek ID ile sil
                 favoriViewModel.favoriSil(favoriYemek.yemek_id)
+                cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
             } else {
                 // Yoksa ekle
                 favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat)
+                cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
             }
         }
 

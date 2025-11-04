@@ -68,6 +68,7 @@ class AnasayfaFragment : Fragment() {
         }
 
 
+
         // TODO-  NavHostFragment + BottomNavigationView safe setup
         val navHostFragment = requireActivity()
                               .supportFragmentManager

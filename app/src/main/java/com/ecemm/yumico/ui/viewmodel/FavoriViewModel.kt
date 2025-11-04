@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 @HiltViewModel
 class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriRepository): ViewModel(){
-
     val favoriListesi = MutableLiveData<List<FavoriYemek>>()
 
     init{
