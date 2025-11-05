@@ -29,10 +29,19 @@ class FavorilerFragment : Fragment() {
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
+        //TODO-UI management (Manage Favori Fill & Blank)
         val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel)
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner){ liste ->
+            if(liste.isNullOrEmpty()){
+                binding.manageFavoriBlank.visibility = View.VISIBLE
+                binding.manageFavoriFill.visibility = View.GONE
+            }else{
+                binding.manageFavoriBlank.visibility = View.GONE
+                binding.manageFavoriFill.visibility = View.VISIBLE
+            }
+
             favoriAdapter.favoriYemekList = liste
             favoriAdapter.notifyDataSetChanged()
         }
