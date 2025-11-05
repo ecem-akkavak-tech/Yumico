@@ -68,6 +68,7 @@ class SepetAdapter(
     //TODO- Sepetteki yemeği sil
     fun yemekSil(sepet_yemek_id:Int,kullanici_adi:String,yemek_adi:String){
            viewModel.yemekSil(sepet_yemek_id, kullanici_adi,yemek_adi)
+
     }
 
 

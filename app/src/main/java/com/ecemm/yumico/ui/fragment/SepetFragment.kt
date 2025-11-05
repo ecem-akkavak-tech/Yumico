@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.Visibility
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentSepetBinding
@@ -69,14 +70,28 @@ class SepetFragment : Fragment() {
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
+        //TODO-UI management (Manage Sepet Fill & Blank)
         val sepetAdapter = SepetAdapter(requireContext(), listOf(), viewModel)
         binding.recyclerViewSepet.adapter = sepetAdapter
 
-        viewModel.sepetListesi.observe(viewLifecycleOwner){ list ->
-            sepetAdapter.sepettekiYemeklerListesi = list
+        viewModel.sepetListesi.observe(viewLifecycleOwner) { liste ->
+            // UI management
+            if (liste.isNullOrEmpty()) {
+                binding.manageSepetBlank.visibility = View.VISIBLE
+                binding.manageSepetFill.visibility = View.GONE
+            } else {
+                binding.manageSepetBlank.visibility = View.GONE
+                binding.manageSepetFill.visibility = View.VISIBLE
+            }
+
+            // adapter update
+            sepetAdapter.sepettekiYemeklerListesi = liste
             sepetAdapter.notifyDataSetChanged()
-            binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla() //sepetten ürün silinse de observe sayesinde güncel hesap yapar
+
+            // toplam güncelle
+            binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla()
         }
+
 
 
         //sepeti onayla - Alert Dialog
@@ -116,17 +131,12 @@ class SepetFragment : Fragment() {
                 )
             }
         }
-            return binding.root
+
+
+
+        return binding.root
     }
 
-
-
-// TODO- Sepetteki Tüm yemekleri  getir (viewModel üstte livedatayı güncellediği için buna gerek yok)
-//    fun getSepettekiYemek(){
-//        val bundle:SepetFragmentArgs by navArgs()
-//        val kullaniciAdi= bundle.yemekSepeti?.kullanici_adi ?: "Ecem Akkavak"
-//        viewModel.sepettekiYemekleriGetir(kullaniciAdi)
-//    }
 
 
 }
