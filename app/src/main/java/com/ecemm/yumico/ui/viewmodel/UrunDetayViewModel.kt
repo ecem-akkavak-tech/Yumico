@@ -1,4 +1,6 @@
 package com.ecemm.yumico.ui.viewmodel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ecemm.yumico.data.repo.YemeklerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,4 +18,6 @@ class UrunDetayViewModel@Inject constructor(var yemeklerRepository: YemeklerRepo
              yemeklerRepository.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
         }
     }
+
+
 }

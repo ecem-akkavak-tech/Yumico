@@ -2,14 +2,17 @@ package com.ecemm.yumico.di
 import android.content.Context
 import androidx.room.Room
 import com.ecemm.yumico.data.datasource.FavoriDataSource
+import com.ecemm.yumico.data.datasource.RatingYemekDataSource
 import com.ecemm.yumico.data.datasource.YemeklerDataSource
 import com.ecemm.yumico.data.repo.FavoriRepository
+import com.ecemm.yumico.data.repo.RatingYemekRepository
 import com.ecemm.yumico.data.repo.YemeklerRepository
 import com.ecemm.yumico.data.repository.AuthRepository
 import com.ecemm.yumico.retrofit.ApiUtils
 import com.ecemm.yumico.retrofit.YemeklerDao
 import com.ecemm.yumico.room.Database
 import com.ecemm.yumico.room.FavoriDao
+import com.ecemm.yumico.room.RatingYemekDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -61,12 +64,15 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFavoriDao(@ApplicationContext context: Context) : FavoriDao { //sağlandı
-        //todo: bu kısımda veritabanı ile ilgili tetikleme & çalıştırma & emülatöre kopyalama işlemleri yapılır
-        val db= Room.databaseBuilder(context, Database::class.java, "yumico.sqlite") //burası veritabanımıza erişimi sağlar
-            .createFromAsset("yumico.sqlite").build() //bu kısım ise sayfamıza kopyalama işlemini yapıyo
+    fun provideFavoriDao(@ApplicationContext context: Context) : FavoriDao {
+        val db = Room.databaseBuilder(context, Database::class.java, "yumico.sqlite")
+            .createFromAsset("yumico.sqlite")
+            .fallbackToDestructiveMigration()// Eski schema uyuşmazsa veriyi silip yeniden oluşturur
+            .build()
         return db.getFavoriDao()
     }
+
+
 
     @Provides
     @Singleton
@@ -78,5 +84,28 @@ class AppModule {
     @Singleton
     fun provideFavoriRepository(favoriDataSource:FavoriDataSource) : FavoriRepository {
         return FavoriRepository(favoriDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRatingYemekDao(@ApplicationContext context: Context) : RatingYemekDao {
+        val db = Room.databaseBuilder(context, Database::class.java, "yumico.sqlite")
+            .createFromAsset("yumico.sqlite")
+            .fallbackToDestructiveMigration()// Eski schema uyuşmazsa veriyi silip yeniden oluşturur
+            .build()
+        return db.getRatingYemekDao()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideRatingYemekDataSource(ratingYemekDao: RatingYemekDao) : RatingYemekDataSource {
+        return RatingYemekDataSource(ratingYemekDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRatingYemekRepository(ratingYemekDataSource:RatingYemekDataSource) : RatingYemekRepository {
+        return RatingYemekRepository(ratingYemekDataSource)
     }
 }

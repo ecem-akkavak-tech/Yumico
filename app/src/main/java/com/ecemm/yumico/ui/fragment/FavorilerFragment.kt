@@ -11,11 +11,13 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentFavorilerBinding
 import com.ecemm.yumico.ui.adapter.FavoriAdapter
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.RatingYemekViewModel
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavorilerFragment : Fragment() {
     private lateinit var binding:FragmentFavorilerBinding
     private lateinit var favoriViewModel: FavoriViewModel
+    private lateinit var ratingYemekViewModel:RatingYemekViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +32,7 @@ class FavorilerFragment : Fragment() {
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
         //TODO-UI management (Manage Favori Fill & Blank)
-        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel)
+        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel , ratingYemekViewModel)
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner){ liste ->
@@ -54,6 +56,9 @@ class FavorilerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val tempViewModel : FavoriViewModel by viewModels()
         favoriViewModel = tempViewModel
+
+        val tempRatingViewModel : RatingYemekViewModel by viewModels()
+        ratingYemekViewModel = tempRatingViewModel
     }
 
 

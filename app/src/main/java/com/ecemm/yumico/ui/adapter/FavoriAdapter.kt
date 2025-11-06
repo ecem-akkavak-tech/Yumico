@@ -9,11 +9,13 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.FavoriYemek
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.RatingYemekViewModel
 
 class FavoriAdapter(
     var mContext: Context,
     var favoriYemekList:List<FavoriYemek>,
-    var favoriViewModel: FavoriViewModel
+    var favoriViewModel: FavoriViewModel,
+    var ratingYemekViewModel: RatingYemekViewModel
 ): RecyclerView.Adapter<FavoriAdapter.CardDesignHolder>(){
 
     inner class CardDesignHolder(var cardBinding: FavoriCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)

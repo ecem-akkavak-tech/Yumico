@@ -1,9 +1,11 @@
 package com.ecemm.yumico.ui.fragment
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -16,17 +18,18 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.RatingYemekViewModel
 import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class UrunDetayFragment : Fragment() {
     private lateinit var binding:FragmentUrunDetayBinding
-
     // TODO:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
-    private lateinit var viewModel: UrunDetayViewModel
-    private val favoriViewModel: FavoriViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı
+    private val viewModel: UrunDetayViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı
+    private val favoriViewModel: FavoriViewModel by activityViewModels()
+    private val ratingYemekViewModel: RatingYemekViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,14 +37,27 @@ class UrunDetayFragment : Fragment() {
         // TODO: dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_urun_detay , container, false)
 
-        binding.buttonCloseUrun.setOnClickListener {
-            findNavController().popBackStack() //1 önceki fragmenta gider
-        }
 
         //TODO: Veriyi alan taraftayız,bu yüzden **args**  && xml ve fragment tarafındaki nesneler eşleşir **/
         val bundle:UrunDetayFragmentArgs by navArgs()
         val alinanYemek = bundle.yemek
         binding.yemekObject = alinanYemek //xml ve fragment tarafındaki nesneler eşleşir
+
+
+
+        //TODO- RATINGBAR - (create & observe livedata)
+        binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            ratingYemekViewModel.ratingEkle(alinanYemek.yemek_id,alinanYemek.yemek_adi ,rating)
+            Log.e("RATING: ", rating.toString())
+        }
+        //değişikliğin sayfadan çıkılıp tekrar girilse bile yansıması için
+        ratingYemekViewModel.ratingGetir(alinanYemek.yemek_id)
+
+        ratingYemekViewModel.ratingBarValue.observe(viewLifecycleOwner){ ratingBar ->
+              binding.ratingBar.rating =ratingBar
+       }
+
+
 
         /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
         val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${alinanYemek.yemek_resim_adi}"
@@ -130,16 +146,18 @@ class UrunDetayFragment : Fragment() {
 
             }
 
-
         }
+
+        binding.buttonCloseUrun.setOnClickListener {
+            findNavController().popBackStack() //1 önceki fragmenta gider
+        }
+
         return binding.root
     }
 
     // TODO:  VIEW MODEL için gerekli (fragmentlarda)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel:UrunDetayViewModel by viewModels()
-        viewModel = tempViewModel
     }
 
     //TODO- Sepete yemek ekle - post
