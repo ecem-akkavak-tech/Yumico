@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentFavorilerBinding
@@ -29,10 +30,15 @@ class FavorilerFragment : Fragment() {
         binding.recyclerViewFavoriler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
-        //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
-        //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
-        //TODO-UI management (Manage Favori Fill & Blank)
-        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel , ratingYemekViewModel)
+        /*
+        TODO
+           - adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
+           - RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
+           - UI management (Manage Favori Fill & Blank)
+           - Rating Yemek güncelleme
+        */
+
+        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel , ratingYemekViewModel,viewLifecycleOwner)
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner){ liste ->

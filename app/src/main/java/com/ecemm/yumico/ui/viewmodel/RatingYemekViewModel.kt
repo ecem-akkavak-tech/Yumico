@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +21,10 @@ class RatingYemekViewModel  @Inject constructor(var ratingYemekRepository: Ratin
     fun ratingEkle(yemek_id:Int,yemek_adi:String,rating:Float){
         CoroutineScope(Dispatchers.Main).launch {
             ratingYemekRepository.ratingEkle(yemek_id,yemek_adi,rating)
-            _ratingBarValue.value = rating // anlık UI güncellemesi için
+            //anlık UI güncellemesi için main threadde set et
+            withContext(Dispatchers.Main) {
+                _ratingBarValue.value = rating
+            }
         }
     }
 
@@ -31,5 +35,6 @@ class RatingYemekViewModel  @Inject constructor(var ratingYemekRepository: Ratin
         }
     }
 
-
+    //Suspend olarak ayrı fonksiyon ekliyoruz, sadece değer döndürsün
+    suspend fun ratingGetirSuspend(yemek_id:Int) = ratingYemekRepository.ratingGetir(yemek_id)
 }
