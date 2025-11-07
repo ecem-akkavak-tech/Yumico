@@ -82,7 +82,7 @@ class YemeklerAdapter(
                 cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
             } else {
                 // Yoksa ekle
-                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat)
+                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat,0f)
                 cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
             }
         }

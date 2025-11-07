@@ -21,4 +21,8 @@ interface FavoriDao {
     //todo: VERİ GETİRME (Read)
     @Query("SELECT * FROM favori_yemekler")
     suspend fun favoriYemekleriGetir() : List<FavoriYemek>
+
+    @Query("UPDATE favori_yemekler SET rating = :rating WHERE yemek_id = :yemekId")
+    suspend fun favoriRatingGuncelle(yemekId: Int, rating: Float)
+
 }

@@ -1,16 +1,11 @@
 package com.ecemm.yumico.ui.fragment
+
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -18,154 +13,130 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
-import com.ecemm.yumico.ui.viewmodel.RatingYemekViewModel
 import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class UrunDetayFragment : Fragment() {
-    private lateinit var binding:FragmentUrunDetayBinding
-    // TODO:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
-    private val viewModel: UrunDetayViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı
+
+    private lateinit var binding: FragmentUrunDetayBinding
+    private val viewModel: UrunDetayViewModel by activityViewModels()
     private val favoriViewModel: FavoriViewModel by activityViewModels()
-    private val ratingYemekViewModel: RatingYemekViewModel by activityViewModels()
+    private val args: UrunDetayFragmentArgs by navArgs()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // TODO: dataBinding kurulum
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_urun_detay , container, false)
+        inflater: android.view.LayoutInflater,
+        container: android.view.ViewGroup?,
+        savedInstanceState: Bundle?
+    ): android.view.View? {
 
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_urun_detay, container, false)
+        val alinanYemek = args.yemek
+        binding.yemekObject = alinanYemek
+        binding.urunAdet = 0
 
-        //TODO: Veriyi alan taraftayız,bu yüzden **args**  && xml ve fragment tarafındaki nesneler eşleşir **/
-        val bundle:UrunDetayFragmentArgs by navArgs()
-        val alinanYemek = bundle.yemek
-        binding.yemekObject = alinanYemek //xml ve fragment tarafındaki nesneler eşleşir
-
-
-
-        //TODO- RATINGBAR - (create & observe livedata)
-        binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
-            ratingYemekViewModel.ratingEkle(alinanYemek.yemek_id,alinanYemek.yemek_adi ,rating)
-            Log.e("RATING: ", rating.toString())
-        }
-        //değişikliğin sayfadan çıkılıp tekrar girilse bile yansıması için
-        ratingYemekViewModel.ratingGetir(alinanYemek.yemek_id)
-
-        ratingYemekViewModel.ratingBarValue.observe(viewLifecycleOwner){ ratingBar ->
-              binding.ratingBar.rating =ratingBar
-       }
-
-
-
-        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
-        val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${alinanYemek.yemek_resim_adi}"
+        // Glide ile resim yükleme
         Glide.with(requireContext())
-            .load(imgUrl)
-            .override(500,700)
+            .load("http://kasimadalan.pe.hu/yemekler/resimler/${alinanYemek.yemek_resim_adi}")
+            .override(500, 700)
             .into(binding.imageViewYemekImg)
 
-
-        //todo- ürün adedi işlemi
-        binding.urunAdet = 0
+        // Ürün adedi işlemleri
         binding.btnAzalt.setOnClickListener {
-            if(binding.urunAdet==0){
+            if (binding.urunAdet == 0) {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Uyarı")
-                    .setMessage("Ürün adedi 0'dan daha az olamaz!")
-                    .setPositiveButton("Tamam") { dialog, _ ->
-                        dialog.dismiss()
-                    }
+                    .setMessage("Ürün adedi 0'dan az olamaz!")
+                    .setPositiveButton("Tamam") { dialog, _ -> dialog.dismiss() }
                     .show()
-                binding.urunAdet = 0
-            }
-           else{
-                binding.urunAdet -= 1
-            }
+            } else binding.urunAdet -= 1
         }
 
         binding.btnArttir.setOnClickListener {
-            if(binding.urunAdet ==30){
+            if (binding.urunAdet == 30) {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Uyarı")
-                    .setMessage("En fazla 30 adet aynı üründen seçebilirsiniz ")
-                    .setPositiveButton("Tamam") { dialog, _ ->
-                        dialog.dismiss()
-                    }
+                    .setMessage("En fazla 30 adet seçebilirsiniz!")
+                    .setPositiveButton("Tamam") { dialog, _ -> dialog.dismiss() }
                     .show()
-                binding.urunAdet = 30
-            }else{
-                binding.urunAdet += 1
-            }
+            } else binding.urunAdet += 1
         }
 
-        //todo: bu sayfadan sepet butonuna tıkladığımız anda SepetFragment'a veri göndericez
-        //todo: UrunDetayFragment sadece “sipariş” iletiyor.
-        // UrunDetayFragment-> **directions**    &&    SepetFragment-> **args
-
+        // Sepete ekleme
         binding.buttonSepeteEkle.setOnClickListener {
-            if(binding.urunAdet > 0){
-                Snackbar.make(it,
-                    " \"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet}) ",
+            if (binding.urunAdet > 0) {
+                Snackbar.make(
+                    it,
+                    "\"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet})",
                     Snackbar.LENGTH_SHORT
                 ).show()
 
-              yemekEkle(
-                  alinanYemek.yemek_adi,
-                  alinanYemek.yemek_resim_adi,
-                  alinanYemek.yemek_fiyat,
-                  binding.urunAdet,
-                  "Ecem"
-              )
+                viewModel.sepeteYemekEkle(
+                    alinanYemek.yemek_adi,
+                    alinanYemek.yemek_resim_adi,
+                    alinanYemek.yemek_fiyat,
+                    binding.urunAdet,
+                    "Ecem"
+                )
 
-                /* todo not: hata almamak için activity_main_nav kısmında sepetFragment içindeki yemek entitysi nullable yapılmalı */
+                val gecis = UrunDetayFragmentDirections.sepetGecis(
+                    YemekSepeti(
+                        0,
+                        alinanYemek.yemek_adi,
+                        alinanYemek.yemek_resim_adi,
+                        alinanYemek.yemek_fiyat,
+                        binding.urunAdet,
+                        "Ecem"
+                    )
+                )
+                findNavController().navigate(gecis)
             }
         }
 
-        //todo- favorilere ekleme & kaldırma için viewmodeldeki listeyi kullandığımızdan observe lazım
-        favoriViewModel.favoriListesi.observe(viewLifecycleOwner){favList->
+        // Favori ve Rating güncelleme tek observer ile
+        favoriViewModel.favoriListesi.observe(viewLifecycleOwner) { favList ->
+            val favoriYemek = favList.find { it.yemek_adi == alinanYemek.yemek_adi }
 
-            if(favList?.any { it.yemek_adi == alinanYemek.yemek_adi } == true){
+            // Favori ikon ve rating güncelle
+            if (favoriYemek != null) {
                 binding.imageViewFavori.setImageResource(R.drawable.favfill_img)
-            }else {
+                binding.ratingBar.rating = favoriYemek.rating
+            } else {
                 binding.imageViewFavori.setImageResource(R.drawable.favblank_img)
+                binding.ratingBar.rating = 0f
             }
 
+            // RatingBar listener
+            binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+                if (favoriYemek != null) {
+                    favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)
+                }
+            }
         }
 
+        // Favori ekle/kaldır
         binding.imageViewFavori.setOnClickListener {
             val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == alinanYemek.yemek_adi }
+            val currentRating = binding.ratingBar.rating
 
             if (favoriYemek != null) {
-                // Eğer favoride varsa, gerçek ID ile sil
                 favoriViewModel.favoriSil(favoriYemek.yemek_id)
             } else {
-                // Yoksa ekle
-                favoriViewModel.favoriEkle(alinanYemek.yemek_adi, alinanYemek.yemek_resim_adi, alinanYemek.yemek_fiyat)
-
+                favoriViewModel.favoriEkle(
+                    alinanYemek.yemek_adi,
+                    alinanYemek.yemek_resim_adi,
+                    alinanYemek.yemek_fiyat,
+                    currentRating
+                )
             }
-
         }
 
+        // Close butonu
         binding.buttonCloseUrun.setOnClickListener {
-            findNavController().popBackStack() //1 önceki fragmenta gider
+            findNavController().popBackStack()
         }
 
         return binding.root
-    }
-
-    // TODO:  VIEW MODEL için gerekli (fragmentlarda)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    //TODO- Sepete yemek ekle - post
-    fun yemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){
-        viewModel.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
-        val gecis = UrunDetayFragmentDirections.sepetGecis(
-            yemekSepeti = YemekSepeti(0,yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
-        )
-        Navigation.findNavController(binding.buttonSepeteEkle).navigate(gecis)
     }
 }
