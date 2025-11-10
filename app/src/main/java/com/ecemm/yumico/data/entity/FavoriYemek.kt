@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 
-@Entity(tableName = "favori_yemekler") //veritabanı ile aynı tablo & kolon adları koymaya çalış
+@Entity(tableName = "favori_yemekler")
 data class FavoriYemek(
     @ColumnInfo(name = "yemek_id")  @PrimaryKey(autoGenerate = true) @NotNull var yemek_id:Int,
     @ColumnInfo(name = "yemek_adi")  @NotNull var yemek_adi:String,

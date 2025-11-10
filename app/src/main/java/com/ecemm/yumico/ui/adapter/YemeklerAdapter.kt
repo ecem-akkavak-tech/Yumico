@@ -65,8 +65,8 @@ class YemeklerAdapter(
 
 
       /*todo- favori iconu güncellemek */
-       // FAVORI IKONU: LiveData bazlı
         val favoriList = favoriViewModel.favoriListesi.value
+
         if (favoriList?.any { it.yemek_adi == yemek.yemek_adi } == true) {
             cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
         } else {
@@ -81,7 +81,7 @@ class YemeklerAdapter(
                 favoriViewModel.favoriSil(favoriYemek.yemek_id)
                 cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
             } else {
-                // Yoksa ekle
+                // Yoksa ekle (rating değeri sadece urun detaydan eklenebilir o yüzden burada ilk 0f)
                 favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat,0f)
                 cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
             }

@@ -10,7 +10,6 @@ import com.ecemm.yumico.data.entity.FavoriYemek
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 
-
 class FavoriAdapter(
     var mContext: Context,
     var favoriYemekList:List<FavoriYemek>,
@@ -46,6 +45,7 @@ class FavoriAdapter(
         //TODO- Rating değerini güncelle
         cBinding.ratingBarFavori.rating = favoriYemek.rating
         cBinding.textViewRating.text = favoriYemek.rating.toString()
+
         cBinding.ratingBarFavori.setOnRatingBarChangeListener { _, rating, _ ->
             favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)
         }

@@ -35,6 +35,7 @@ class FavorilerFragment : Fragment() {
            - UI management (Manage Favori Fill & Blank)
 
         */
+
         val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel )
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 

@@ -16,9 +16,9 @@ class FavoriDataSource(var favoriDao: FavoriDao) {
     }
 
     //delete
-    suspend fun favoriSil(yemek_id: Int) {
-        favoriDao.favoriSilById(yemek_id)
-        Log.e("silinen favori yemek:", yemek_id.toString())
+    suspend fun favoriSil(yemekId: Int) {
+        favoriDao.favoriSilById(yemekId)
+        Log.e("silinen favori yemek:", yemekId.toString())
     }
 
     //read

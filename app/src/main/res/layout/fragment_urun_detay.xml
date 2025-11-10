@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-       <variable
-           name="yemekObject"
-           type="com.ecemm.yumico.data.entity.Yemekler" />
+        <variable
+            name="yemekObject"
+            type="com.ecemm.yumico.data.entity.Yemekler" />
         <variable
             name="urunAdet"
             type="int" />
@@ -142,23 +142,23 @@
             android:id="@+id/buttonSepeteEkle"
             android:layout_width="150dp"
             android:layout_height="55dp"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="52dp"
             android:backgroundTint="#4CAF50"
             android:text="Sepete Ekle"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewUrunToplamFiyat" />
 
         <TextView
             android:id="@+id/textViewUrunToplamFiyat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="65dp"
             android:text='@{"Toplam " + String.valueOf(urunAdet * yemekObject.yemek_fiyat) + " ₺"}'
-            android:textAlignment="center"
-            android:textColor="#423F3F"
-            android:textSize="26sp"
+            android:textColor="#434242"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonSepeteEkle"
@@ -245,7 +245,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:text="@{yemekObject.yemek_adi}"
             android:textAlignment="center"
             android:textSize="25sp"

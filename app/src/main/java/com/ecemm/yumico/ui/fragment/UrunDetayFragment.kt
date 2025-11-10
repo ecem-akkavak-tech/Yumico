@@ -1,7 +1,5 @@
 package com.ecemm.yumico.ui.fragment
-
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment

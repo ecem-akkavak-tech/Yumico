@@ -27,7 +27,7 @@ class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriReposito
         }
     }
 
-    fun favoriEkle(yemek_adi:String,yemek_resim_adi:String,yemek_fiyat:Int,rating:Float){
+    fun favoriEkle(yemek_adi:String , yemek_resim_adi:String , yemek_fiyat:Int , rating:Float){
         //fe & be kısımları güncel olmalı
         CoroutineScope(Dispatchers.Main).launch {
             //aynı yemeği tekrar tekrar favorilere eklememek için:
@@ -36,11 +36,12 @@ class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriReposito
                 // zaten var, ekleme yapma
                 return@launch
             }
-            favoriRepository.favoriEkle(yemek_adi, yemek_resim_adi, yemek_fiyat,rating)
+            favoriRepository.favoriEkle(yemek_adi, yemek_resim_adi, yemek_fiyat, rating)
 
             val guncelListe = favoriRepository.favoriYemekleriGetir()
+
             withContext(Dispatchers.Main){
-                favoriListesi.value = guncelListe //ekleme işleminden sonra ilgili sayfa güncellensin
+                favoriListesi.value = guncelListe //ekleme işleminden sonra ilgili sayfanın ui'ı güncellensin
             }
         }
     }
@@ -56,12 +57,6 @@ class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriReposito
         }
     }
 
-
-    fun favorilendiMi(yemek_id:Int):Boolean{
-        return favoriListesi.value?.any{
-            it.yemek_id ==yemek_id
-        }?: false
-    }
 
     fun favoriRatingGuncelle(yemek_id: Int, rating: Float) {
         viewModelScope.launch(Dispatchers.IO) {
