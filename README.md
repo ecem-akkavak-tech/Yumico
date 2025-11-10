@@ -87,4 +87,4 @@
 </ul>
 
 <h3 id="contributors">Contributors</h3>
-<p><a href="https://github.com/ecem-akkavak-tech/">Ecem Naz Görüşük</a> – Main Developer & Project Owner</p>
+<p><a href="https://github.com/ecem-akkavak-tech/">Ecem Akkavak</a> – Main Developer & Project Owner</p>
