@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentSignupBinding
@@ -49,15 +50,20 @@ class SignupFragment : Fragment() {
         return binding.root
     }
 
-  fun observeProcess(){
-      authViewModel.user.observe(viewLifecycleOwner){ user->
-          if(user != null){
-              //profil sayfasına yönlendirme &      değerini gönderme
-              Toast.makeText(requireContext(), "Hoşgeldin ${user.email}", Toast.LENGTH_SHORT).show()
-              val profilGecis= SignupFragmentDirections.signuptoProfilGecis()
-              Navigation.findNavController(binding.root).navigate(profilGecis)
-          }
-      }
+    fun observeProcess() {
+        authViewModel.user.observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                // Kullanıcı signup yaptı, ProfilTamamlaFragment’e yönlendir
+                Toast.makeText(requireContext(), "Hoşgeldin ${user.email}", Toast.LENGTH_SHORT).show()
+                val profilGecis = SignupFragmentDirections.signuptoProfilGecis()
+
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.signupFragment, true) // signup'ı stack'ten at
+                    .build()
+                Navigation.findNavController(binding.root).navigate(profilGecis, navOptions)
+
+            }
+        }
       //Hata mesajları
       authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
           error?.let {

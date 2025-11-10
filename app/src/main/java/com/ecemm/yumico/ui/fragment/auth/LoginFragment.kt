@@ -53,6 +53,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Hoşgeldin ${user.email}", Toast.LENGTH_SHORT).show()
                 val anasayfaGecis= LoginFragmentDirections.loginAnasayfaGecis(user.email?:"")
                 Navigation.findNavController(binding.root).navigate(anasayfaGecis)
+
             }
         }
         authViewModel.errorMessage.observe(viewLifecycleOwner) { error ->

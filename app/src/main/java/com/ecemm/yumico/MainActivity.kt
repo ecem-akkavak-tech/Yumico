@@ -25,25 +25,28 @@ class MainActivity : AppCompatActivity() {
 
         // stack temizleme ayarları
         val navLoginOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.signupFragment, true)
+            .setPopUpTo(R.id.signupFragment, true) // signup'ı stack'ten çıkar
             .build()
 
         val navSignupOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.anasayfaFragment, true)
+            .setPopUpTo(R.id.anasayfaFragment, true) // ana sayfayı stack'ten çıkar
             .build()
 
+        // Sadece uygulama ilk açıldığında çalışsın
+        if (savedInstanceState == null) {
+            binding.root.post {
+                if (authViewModel.isUserLoggedIn()) {
+                    // kullanıcı login → direkt ana sayfa
+                    if (navController.currentDestination?.id != R.id.anasayfaFragment) {
+                        navController.navigate(R.id.anasayfaFragment, null, navLoginOptions)
+                    }
+                } else {
+                    // kullanıcı login değil → signup’a at
+                    if (navController.currentDestination?.id != R.id.signupFragment) {
+                        navController.navigate(R.id.signupFragment, null, navSignupOptions)
+                    }
+                }
 
-        binding.root.post {
-            if (authViewModel.isUserLoggedIn()) {
-                // kullanıcı login → direkt ana sayfa
-                if (navController.currentDestination?.id != R.id.anasayfaFragment) {
-                    navController.navigate(R.id.anasayfaFragment, null, navLoginOptions)
-                }
-            } else {
-                // kullanıcı login değil → signup’a at
-                if (navController.currentDestination?.id != R.id.signupFragment) {
-                    navController.navigate(R.id.signupFragment, null, navSignupOptions)
-                }
             }
         }
     }
