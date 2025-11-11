@@ -28,7 +28,7 @@ class YemeklerDataSource(var yemeklerDao : YemeklerDao) {
     //TODO- Sepete yemek ekle -POST
     suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){
         yemeklerDao.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
-        Log.e("eklendi: ","Yemek Adı: ${yemekAdi} Fiyat: ${yemekFiyat} ")
+        Log.e("eklendi: ","Yemek Adı: ${yemekAdi} Fiyat: ${yemekFiyat} Kullanıcı: ${kullaniciAdi}")
     }
 
     //TODO- Sepetteki Tüm yemekleri  kullanıcıya göre getir -POST

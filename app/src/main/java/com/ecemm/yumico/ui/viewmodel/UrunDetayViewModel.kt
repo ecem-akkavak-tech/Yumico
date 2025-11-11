@@ -1,4 +1,5 @@
 package com.ecemm.yumico.ui.viewmodel
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ class UrunDetayViewModel@Inject constructor(var yemeklerRepository: YemeklerRepo
         CoroutineScope(Dispatchers.Main).launch {
             //main arayüzle ilgili işlemlerde kullanılır
              yemeklerRepository.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
+
         }
     }
 

@@ -55,7 +55,6 @@ class SepetAdapter(
             Snackbar.make(it,"${sepeteEklenenYemek.yemek_adi} silinsin mi? ",Snackbar.LENGTH_SHORT)
                 .setAction("EVET"){
                     yemekSil(sepeteEklenenYemek.sepet_yemek_id,sepeteEklenenYemek.kullanici_adi,sepeteEklenenYemek.yemek_adi)
-
                 }.show()
             Log.e("sepettekiYemeklerListesi",sepettekiYemeklerListesi.toString())
         }
@@ -68,7 +67,6 @@ class SepetAdapter(
     //TODO- Sepetteki yemeği sil
     fun yemekSil(sepet_yemek_id:Int,kullanici_adi:String,yemek_adi:String){
            viewModel.yemekSil(sepet_yemek_id, kullanici_adi,yemek_adi)
-
     }
 
 

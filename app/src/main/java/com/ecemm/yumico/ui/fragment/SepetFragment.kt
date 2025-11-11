@@ -2,6 +2,7 @@ package com.ecemm.yumico.ui.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -84,12 +85,12 @@ class SepetFragment : Fragment() {
                 binding.manageSepetFill.visibility = View.VISIBLE
             }
 
+            // toplam güncelle
+            binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla()
+
             // adapter update
             sepetAdapter.sepettekiYemeklerListesi = liste
             sepetAdapter.notifyDataSetChanged()
-
-            // toplam güncelle
-            binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla()
         }
 
 

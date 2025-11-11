@@ -12,6 +12,7 @@ import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
+import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ class UrunDetayFragment : Fragment() {
     private lateinit var binding: FragmentUrunDetayBinding
     private val viewModel: UrunDetayViewModel by activityViewModels()
     private val favoriViewModel: FavoriViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
     private val args: UrunDetayFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -75,7 +77,7 @@ class UrunDetayFragment : Fragment() {
                     alinanYemek.yemek_resim_adi,
                     alinanYemek.yemek_fiyat,
                     binding.urunAdet,
-                    "Ecem"
+                    authViewModel.getCurrentUserEmail().toString()
                 )
 
                 val gecis = UrunDetayFragmentDirections.sepetGecis(
@@ -85,7 +87,7 @@ class UrunDetayFragment : Fragment() {
                         alinanYemek.yemek_resim_adi,
                         alinanYemek.yemek_fiyat,
                         binding.urunAdet,
-                        "Ecem"
+                        authViewModel.getCurrentUserEmail().toString()
                     )
                 )
                 findNavController().navigate(gecis)

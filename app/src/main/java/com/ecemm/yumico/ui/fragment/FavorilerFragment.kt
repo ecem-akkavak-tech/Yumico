@@ -6,22 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentFavorilerBinding
 import com.ecemm.yumico.ui.adapter.FavoriAdapter
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.SepetViewModel
+import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
+import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavorilerFragment : Fragment() {
     private lateinit var binding:FragmentFavorilerBinding
     private val favoriViewModel: FavoriViewModel by activityViewModels()
-
+    private val urunDetayViewModel:UrunDetayViewModel by activityViewModels()
+    private val sepetViewModel:SepetViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
+
     ): View? {
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoriler , container, false)
@@ -36,11 +41,10 @@ class FavorilerFragment : Fragment() {
 
         */
 
-        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel )
+        val favoriAdapter = FavoriAdapter(requireContext(), listOf(), favoriViewModel , urunDetayViewModel ,sepetViewModel, authViewModel)
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner){ liste ->
-
             if(liste.isNullOrEmpty()){
                 binding.manageFavoriBlank.visibility = View.VISIBLE
                 binding.manageFavoriFill.visibility = View.GONE
@@ -51,6 +55,12 @@ class FavorilerFragment : Fragment() {
 
             favoriAdapter.favoriYemekList = liste
             favoriAdapter.notifyDataSetChanged()
+        }
+
+
+        // Close butonu
+        binding.buttonCloseFavoriler.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         return binding.root

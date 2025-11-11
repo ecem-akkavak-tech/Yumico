@@ -9,11 +9,19 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.FavoriYemek
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.SepetViewModel
+import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
+import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class FavoriAdapter(
     var mContext: Context,
     var favoriYemekList:List<FavoriYemek>,
     var favoriViewModel: FavoriViewModel,
+    var urunDetayViewModel: UrunDetayViewModel,
+    var sepetViewModel: SepetViewModel,
+    var authViewModel: AuthViewModel,
+
 ): RecyclerView.Adapter<FavoriAdapter.CardDesignHolder>(){
 
     inner class CardDesignHolder(var cardBinding: FavoriCardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
@@ -48,6 +56,22 @@ class FavoriAdapter(
 
         cBinding.ratingBarFavori.setOnRatingBarChangeListener { _, rating, _ ->
             favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)
+        }
+
+        //todo- sepete favorilenen yemeği ekleme
+        cBinding.buttonSepetEkle.setOnClickListener {
+          val kullaniciAdi = authViewModel.user.value?.email ?: "ecemnaz_gorusuk"
+
+          urunDetayViewModel.sepeteYemekEkle(
+              favoriYemek.yemek_adi,
+              favoriYemek.yemek_resim_adi,
+              favoriYemek.yemek_fiyat,
+              1,
+              kullaniciAdi
+              )
+
+            Snackbar.make(it, "\"${favoriYemek.yemek_adi}\" sepete eklendi.", Snackbar.LENGTH_SHORT).show()
+
         }
     }
 

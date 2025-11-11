@@ -79,19 +79,17 @@ class YemeklerAdapter(
         cBinding.ratingBarAnasayfa.rating = favYemek?.rating ?:0f
 
         cBinding.ratingBarAnasayfa.setOnRatingBarChangeListener { _, rating, _ ->
-            val favYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == yemek.yemek_adi }
             if(favYemek != null){
                 favoriViewModel.favoriRatingGuncelle(favYemek.yemek_id,rating)
             }
         }
 
         cBinding.imageViewFav.setOnClickListener {
-            val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == yemek.yemek_adi }
             val currentRating = cBinding.ratingBarAnasayfa.rating
 
-            if (favoriYemek != null) {
+            if (favYemek != null) {
                 // Eğer favoride varsa, gerçek ID ile sil
-                favoriViewModel.favoriSil(favoriYemek.yemek_id)
+                favoriViewModel.favoriSil(favYemek.yemek_id)
                 cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
             } else {
                 favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat, currentRating)
@@ -102,6 +100,9 @@ class YemeklerAdapter(
 
 
 
+        cBinding.imageViewFav.animate().scaleX(1.2f).scaleY(1.2f).setDuration(150).withEndAction {
+            cBinding.imageViewFav.animate().scaleX(1f).scaleY(1f).duration = 150
+        }
 
     }
 
