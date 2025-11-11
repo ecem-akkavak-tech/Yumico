@@ -16,10 +16,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewYemekler"
-            android:descendantFocusability="blocksDescendants"
-            android:layout_width="185dp"
+            android:layout_width="195dp"
             android:layout_height="280dp"
             android:layout_margin="6dp"
+            android:descendantFocusability="blocksDescendants"
             app:cardCornerRadius="5dp"
             app:cardElevation="6dp">
 
@@ -35,9 +35,9 @@
 
                 <ImageView
                     android:id="@+id/imageViewYemekImg"
-                    android:layout_width="140dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="130dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
                     android:clickable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -49,24 +49,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="61dp"
+                    android:layout_marginTop="81dp"
                     android:text='@{yemekObj.yemek_fiyat+" ₺"}'
                     android:textColor="@color/purpBlue"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg" />
-
-                <ImageView
-                    android:id="@+id/imageViewPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="65dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg"
-                    app:srcCompat="@drawable/plus_img" />
 
                 <TextView
                     android:id="@+id/textViewYemekUcret"
@@ -87,34 +76,61 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="3dp"
                     android:clickable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/favblank_img" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Ücretsiz Gönderim"
-                    android:textColor="#6A6A73"
-                    android:textSize="12sp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@+id/ratingBarAnasayfa"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.491"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewYemekUcret">
 
-                <ImageView
-                    android:id="@+id/imageView3"
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg"
+                        app:srcCompat="@drawable/bike_img" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ücretsiz Gönderim"
+                        android:textColor="#6A6A73"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.491"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg" />
+                </LinearLayout>
+
+                <RatingBar
+                    android:id="@+id/ratingBarAnasayfa"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="38dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="26dp"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:progressTint="@color/yellow"
+                    android:rating="0"
+                    android:stepSize="1"
+                    android:theme="@style/Widget.AppCompat.RatingBar.Small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewYemekImg"
-                    app:srcCompat="@drawable/bike_img" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

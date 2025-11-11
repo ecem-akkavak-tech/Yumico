@@ -167,6 +167,7 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
+            android:progressTint="@color/yellow"
             android:layout_width="235dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"

@@ -25,7 +25,7 @@ class AnasayfaFragment : Fragment() {
    private lateinit var binding: FragmentAnasayfaBinding
 
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
-    private lateinit var viewModel: AnasayfaViewModel
+    private val viewModel: AnasayfaViewModel  by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
     private val favoriViewModel: FavoriViewModel by activityViewModels() //ortak livedata olduğu için shared olmalı (icon ile ekle-sil)
 
@@ -71,6 +71,7 @@ class AnasayfaFragment : Fragment() {
 
 
 
+
         // TODO-  NavHostFragment + BottomNavigationView safe setup
         val navHostFragment = requireActivity()
                               .supportFragmentManager
@@ -103,12 +104,8 @@ class AnasayfaFragment : Fragment() {
         return binding.root
     }
 
-    // TODO-2-:  VIEW MODEL için gerekli (fragmentlarda)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel:AnasayfaViewModel by viewModels()
-        viewModel = tempViewModel
-
     }
 
     //TODO-3-: GÜNCEL LİSTE İÇİN

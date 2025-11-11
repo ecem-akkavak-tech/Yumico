@@ -105,7 +105,7 @@ class UrunDetayFragment : Fragment() {
                 binding.ratingBar.rating = 0f
             }
 
-            // RatingBar listener
+            // RatingBar tıklama & güncelleme
             binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
                 if (favoriYemek != null) {
                     favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)

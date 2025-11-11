@@ -73,16 +73,28 @@ class YemeklerAdapter(
             cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
         }
 
+
+       //güncel ratingbar ui:
+        val favYemek = favoriList.find { it.yemek_adi == yemek.yemek_adi }
+        cBinding.ratingBarAnasayfa.rating = favYemek?.rating ?:0f
+
+        cBinding.ratingBarAnasayfa.setOnRatingBarChangeListener { _, rating, _ ->
+            val favYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == yemek.yemek_adi }
+            if(favYemek != null){
+                favoriViewModel.favoriRatingGuncelle(favYemek.yemek_id,rating)
+            }
+        }
+
         cBinding.imageViewFav.setOnClickListener {
             val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == yemek.yemek_adi }
+            val currentRating = cBinding.ratingBarAnasayfa.rating
 
             if (favoriYemek != null) {
                 // Eğer favoride varsa, gerçek ID ile sil
                 favoriViewModel.favoriSil(favoriYemek.yemek_id)
                 cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
             } else {
-                // Yoksa ekle (rating değeri sadece urun detaydan eklenebilir o yüzden burada ilk 0f)
-                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat,0f)
+                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat, currentRating)
                 cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
             }
         }
