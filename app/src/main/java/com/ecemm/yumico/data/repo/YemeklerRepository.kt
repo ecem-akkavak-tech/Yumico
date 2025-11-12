@@ -19,13 +19,7 @@ class YemeklerRepository(var yemeklerDataSource : YemeklerDataSource) {
     }
 
     //TODO- Sepete yemek ekle
-    suspend fun sepeteYemekEkle(
-        yemekAdi: String,
-        yemekResimAdi: String,
-        yemekFiyat: Int,
-        yemekSiparisAdet: Int,
-        kullaniciAdi: String
-    ) {
+    suspend fun sepeteYemekEkle(yemekAdi: String, yemekResimAdi: String, yemekFiyat: Int, yemekSiparisAdet: Int, kullaniciAdi: String) {
         return yemeklerDataSource.sepeteYemekEkle(
             yemekAdi,
             yemekResimAdi,

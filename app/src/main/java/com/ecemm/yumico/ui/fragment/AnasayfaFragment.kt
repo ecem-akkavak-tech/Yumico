@@ -104,9 +104,6 @@ class AnasayfaFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     //TODO-3-: GÜNCEL LİSTE İÇİN
     override fun onResume() {

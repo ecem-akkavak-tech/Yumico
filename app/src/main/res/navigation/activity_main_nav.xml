@@ -27,7 +27,11 @@
         android:id="@+id/favorilerFragment"
         android:name="com.ecemm.yumico.ui.fragment.FavorilerFragment"
         android:label="fragment_favoriler"
-        tools:layout="@layout/fragment_favoriler" />
+        tools:layout="@layout/fragment_favoriler" >
+        <action
+            android:id="@+id/favoriTosepetGecis"
+            app:destination="@id/sepetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/urunDetayFragment"
         android:name="com.ecemm.yumico.ui.fragment.UrunDetayFragment"

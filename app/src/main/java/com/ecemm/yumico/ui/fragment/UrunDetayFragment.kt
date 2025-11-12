@@ -11,7 +11,7 @@ import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentUrunDetayBinding
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
-import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
+import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UrunDetayFragment : Fragment() {
 
     private lateinit var binding: FragmentUrunDetayBinding
-    private val viewModel: UrunDetayViewModel by activityViewModels()
+    private val sepetViewModel:SepetViewModel  by activityViewModels()
     private val favoriViewModel: FavoriViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
     private val args: UrunDetayFragmentArgs by navArgs()
@@ -42,22 +42,27 @@ class UrunDetayFragment : Fragment() {
             .override(500, 700)
             .into(binding.imageViewYemekImg)
 
+
+
+
+
         // Ürün adedi işlemleri
         binding.btnAzalt.setOnClickListener {
             if (binding.urunAdet == 0) {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Uyarı")
-                    .setMessage("Ürün adedi 0'dan az olamaz!")
+                    .setMessage("Ürün adedi 0'dan küçük seçilemez!")
                     .setPositiveButton("Tamam") { dialog, _ -> dialog.dismiss() }
                     .show()
             } else binding.urunAdet -= 1
         }
 
+
         binding.btnArttir.setOnClickListener {
             if (binding.urunAdet == 30) {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Uyarı")
-                    .setMessage("En fazla 30 adet seçebilirsiniz!")
+                    .setMessage("En fazla 30 adet aynı üründen seçebilirsiniz!")
                     .setPositiveButton("Tamam") { dialog, _ -> dialog.dismiss() }
                     .show()
             } else binding.urunAdet += 1
@@ -72,13 +77,14 @@ class UrunDetayFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
 
-                viewModel.sepeteYemekEkle(
+                sepetViewModel.sepeteYemekEkle(
                     alinanYemek.yemek_adi,
                     alinanYemek.yemek_resim_adi,
                     alinanYemek.yemek_fiyat,
                     binding.urunAdet,
                     authViewModel.getCurrentUserEmail().toString()
                 )
+
 
                 val gecis = UrunDetayFragmentDirections.sepetGecis(
                     YemekSepeti(
@@ -93,6 +99,7 @@ class UrunDetayFragment : Fragment() {
                 findNavController().navigate(gecis)
             }
         }
+
 
         // Favori ve Rating güncelleme tek observer ile
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner) { favList ->
@@ -139,4 +146,5 @@ class UrunDetayFragment : Fragment() {
 
         return binding.root
     }
+
 }

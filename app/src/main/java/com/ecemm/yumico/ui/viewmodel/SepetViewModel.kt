@@ -1,4 +1,5 @@
 package com.ecemm.yumico.ui.viewmodel
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,14 +15,26 @@ import javax.inject.Inject
  **/
 @HiltViewModel
 class SepetViewModel@Inject constructor(var yemeklerRepository: YemeklerRepository) : ViewModel() {
+
     val sepetListesi = MutableLiveData<List<YemekSepeti>>()
 
+    //TODO- Sepete yemek ekle - post
+    fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){
+        CoroutineScope(Dispatchers.Main).launch {
+            //main arayüzle ilgili işlemlerde kullanılır
+            yemeklerRepository.sepeteYemekEkle(yemekAdi,yemekResimAdi,yemekFiyat,yemekSiparisAdet,kullaniciAdi)
+
+        }
+    }
+
+
+
     //TODO- Sepetteki Tüm yemekleri  getir
-     fun sepettekiYemekleriGetir(kullanici_adi:String){
+    fun sepettekiYemekleriGetir(kullanici_adi:String){
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val response=yemeklerRepository.sepettekiYemekleriGetir(kullanici_adi)
-                sepetListesi.value = response ?: emptyList()
+                //yemeklerRepository.sepettekiYemekleriGetir(kullanici_adi)
+                //sepetListesi.value = response
             }catch (e:Exception){
                 e.printStackTrace()
                 sepetListesi.value = emptyList()

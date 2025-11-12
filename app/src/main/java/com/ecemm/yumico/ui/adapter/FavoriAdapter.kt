@@ -3,22 +3,26 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ecemm.yumico.R
 import com.ecemm.yumico.data.entity.FavoriYemek
+import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FavoriCardDesignBinding
+import com.ecemm.yumico.ui.fragment.FavorilerFragmentDirections
+import com.ecemm.yumico.ui.fragment.FavorilerFragmentDirections.Companion.favoriTosepetGecis
+import com.ecemm.yumico.ui.fragment.UrunDetayFragmentDirections
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
-import com.ecemm.yumico.ui.viewmodel.UrunDetayViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
-import com.google.android.material.snackbar.Snackbar
+
 
 class FavoriAdapter(
     var mContext: Context,
     var favoriYemekList:List<FavoriYemek>,
     var favoriViewModel: FavoriViewModel,
-    var urunDetayViewModel: UrunDetayViewModel,
     var sepetViewModel: SepetViewModel,
     var authViewModel: AuthViewModel,
 
@@ -59,20 +63,32 @@ class FavoriAdapter(
         }
 
         //todo- sepete favorilenen yemeği ekleme
+
         cBinding.buttonSepetEkle.setOnClickListener {
-          val kullaniciAdi = authViewModel.user.value?.email ?: "ecemnaz_gorusuk"
+                sepetViewModel.sepeteYemekEkle(
+                    favoriYemek.yemek_adi,
+                    favoriYemek.yemek_resim_adi,
+                    favoriYemek.yemek_fiyat,
+                    1,
+                    authViewModel.getCurrentUserEmail().toString()
+                )
 
-          urunDetayViewModel.sepeteYemekEkle(
-              favoriYemek.yemek_adi,
-              favoriYemek.yemek_resim_adi,
-              favoriYemek.yemek_fiyat,
-              1,
-              kullaniciAdi
-              )
 
-            Snackbar.make(it, "\"${favoriYemek.yemek_adi}\" sepete eklendi.", Snackbar.LENGTH_SHORT).show()
+                val gecis = FavorilerFragmentDirections.favoriTosepetGecis(
+                    YemekSepeti(
+                        0,
+                        favoriYemek.yemek_adi,
+                        favoriYemek.yemek_resim_adi,
+                        favoriYemek.yemek_fiyat,
+                        1,
+                        authViewModel.getCurrentUserEmail().toString()
+                    )
+                )
+                //findNavController().navigate(gecis)
+                Navigation.findNavController(it).navigate(gecis)
 
         }
+
     }
 
     override fun getItemCount(): Int {
