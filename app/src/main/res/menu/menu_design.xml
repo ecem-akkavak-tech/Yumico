@@ -4,18 +4,14 @@
 
     <item
         android:id="@+id/anasayfaFragment"
-        android:icon="@drawable/home_img"
-        android:title="Anasayfa" />
+        android:icon="@drawable/home_img" />
     <item
         android:id="@+id/favorilerFragment"
-        android:icon="@drawable/favori_img"
-        android:title="Favoriler" />
+        android:icon="@drawable/favori_img" />
     <item
         android:id="@+id/sepetFragment"
-        android:icon="@drawable/shoppingcart_img"
-        android:title="Sepet" />
+        android:icon="@drawable/shoppingcart_img" />
     <item
         android:id="@+id/kullaniciFragment"
-        android:icon="@drawable/account_img"
-        android:title="Kullanıcı" />
+        android:icon="@drawable/account_img" />
 </menu>

@@ -1,10 +1,12 @@
 package com.ecemm.yumico
-
 import android.os.Bundle
+import android.view.View
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.ecemm.yumico.databinding.ActivityMainBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,35 +21,42 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+
+        // NAV HOST & BOTTOM NAVIGATION VIEW
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // stack temizleme ayarları
-        val navLoginOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.signupFragment, true) // signup'ı stack'ten çıkar
-            .build()
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
-        val navSignupOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.anasayfaFragment, true) // ana sayfayı stack'ten çıkar
-            .build()
-
-        // Sadece uygulama ilk açıldığında çalışsın
+        ///startDestination (kullanıcı login ise -> Anasayfa)
         if (savedInstanceState == null) {
-            binding.root.post {
-                if (authViewModel.isUserLoggedIn()) {
-                    // kullanıcı login → direkt ana sayfa
-                    if (navController.currentDestination?.id != R.id.anasayfaFragment) {
-                        navController.navigate(R.id.anasayfaFragment, null, navLoginOptions)
-                    }
-                } else {
-                    // kullanıcı login değil → signup’a at
-                    if (navController.currentDestination?.id != R.id.signupFragment) {
-                        navController.navigate(R.id.signupFragment, null, navSignupOptions)
-                    }
-                }
+            val navGraph = navController.navInflater.inflate(R.navigation.activity_main_nav)
+            navGraph.setStartDestination(
+                if (authViewModel.isUserLoggedIn()) R.id.anasayfaFragment else R.id.signupFragment
+            )
+            navController.graph = navGraph
+        }
 
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNavigationView.visibility = View.VISIBLE
+                }
             }
         }
+
+
+
+        // Geri tuşu davranışı
+        onBackPressedDispatcher.addCallback(this) {
+            val current = navController.currentDestination?.id
+            if (current == R.id.anasayfaFragment) finish()
+            else navController.popBackStack()
+        }
+
     }
 }

@@ -9,13 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentFavorilerBinding
 import com.ecemm.yumico.ui.adapter.FavoriAdapter
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
-import com.google.android.material.snackbar.Snackbar
 
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint

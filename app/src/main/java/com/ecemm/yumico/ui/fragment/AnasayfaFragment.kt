@@ -6,11 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import android.widget.SearchView
-import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ecemm.yumico.R
 import com.ecemm.yumico.databinding.FragmentAnasayfaBinding
@@ -68,33 +64,6 @@ class AnasayfaFragment : Fragment() {
             yemeklerAdapter.notifyDataSetChanged()
         }
 
-
-
-
-
-        // TODO-  NavHostFragment + BottomNavigationView safe setup
-        val navHostFragment = requireActivity()
-                              .supportFragmentManager
-                              .findFragmentById(R.id.navHostFragment) as NavHostFragment
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            val navController = navHostFragment.navController
-            // duplicate navigate engelle
-            if (item.itemId != navController.currentDestination?.id) {
-                NavigationUI.onNavDestinationSelected(item, navController)
-            }
-            true
-        }
-
-        // Geri tuşu davranışı
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            val navController = navHostFragment.navController
-            val currentFragmentId = navController.currentDestination?.id
-            if (currentFragmentId == R.id.anasayfaFragment) {
-                requireActivity().finish() // AnaSayfa'da uygulamayı kapat
-            } else {
-                navController.popBackStack()
-            }
-        }
 
 
         authViewModel.getUserFromFirestore() { user->
