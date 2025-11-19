@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
-        ///startDestination (kullanıcı login ise -> Anasayfa)
+        //startDestination (kullanıcı login ise Anasayfa , değilse Signup)
         if (savedInstanceState == null) {
             val navGraph = navController.navInflater.inflate(R.navigation.activity_main_nav)
             navGraph.setStartDestination(
@@ -37,15 +37,23 @@ class MainActivity : AppCompatActivity() {
             navController.graph = navGraph
         }
 
-
+        //start destination durumuna göre bottom nav bar visibility
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+
+                R.id.signupFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
                 R.id.loginFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                R.id.profilBilgisiFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
                 }
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
+
             }
         }
 
