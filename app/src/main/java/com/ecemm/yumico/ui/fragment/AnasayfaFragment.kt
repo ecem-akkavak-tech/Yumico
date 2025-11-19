@@ -14,11 +14,15 @@ import com.ecemm.yumico.ui.adapter.YemeklerAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
+import com.ecemm.yumico.utils.SiralamaTuru
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AnasayfaFragment : Fragment() {
    private lateinit var binding: FragmentAnasayfaBinding
+
+   private var aramaKelimesi:String = ""
+   private var siralamaTuru:SiralamaTuru = SiralamaTuru.DEFAULT
 
     // TODO-1-:  VIEW MODEL BAĞLAMA İŞLEMİ (fragmentlarda)
     private val viewModel: AnasayfaViewModel  by activityViewModels()
@@ -36,20 +40,40 @@ class AnasayfaFragment : Fragment() {
         binding.recyclerviewYemekler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
+        authViewModel.getUserFromFirestore() { user->
+            binding.toolbarAnasayfa.title = "Hoşgeldin ${user?.name ?: "Misafir"}"
+        }
+
+
         //todo- SEARCH VIEW içini doldur ********/
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 //search view'a harf girdikçe veya sildikçe bize sonuç döndüren fonksiyondur
-                viewModel.yemekFiltresiyleAra(newText ?: "")
+                aramaKelimesi = newText ?: ""
+                filtrelemeYap(aramaKelimesi, siralamaTuru)
                 return true
             }
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //search view'a harf girilme işlemini yaptıktan sonra arama iconuna tıkladığımızda bize sonuç döndüren fonksiyondur
-                viewModel.yemekFiltresiyleAra(query ?: "")
+                aramaKelimesi = query ?: ""
+                if(aramaKelimesi.isBlank()){
+                    viewModel.yemekleriGetir()
+                }
+                filtrelemeYap(aramaKelimesi, siralamaTuru)
                 return true
             }
         })
+
+        binding.imageViewFiyatArtan.setOnClickListener {
+           siralamaTuru = SiralamaTuru.ARTAN
+           filtrelemeYap(aramaKelimesi, siralamaTuru)
+        }
+
+        binding.imageViewFiyatAzalan.setOnClickListener {
+            siralamaTuru = SiralamaTuru.AZALAN
+            filtrelemeYap(aramaKelimesi, siralamaTuru)
+        }
 
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
@@ -66,9 +90,7 @@ class AnasayfaFragment : Fragment() {
 
 
 
-        authViewModel.getUserFromFirestore() { user->
-            binding.toolbarAnasayfa.title = "Hoşgeldin ${user?.name ?: "Misafir"}"
-        }
+
 
         return binding.root
     }
@@ -82,4 +104,7 @@ class AnasayfaFragment : Fragment() {
 
     }
 
+   fun filtrelemeYap(aramaKelimesi:String,siralamaTuru:SiralamaTuru){
+       viewModel.yemekFiltresiyleAra(aramaKelimesi, siralamaTuru)
+   }
 }

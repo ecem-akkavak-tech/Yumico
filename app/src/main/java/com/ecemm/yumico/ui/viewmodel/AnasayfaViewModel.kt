@@ -3,6 +3,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.data.repo.YemeklerRepository
+import com.ecemm.yumico.utils.SiralamaTuru
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,14 +34,14 @@ class AnasayfaViewModel @Inject constructor(var yemeklerRepository: YemeklerRepo
     }
 
     //TODO- Yemek ara
-    fun yemekFiltresiyleAra(aramaKelimesi:String){
+    fun yemekFiltresiyleAra(aramaKelimesi:String , siralamaTuru: SiralamaTuru){
             if (aramaKelimesi.isBlank()) {
                 //arama kısmı boşsa tüm listeyi tekrar çağır
                 yemekleriGetir()
             } else {
                 val tumListe = yemeklerListesi.value ?: listOf()
                 CoroutineScope(Dispatchers.Main).launch {
-                    yemeklerListesi.value = yemeklerRepository.yemekAra(aramaKelimesi, tumListe)
+                    yemeklerListesi.value = yemeklerRepository.yemekAra(aramaKelimesi, tumListe, siralamaTuru )
                 }
             }
 

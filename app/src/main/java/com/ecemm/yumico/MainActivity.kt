@@ -50,6 +50,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.profilBilgisiFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
                 }
+                R.id.favorilerFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                R.id.sepetFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }

@@ -3,6 +3,7 @@ import com.ecemm.yumico.data.datasource.YemeklerDataSource
 import com.ecemm.yumico.data.entity.CrudResponse
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.data.entity.Yemekler
+import com.ecemm.yumico.utils.SiralamaTuru
 
 
 // todo: DataSource ile bağlama işlemi , İlk amaç data source'a erişmektir ve yönetmektir
@@ -14,8 +15,8 @@ class YemeklerRepository(var yemeklerDataSource : YemeklerDataSource) {
     }
 
     //TODO- Yemek ara
-    suspend fun yemekAra(aramaKelimesi: String, tumYemekler: List<Yemekler>): List<Yemekler> {
-        return yemeklerDataSource.yemekAra(aramaKelimesi, tumYemekler)
+    suspend fun yemekAra(aramaKelimesi: String, tumYemekler: List<Yemekler>,siralamaTuru: SiralamaTuru): List<Yemekler> {
+        return yemeklerDataSource.yemekAra(aramaKelimesi, tumYemekler,siralamaTuru)
     }
 
     //TODO- Sepete yemek ekle

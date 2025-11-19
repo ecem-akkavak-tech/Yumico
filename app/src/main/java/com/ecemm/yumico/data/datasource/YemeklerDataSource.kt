@@ -3,6 +3,7 @@ import android.util.Log
 import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.retrofit.YemeklerDao
+import com.ecemm.yumico.utils.SiralamaTuru
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -18,12 +19,19 @@ class YemeklerDataSource(var yemeklerDao : YemeklerDao) {
     }
 
     //TODO- Yemek ara -POST
-    suspend fun yemekAra(aramaKelimesi:String,tumYemekler:List<Yemekler>):List<Yemekler> = withContext(Dispatchers.Default){
-      //no api call for this process
-      tumYemekler.filter {
-          it.yemek_adi.contains(aramaKelimesi,ignoreCase = true)
-      }
+    suspend fun yemekAra(aramaKelimesi:String,tumYemekler:List<Yemekler>,siralamaTuru: SiralamaTuru):List<Yemekler> = withContext(Dispatchers.Default) {
+        //no api call for this process
+        val filtrelenen = tumYemekler.filter {
+            it.yemek_adi.contains(aramaKelimesi, ignoreCase = true)
+        }
+        return@withContext when(siralamaTuru){
+            //fiyata göre artan & azalan sıralama işlemi
+            SiralamaTuru.ARTAN  -> filtrelenen.sortedBy { it.yemek_fiyat.toInt() } //sortedBy: artan sıralamayı verir
+            SiralamaTuru.AZALAN -> filtrelenen.sortedByDescending { it.yemek_fiyat.toInt() } //sortedByDescending:azalan sıralama
+            else -> filtrelenen //olduğu gibi filtreler
+        }
     }
+
 
     //TODO- Sepete yemek ekle -POST
     suspend fun sepeteYemekEkle(yemekAdi:String,yemekResimAdi:String,yemekFiyat:Int,yemekSiparisAdet:Int,kullaniciAdi:String){

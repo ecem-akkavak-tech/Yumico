@@ -113,7 +113,7 @@
         android:layout_height="52dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="74dp"
-        android:background="@drawable/gradient_button"
+        android:background="@drawable/button_ui"
         android:backgroundTint="@null"
         android:elevation="6dp"
         android:text="Kaydet"
