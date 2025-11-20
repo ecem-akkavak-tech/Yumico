@@ -22,6 +22,7 @@ import com.ecemm.yumico.ui.adapter.SepetAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -103,42 +104,31 @@ class SepetFragment : Fragment() {
         }
 
 
-        //sepeti onayla - Alert Dialog
+        //sepeti onayla
         binding.buttonSepetiOnayla.setOnClickListener {
-            val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            builder.setTitle("❓ Sipariş Onayı")
-            builder.setMessage("Sepetinizdeki yemekleri onaylıyor musunuz?\nToplam: ₺${viewModel.toplamSepetHesapla()}")
+            val total = viewModel.toplamSepetHesapla()
+            val sepetListesi = viewModel.sepetListesi.value?.toMutableList() ?: mutableListOf()
 
-            builder.setPositiveButton("EVET") { dialog, _ ->
-                dialog.dismiss()
-                val confirmDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                    .setMessage("\uD83C\uDF7D\uFE0F Siparişiniz başarıyla alındı! ")
-                    .setPositiveButton("TAMAM") { itDialog, _ -> itDialog.dismiss() }
-                    .create()
+            MaterialAlertDialogBuilder(requireContext(), R.style.PopupStyle)
+                .setTitle("Sipariş Onayı")
+                .setMessage(
+                     "\uD83D\uDECD\uFE0F Sepetinizdeki yemekleri onaylıyor musunuz?\n"
+                   + "\nToplam: ₺$total")
 
-                confirmDialog.show()
-                confirmDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
-                    ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-
-                confirmDialog.window?.setBackgroundDrawable(
-                    ColorDrawable(ContextCompat.getColor(requireContext(), R.color.purp))
-                )
-            }
-
-            builder.setNegativeButton("HAYIR") { dialog, _ -> dialog.dismiss() }
-            val dialog = builder.create()
-            dialog.show()
-
-            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
-                ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
-                ?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-
-            dialog.window?.setBackgroundDrawable(
-                ColorDrawable(ContextCompat.getColor(requireContext(), R.color.purp))
-            )
+                .setPositiveButton("Onayla") { d, _ ->
+                    d.dismiss()
+                    // Başarı popup
+                    MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
+                        .setMessage(
+                            "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
+                            sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
+                        )
+                        .setPositiveButton("Tamam") { ok, _ -> ok.dismiss() }
+                        .show()
+                }
+                .setNegativeButton("Vazgeç") { d, _ -> d.dismiss() }
+                .show()
         }
-
 
         return binding.root
     }

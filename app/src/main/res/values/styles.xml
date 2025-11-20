@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PopupStyle" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="backgroundTint">@color/purpBlue</item>
+        <item name="backgroundColor">@color/purp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="shapeAppearance">?shapeAppearanceCornerMedium</item>
+    </style>
+
+
+
+
+   <style name="PopupTextStyle" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+       <item name="backgroundTint">@color/purpBlue</item>
+       <item name="android:textSize">18sp</item>
+       <item name="backgroundColor">@color/purp</item>
+       <item name="android:textColor">@color/black</item>
+       <item name="shapeAppearance">?shapeAppearanceCornerMedium</item>
+   </style>
+
+</resources>
