@@ -71,11 +71,11 @@ class UrunDetayFragment : Fragment() {
         // Sepete ekleme
         binding.buttonSepeteEkle.setOnClickListener {
             if (binding.urunAdet > 0) {
-                Snackbar.make(
-                    it,
-                    "\"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet})",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+//                Snackbar.make(
+//                    it,
+//                    "\"${alinanYemek.yemek_adi}\" sepete eklendi. (adet: ${binding.urunAdet})",
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
 
                 sepetViewModel.sepeteYemekEkle(
                     alinanYemek.yemek_adi,

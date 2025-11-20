@@ -1,12 +1,17 @@
 package com.ecemm.yumico.ui.fragment
+import android.app.PendingIntent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -65,12 +70,10 @@ class SepetFragment : Fragment() {
                 mevcutSepetList.add(yemek)
             }
 
-
             //UI- livedata güncelle
             viewModel.sepetListesi.value = mevcutSepetList //RecyclerView otomatik yenilenir
 
         }
-
 
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
@@ -95,7 +98,6 @@ class SepetFragment : Fragment() {
                 // adapter update
                 sepetAdapter.sepettekiYemeklerListesi = liste
 
-
                 sepetAdapter.notifyDataSetChanged()
                 Log.e("SepetFragment", "Liste geldi: $liste")
             }
@@ -111,24 +113,58 @@ class SepetFragment : Fragment() {
 
             MaterialAlertDialogBuilder(requireContext(), R.style.PopupStyle)
                 .setTitle("Sipariş Onayı")
-                .setMessage(
-                     "\uD83D\uDECD\uFE0F Sepetinizdeki yemekleri onaylıyor musunuz?\n"
-                   + "\nToplam: ₺$total")
-
+                .setMessage("\uD83D\uDECD\uFE0F Sepetinizdeki yemekleri onaylıyor musunuz?\n\nToplam: ₺$total")
                 .setPositiveButton("Onayla") { d, _ ->
                     d.dismiss()
-                    // Başarı popup
+
+                    //todo- Başarı popup
                     MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
                         .setMessage(
                             "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
-                            sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
+                                    sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
                         )
                         .setPositiveButton("Tamam") { ok, _ -> ok.dismiss() }
                         .show()
+
+
+                    //TODO- Notification - Bildirim gönderme
+                    val channelId = "siparis_channel"
+
+                    // Android 13+ izin
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+                            != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 101)
+                            return@setPositiveButton
+                        }
+                    }
+
+                    val intent = requireActivity().intent
+                    val pendingIntent = PendingIntent.getActivity(
+                        requireContext(),
+                        0,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+
+                    val builder = NotificationCompat.Builder(requireContext(), channelId)
+                        .setSmallIcon(R.drawable.shop_img) // kendi iconunu kullan
+                        .setContentTitle("Siparişiniz Alındı")
+                        .setContentText("Siparişiniz alındı ve hazırlanıyor! \uD83D\uDED2\uD83C\uDF72\uD83D\uDE0B\uD83E\uDD73⏳️")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+
+                    with(NotificationManagerCompat.from(requireContext())) {
+                        notify(1001, builder.build())
+                    }
                 }
+
+                 //todo- başarısız popup
                 .setNegativeButton("Vazgeç") { d, _ -> d.dismiss() }
                 .show()
         }
+
 
         return binding.root
     }

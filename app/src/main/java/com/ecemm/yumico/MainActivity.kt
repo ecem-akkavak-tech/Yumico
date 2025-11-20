@@ -4,13 +4,15 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.ecemm.yumico.databinding.ActivityMainBinding
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -56,13 +58,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.sepetFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
                 }
+                R.id.urunDetayFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
 
             }
         }
-
 
 
         // Geri tuşu davranışı
@@ -72,5 +76,24 @@ class MainActivity : AppCompatActivity() {
             else navController.popBackStack()
         }
 
+
+        createNotificationChannel(this)
+    }
+
+    //NOTIFITICATION
+    fun createNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelId = "siparis_channel"
+            val channelName = "Sipariş Bildirimleri"
+            val channelDescription = "Sipariş durum bildirimleri"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, channelName, importance).apply {
+                description = channelDescription
+            }
+
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }
