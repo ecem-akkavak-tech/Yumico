@@ -27,6 +27,7 @@ import com.ecemm.yumico.ui.adapter.SepetAdapter
 import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
+import com.ecemm.yumico.utils.LoadingDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,17 +35,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class SepetFragment : Fragment() {
 
     private lateinit var binding: FragmentSepetBinding
+    private lateinit var loading: LoadingDialog
 
     // **TODO-1-:  ATIVITY VIEW MODEL BAĞLAMA-> ActivityViewModels ile shared olarak çalıştırır ve liste 0lanmadan güncel veriler korunur
     private val viewModel: SepetViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // TODO: dataBinding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sepet , container, false)
-
+        loading = LoadingDialog(requireContext())
 
         binding.buttonCloseSepet.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.anasayfaFragment)
@@ -114,18 +118,26 @@ class SepetFragment : Fragment() {
             MaterialAlertDialogBuilder(requireContext(), R.style.PopupStyle)
                 .setTitle("Sipariş Onayı")
                 .setMessage("\uD83D\uDECD\uFE0F Sepetinizdeki yemekleri onaylıyor musunuz?\n\nToplam: ₺$total")
+                //todo- Başarı popup
                 .setPositiveButton("Onayla") { d, _ ->
+
+                    loading.show()
                     d.dismiss()
 
-                    //todo- Başarı popup
-                    MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
-                        .setMessage(
-                            "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
-                                    sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
-                        )
-                        .setPositiveButton("Tamam") { ok, _ -> ok.dismiss() }
+                    //loadingi 2 sn beklet:
+                    binding.root.postDelayed({
+                        loading.hide()
+
+                         MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
+                            .setMessage(
+                                "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
+                                 sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
+                            )
+                            .setPositiveButton("Tamam") { ok, _ -> ok.dismiss()
+                        }
                         .show()
 
+                    }, 2000)
 
                     //TODO- Notification - Bildirim gönderme
                     val channelId = "siparis_channel"
