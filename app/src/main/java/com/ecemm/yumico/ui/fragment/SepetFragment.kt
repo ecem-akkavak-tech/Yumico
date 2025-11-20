@@ -1,4 +1,5 @@
 package com.ecemm.yumico.ui.fragment
+import LoadingDialog
 import android.app.PendingIntent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -15,19 +16,13 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.Visibility
 import com.ecemm.yumico.R
-import com.ecemm.yumico.data.entity.YemekSepeti
 import com.ecemm.yumico.databinding.FragmentSepetBinding
 import com.ecemm.yumico.ui.adapter.SepetAdapter
-import com.ecemm.yumico.ui.viewmodel.AnasayfaViewModel
 import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
-import com.ecemm.yumico.utils.LoadingDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
