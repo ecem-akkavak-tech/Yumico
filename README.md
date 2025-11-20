@@ -1,5 +1,5 @@
 <h1>🛒 YUMICO</h1>
-<p>Yumico is a dynamic e-commerce mobile application designed to deliver a smooth and engaging shopping experience. Built with Android XML and Kotlin, it combines robust offline storage, cloud synchronization, and efficient API integration. This project showcases advanced Android development skills, a passion for learning, and a commitment to delivering polished user experiences.</p>
+<p>Yumico is a dynamic e-commerce mobile application designed to deliver a smooth and engaging shopping experience. Built with Android XML and Kotlin, it combines robust offline storage, cloud synchronization, efficient API integration, and interactive notifications. This project showcases advanced Android development skills, a passion for learning, and a commitment to delivering polished user experiences.</p>
 
 <h2>Content Overview</h2>
 <ul>
@@ -11,7 +11,7 @@
 </ul>
 
 <h3 id="project-description">Project Description</h3>
-<p>Yumico allows users to explore products seamlessly, add favorites, rate items, and enjoy real-time updates. The application leverages Room Database for offline storage, Firestore for cloud synchronization, and Retrofit for API communication. Glide handles fast and efficient image loading, while Data Binding ensures smooth interaction between XML layouts and Kotlin code.</p>
+<p>Yumico allows users to explore products seamlessly, add favorites, rate items, and enjoy real-time updates. The application leverages Room Database for offline storage, Firestore for cloud synchronization, and Retrofit for API communication. Glide handles fast and efficient image loading, while Data Binding ensures smooth interaction between XML layouts and Kotlin code. Interactive notifications, Snackbar messages, and AlertDialog popups provide instant feedback, confirming actions like “Order Placed Successfully” to enhance user experience.</p>
 <p>The app emphasizes usability and performance, demonstrating strong problem-solving skills, attention to detail, and a genuine passion for improving user experiences. Every feature has been crafted to maintain responsiveness and aesthetic appeal, ensuring the app feels modern and intuitive.</p>
 
 <h3 id="features">Features</h3>
@@ -21,7 +21,7 @@
   <li>⭐ <strong>Ratings</strong> – Users can rate products; ratings are stored and displayed accurately across sessions.</li>
   <li>🔄 <strong>Cloud Sync</strong> – Firestore ensures user data is synchronized across devices, maintaining consistency and reliability.</li>
   <li>🖼️ <strong>Image Handling</strong> – Glide efficiently loads and caches images to optimize performance.</li>
-  <li>🔔 <strong>Notifications</strong> – Interactive Snackbar and AlertDialog elements provide instant feedback to user actions.</li>
+  <li>🔔 <strong>Interactive Notifications</strong> – Users receive instant feedback on actions like successful orders through AlertDialog popups and system notifications.</li>
 </ul>
 
 <h3 id="technologies">Technologies Used</h3>
@@ -69,7 +69,7 @@
   <tr>
     <td>🔔</td>
     <td><strong>Snackbar & AlertDialog</strong></td>
-    <td>Provides interactive notifications and confirmation dialogs.</td>
+    <td>Provides interactive notifications and confirmation dialogs, including order success messages.</td>
   </tr>
   <tr>
     <td>🔄</td>
