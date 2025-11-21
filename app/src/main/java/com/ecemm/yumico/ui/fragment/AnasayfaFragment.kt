@@ -1,4 +1,5 @@
 package com.ecemm.yumico.ui.fragment
+import LoadingDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AnasayfaFragment : Fragment() {
    private lateinit var binding: FragmentAnasayfaBinding
-
+   private lateinit var loadingDialog: LoadingDialog
    private var aramaKelimesi:String = ""
    private var siralamaTuru:SiralamaTuru = SiralamaTuru.DEFAULT
 
@@ -33,6 +34,8 @@ class AnasayfaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        loadingDialog = LoadingDialog(requireContext())
 
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa , container, false)
@@ -82,14 +85,11 @@ class AnasayfaFragment : Fragment() {
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
         //TODO- LIVE DATA OBSERVE
-        //yemek listesi live data
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){ yemekListesi ->
+            loadingDialog.hide() //livedata gelmeden hemen önce kapat
             yemeklerAdapter.yemeklerList = yemekListesi
             yemeklerAdapter.notifyDataSetChanged()
         }
-
-
-
 
 
         return binding.root
@@ -98,8 +98,8 @@ class AnasayfaFragment : Fragment() {
 
     //TODO-3-: GÜNCEL LİSTE İÇİN
     override fun onResume() {
-        //ekleme yaptıktan sonra **bu sayfaya geri döndüğümüzde** güncel yemekler listesini görmemizi sağlar
         super.onResume()
+        loadingDialog.show()       // loadingi başlat
         viewModel.yemekleriGetir() //böylece anasayfaya döndüğümüz anda veriler tekrar yüklenmiş olacak
 
     }

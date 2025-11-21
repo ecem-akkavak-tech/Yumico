@@ -1,4 +1,5 @@
 package com.ecemm.yumico.ui.fragment
+import LoadingDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,17 +17,24 @@ import com.ecemm.yumico.ui.viewmodel.SepetViewModel
 import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+
 @AndroidEntryPoint
 class FavorilerFragment : Fragment() {
     private lateinit var binding:FragmentFavorilerBinding
     private val favoriViewModel: FavoriViewModel by activityViewModels()
     private val sepetViewModel:SepetViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
+
+    private lateinit var loadingDialog: LoadingDialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
 
     ): View? {
+        loadingDialog = LoadingDialog(requireContext())
+
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoriler , container, false)
         binding.favorilerObject = this
@@ -44,6 +52,7 @@ class FavorilerFragment : Fragment() {
         binding.recyclerViewFavoriler.adapter = favoriAdapter
 
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner){ liste ->
+
             if(liste.isNullOrEmpty()){
                 binding.manageFavoriBlank.visibility = View.VISIBLE
                 binding.manageFavoriFill.visibility = View.GONE
@@ -52,8 +61,13 @@ class FavorilerFragment : Fragment() {
                 binding.manageFavoriFill.visibility = View.VISIBLE
             }
 
-            favoriAdapter.favoriYemekList = liste
-            favoriAdapter.notifyDataSetChanged()
+            binding.root.postDelayed({
+                loadingDialog.hide()
+                favoriAdapter.favoriYemekList = liste
+                favoriAdapter.notifyDataSetChanged()
+            }, 1000)
+
+
         }
 
 
@@ -71,6 +85,7 @@ class FavorilerFragment : Fragment() {
     //TODO-3-: GÜNCEL LİSTE İÇİN
     override fun onResume() {
         //ekleme yaptıktan sonra **bu sayfaya geri döndüğümüzde** güncel favori listesini görmemizi sağlar
+        loadingDialog.show()
         super.onResume()
         favoriViewModel.favoriYemekleriGetir()
     }

@@ -1,4 +1,5 @@
 package com.ecemm.yumico
+import LoadingDialog
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -13,14 +14,19 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private lateinit var loadingDialog:LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
 
@@ -34,7 +40,12 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             val navGraph = navController.navInflater.inflate(R.navigation.activity_main_nav)
             navGraph.setStartDestination(
-                if (authViewModel.isUserLoggedIn()) R.id.anasayfaFragment else R.id.signupFragment
+                if (authViewModel.isUserLoggedIn()){
+                    R.id.anasayfaFragment
+                }
+                else{
+                    R.id.signupFragment
+                }
             )
             navController.graph = navGraph
         }
