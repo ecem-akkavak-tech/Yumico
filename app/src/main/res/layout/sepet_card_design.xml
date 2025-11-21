@@ -29,9 +29,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-
-                android:padding="12dp">
+                android:background="@color/background"
+                android:padding="12dp"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <ImageView
@@ -39,9 +39,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
@@ -86,6 +86,7 @@
                         android:layout_height="match_parent"
                         android:text='@{"Fiyat: " + yemekSepetiObj.yemek_fiyat + " ₺\nAdet: " + yemekSepetiObj.yemek_siparis_adet}'
                         android:textSize="14sp"
+                        android:textColor="@color/textColor"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -95,10 +96,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text='@{(yemekSepetiObj.yemek_fiyat * yemekSepetiObj.yemek_siparis_adet) + " ₺"}'
-                    android:textStyle="bold"
+                    android:textColor="@color/textColor"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

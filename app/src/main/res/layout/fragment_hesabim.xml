@@ -42,6 +42,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/background"
                 android:padding="16dp">
 
                 <!-- Profil Resmi -->
@@ -81,6 +82,7 @@
                             android:id="@+id/textViewIsimLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="İsim:"
                             android:textAlignment="viewStart"
                             android:textSize="14sp"
@@ -91,9 +93,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
+                            android:textColor="@color/textColor"
                             android:text="Ecem"
                             android:textAlignment="viewStart"
-                            android:textColor="#525151"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -110,6 +112,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Soyisim:"
+                            android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -120,7 +123,7 @@
                             android:layout_marginStart="8dp"
                             android:text="Akkavak"
                             android:textAlignment="viewStart"
-                            android:textColor="#525151"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -137,6 +140,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Email:"
+                            android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -164,6 +168,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Adres:"
+                            android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -174,7 +179,7 @@
                             android:layout_marginStart="8dp"
                             android:text="Örnek Mah. No:123, Şehir/Ülke"
                             android:textAlignment="viewStart"
-                            android:textColor="#525151"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -191,6 +196,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Telefon:"
+                            android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -201,7 +207,7 @@
                             android:layout_marginStart="8dp"
                             android:text="05054327654"
                             android:textAlignment="viewStart"
-                            android:textColor="#525151"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
 

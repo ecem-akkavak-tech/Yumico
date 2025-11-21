@@ -11,9 +11,10 @@
     <color name="purpp">#756BDC</color>
     <color name="transparent">#00000000</color>
     <color name="background">#FFFFFFFF</color>
-    <color name="toolbarBg">#6750A4</color>
-    <color name="textColor">#FB2E2D2D</color>
-    <color name="background2">#FFFFFFFF</color>
-    <color name="favTitleColor">#1D1871</color>
-    <color name="sepetwFavTextColor">#4A3EAB</color>
+    <color name="toolbarBg">#3C2568</color>
+    <color name="textColor">#FB2C2B2B</color>
+    <color name="background2">#050505</color>
+    <color name="favTitleColor">#F5F5F6</color>
+    <color name="sepetwFavTextColor">#F5F5F6</color>
+
 </resources>

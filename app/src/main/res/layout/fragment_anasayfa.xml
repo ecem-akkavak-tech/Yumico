@@ -12,13 +12,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background2"
         tools:context=".ui.fragment.AnasayfaFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAnasayfa"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/toolbarBg"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,6 @@
             android:id="@+id/sortingContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="#F5F0FF"
             android:clipToPadding="false"
             android:elevation="4dp"
@@ -45,12 +45,12 @@
                 android:id="@+id/searchView"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:background="@drawable/searchview_bg"
                 android:layout_marginStart="8dp"
+                android:background="@drawable/searchview_bg"
                 android:elevation="8dp"
                 android:iconifiedByDefault="false"
-                android:shadowRadius="10"
                 android:queryHint="Ara..."
+                android:shadowRadius="10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewFiyatArtan"
                 app:layout_constraintHorizontal_bias="0.5"

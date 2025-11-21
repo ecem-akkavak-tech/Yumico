@@ -128,8 +128,11 @@ class SepetFragment : Fragment() {
                                 "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
                                  sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
                             )
-                            .setPositiveButton("Tamam") { ok, _ -> ok.dismiss()
-                        }
+                            .setPositiveButton("Tamam") { ok, _ ->
+                                ok.dismiss()
+                                viewModel.sepetListesi.value = null
+
+                            }
                         .show()
 
                     }, 2000)

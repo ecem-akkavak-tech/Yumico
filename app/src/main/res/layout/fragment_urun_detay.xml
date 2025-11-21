@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
+        android:background="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
@@ -145,6 +146,7 @@
             android:layout_marginBottom="52dp"
             android:backgroundTint="#4CAF50"
             android:text="Sepete Ekle"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -167,10 +169,10 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            android:progressTint="@color/yellow"
             android:layout_width="235dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
+            android:progressTint="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -249,6 +251,7 @@
             android:layout_marginTop="40dp"
             android:text="@{yemekObject.yemek_adi}"
             android:textAlignment="center"
+            android:textColor="@color/textColor"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
