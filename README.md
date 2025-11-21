@@ -1,5 +1,5 @@
 <h1>🛒 YUMICO</h1>
-<p>Yumico is a dynamic e-commerce mobile application designed to deliver a smooth and engaging shopping experience. Built with Android XML and Kotlin, it combines robust offline storage, cloud synchronization, efficient API integration, and interactive notifications. This project showcases advanced Android development skills, a passion for learning, and a commitment to delivering polished user experiences.</p>
+<p>Yumico is a dynamic e-commerce mobile application designed to deliver a smooth and engaging shopping experience. Built with Android XML and Kotlin, it combines robust offline storage, cloud synchronization, efficient API integration, interactive notifications, and dual theme support. This project highlights advanced Android development skills, strong problem-solving abilities, and a commitment to delivering polished user experiences.</p>
 
 <h2>Content Overview</h2>
 <ul>
@@ -11,18 +11,18 @@
 </ul>
 
 <h3 id="project-description">Project Description</h3>
-<p>Yumico allows users to explore products seamlessly, add favorites, rate items, and enjoy real-time updates. The application leverages Room Database for offline storage, Firestore for cloud synchronization, and Retrofit for API communication. Glide handles fast and efficient image loading, while Data Binding ensures smooth interaction between XML layouts and Kotlin code. Interactive notifications, Snackbar messages, and AlertDialog popups provide instant feedback, confirming actions like “Order Placed Successfully” to enhance user experience.</p>
-<p>The app emphasizes usability and performance, demonstrating strong problem-solving skills, attention to detail, and a genuine passion for improving user experiences. Every feature has been crafted to maintain responsiveness and aesthetic appeal, ensuring the app feels modern and intuitive.</p>
+<p>Yumico allows users to browse products seamlessly, add favorites, rate items, and enjoy real-time updates. The application uses Room Database for offline storage, Firestore for cloud synchronization, and Retrofit for API communication. Glide provides fast and efficient image loading, while Data Binding ensures smooth interaction between XML layouts and Kotlin code. Snackbar messages, AlertDialog confirmations, and interactive notifications support user engagement and deliver immediate feedback, such as “Order Placed Successfully.”</p>
+<p>The app focuses on usability, performance, and visual clarity. It features modern UI components, clean animations, and a responsive structure designed for an intuitive shopping experience. Every detail reflects a thoughtful approach to creating a robust, elegant, and user-friendly application.</p>
 
 <h3 id="features">Features</h3>
 <ul>
-  <li>📦 <strong>Product Catalog</strong> – Browse products by category, filter by preferences, and view detailed information with smooth UI interactions.</li>
-  <li>❤️ <strong>Favorites</strong> – Add or remove favorite products, stored securely in Room Database for offline access.</li>
-  <li>⭐ <strong>Ratings</strong> – Users can rate products; ratings are stored and displayed accurately across sessions.</li>
-  <li>🔄 <strong>Cloud Sync</strong> – Firestore ensures user data is synchronized across devices, maintaining consistency and reliability.</li>
-  <li>🖼️ <strong>Image Handling</strong> – Glide efficiently loads and caches images to optimize performance.</li>
-  <li>🔔 <strong>Interactive Notifications</strong> – Users receive instant feedback on actions like successful orders through AlertDialog popups and system notifications.</li>
-  <li>🌗 <strong>Dark Mode / Light Mode</strong> – System temasına uyum sağlayan otomatik tema geçişi ile göz konforunu artırır ve modern bir görünüm sunar.</li>
+  <li>📦 <strong>Product Catalog</strong> – Browse items by category, filter by preferences, and view details through a well-structured and smooth UI.</li>
+  <li>❤️ <strong>Favorites</strong> – Save and manage favorites using Room Database for persistent offline access.</li>
+  <li>⭐ <strong>Ratings</strong> – Users can rate products, with rating data stored and displayed consistently.</li>
+  <li>🔄 <strong>Cloud Sync</strong> – Firestore synchronizes user data across devices for reliable and consistent access.</li>
+  <li>🖼️ <strong>Image Handling</strong> – Glide ensures fast image loading, caching, and performance optimization.</li>
+  <li>🔔 <strong>Interactive Notifications</strong> – Real-time feedback via Snackbar, AlertDialog, and system notifications.</li>
+  <li>🌗 <strong>Dark Mode / Light Mode</strong> – Automatic theme adaptation based on the system’s appearance settings, providing visual comfort and a modern look.</li>
 </ul>
 
 <h3 id="technologies">Technologies Used</h3>
@@ -35,52 +35,52 @@
   <tr>
     <td>🏗️</td>
     <td><strong>Android XML</strong></td>
-    <td>Designs layouts and UI components efficiently for an intuitive user interface.</td>
+    <td>Used to design clean, efficient, and responsive layout structures.</td>
   </tr>
   <tr>
     <td>☕</td>
     <td><strong>Kotlin</strong></td>
-    <td>Main language for app logic, functions, and smooth user interactions.</td>
+    <td>Primary language responsible for core logic and feature implementation.</td>
   </tr>
   <tr>
     <td>🌐</td>
     <td><strong>Retrofit</strong></td>
-    <td>Handles API calls to fetch and send data between app and server.</td>
+    <td>Handles API requests, data transfer, and backend communication.</td>
   </tr>
   <tr>
     <td>🗃️</td>
     <td><strong>Room Database</strong></td>
-    <td>Secure offline storage for favorites, ratings, and other persistent data.</td>
+    <td>Ensures secure local storage for favorites, ratings, and persistent user data.</td>
   </tr>
   <tr>
     <td>🔥</td>
     <td><strong>Firestore</strong></td>
-    <td>Cloud-based storage for synchronized and safe user data.</td>
+    <td>Cloud synchronization for real-time and cross-device data consistency.</td>
   </tr>
   <tr>
     <td>🖼️</td>
     <td><strong>Glide</strong></td>
-    <td>Efficient image loading and caching for performance optimization.</td>
+    <td>Optimized library for fast image loading and caching.</td>
   </tr>
   <tr>
     <td>🧩</td>
     <td><strong>Data Binding</strong></td>
-    <td>Connects XML layouts with Kotlin code seamlessly for reactive UI.</td>
+    <td>Connects XML views directly with Kotlin code for reactive UI updates.</td>
   </tr>
   <tr>
     <td>🔔</td>
     <td><strong>Snackbar & AlertDialog</strong></td>
-    <td>Provides interactive notifications and confirmation dialogs, including order success messages.</td>
+    <td>Delivers engaging and informative user feedback through visual prompts.</td>
   </tr>
   <tr>
     <td>🔄</td>
     <td><strong>Shared ViewModel</strong></td>
-    <td>Allows smooth data sharing between fragments without hassle.</td>
+    <td>Facilitates seamless data sharing between fragments without redundancy.</td>
   </tr>
   <tr>
     <td>🌗</td>
     <td><strong>Dark Mode & Light Mode</strong></td>
-    <td>Kullanıcı deneyimini kişiselleştirmek için sistem temasına uyum sağlayan çift mod desteği sunar. Renk paleti, ikonlar ve bileşenler her iki modda da tutarlı bir görünüm sağlar.</td>
+    <td>Provides dual theme support that automatically adjusts to the device’s system theme, maintaining visual harmony across all UI elements.</td>
   </tr>
 </table>
 
