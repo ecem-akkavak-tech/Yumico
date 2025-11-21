@@ -22,6 +22,7 @@
   <li>🔄 <strong>Cloud Sync</strong> – Firestore ensures user data is synchronized across devices, maintaining consistency and reliability.</li>
   <li>🖼️ <strong>Image Handling</strong> – Glide efficiently loads and caches images to optimize performance.</li>
   <li>🔔 <strong>Interactive Notifications</strong> – Users receive instant feedback on actions like successful orders through AlertDialog popups and system notifications.</li>
+  <li>🌗 <strong>Dark Mode / Light Mode</strong> – System temasına uyum sağlayan otomatik tema geçişi ile göz konforunu artırır ve modern bir görünüm sunar.</li>
 </ul>
 
 <h3 id="technologies">Technologies Used</h3>
@@ -75,6 +76,11 @@
     <td>🔄</td>
     <td><strong>Shared ViewModel</strong></td>
     <td>Allows smooth data sharing between fragments without hassle.</td>
+  </tr>
+  <tr>
+    <td>🌗</td>
+    <td><strong>Dark Mode & Light Mode</strong></td>
+    <td>Kullanıcı deneyimini kişiselleştirmek için sistem temasına uyum sağlayan çift mod desteği sunar. Renk paleti, ikonlar ve bileşenler her iki modda da tutarlı bir görünüm sağlar.</td>
   </tr>
 </table>
 
