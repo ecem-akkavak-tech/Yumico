@@ -6,7 +6,6 @@
   <li><a href="#project-description">Project Description</a></li>
   <li><a href="#features">Features</a></li>
   <li><a href="#technologies">Technologies Used</a></li>
-  <li><a href="#responsive-design">Responsive UI Design</a></li>
   <li><a href="#screenshots">Screenshots</a></li>
   <li><a href="#contributors">Contributors</a></li>
 </ul>
@@ -83,25 +82,15 @@
     <td><strong>Dark Mode & Light Mode</strong></td>
     <td>Provides dual theme support that automatically adjusts to the device’s system theme, maintaining visual harmony across all UI elements.</td>
   </tr>
-</table>
-
-<h3 id="responsive-design">Responsive UI Design (Small / Medium / Large Screens)</h3>
-<table>
   <tr>
-    <th>Screen Size</th>
-    <th>Layout & Design</th>
-  </tr>
-  <tr>
-    <td>Small</td>
-    <td>Compact components, simplified navigation, stacked cards, and optimized spacing for handheld devices.</td>
-  </tr>
-  <tr>
-    <td>Medium</td>
-    <td>Balanced layout with enhanced spacing, larger visuals, and multi-column arrangements for tablets and mid-size devices.</td>
-  </tr>
-  <tr>
-    <td>Large</td>
-    <td>Expanded desktop-like structure, wider grids, increased content visibility, and spacious arrangement for large tablets and foldables.</td>
+    <td>📱</td>
+    <td><strong>Responsive UI Design</strong></td>
+    <td>
+      Optimized layouts for different screens: <br>
+      • Small – compact components, stacked cards, simplified navigation. <br>
+      • Medium – balanced layout, larger visuals, multi-column where suitable. <br>
+      • Large – desktop-like structure, wider grids, spacious arrangement for big screens.
+    </td>
   </tr>
 </table>
 
