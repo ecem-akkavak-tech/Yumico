@@ -141,9 +141,9 @@
 
         <Button
             android:id="@+id/buttonSepeteEkle"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="55dp"
-            android:layout_marginBottom="52dp"
+            android:layout_marginBottom="48dp"
             android:backgroundTint="#4CAF50"
             android:text="Sepete Ekle"
             android:textColor="@color/white"
@@ -151,21 +151,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewUrunToplamFiyat" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textViewUrunToplamFiyat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="65dp"
+            android:layout_marginTop="120dp"
             android:text='@{"Toplam " + String.valueOf(urunAdet * yemekObject.yemek_fiyat) + " ₺"}'
             android:textColor="#434242"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonSepeteEkle"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAdet" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -183,29 +183,29 @@
             android:id="@+id/textViewFirst"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginBottom="145dp"
+            android:layout_marginTop="40dp"
             android:backgroundTint="#FF9800"
             android:clickable="false"
             android:elevation="8dp"
             android:focusable="false"
             android:gravity="center"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
 
+            android:paddingRight="16dp"
             android:text="20-30 dk"
             android:textColor="@android:color/white"
             android:textSize="11sp"
             app:cornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textViewSecond"
-            app:layout_constraintStart_toEndOf="@+id/textViewThird" />
+            app:layout_constraintStart_toEndOf="@+id/textViewThird"
+            app:layout_constraintTop_toBottomOf="@+id/btnAzalt" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/textViewSecond"
             android:layout_width="129dp"
             android:layout_height="40dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="145dp"
             android:backgroundTint="#FF9800"
             android:clickable="false"
             android:elevation="8dp"
@@ -217,17 +217,17 @@
             android:textColor="@android:color/white"
             android:textSize="11sp"
             app:cornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewFirst" />
+            app:layout_constraintStart_toEndOf="@+id/textViewFirst"
+            app:layout_constraintTop_toBottomOf="@+id/btnArttir" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/textViewThird"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="145dp"
+            android:layout_marginTop="40dp"
             android:backgroundTint="#FF9800"
             android:clickable="false"
             android:elevation="8dp"
@@ -239,10 +239,10 @@
             android:textColor="@android:color/white"
             android:textSize="11sp"
             app:cornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textViewFirst"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAzalt" />
 
         <TextView
             android:id="@+id/textView"
