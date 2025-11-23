@@ -17,7 +17,7 @@
             android:id="@+id/textViewSayfaBaslik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="Hesabım"
             android:textColor="@color/favTitleColor"
             android:textSize="21sp"
@@ -238,7 +238,7 @@
             android:padding="8dp"
             android:src="@drawable/back_img"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
