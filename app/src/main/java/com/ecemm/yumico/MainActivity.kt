@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-       // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+      //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         // NAV HOST & BOTTOM NAVIGATION VIEW
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
