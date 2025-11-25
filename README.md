@@ -97,8 +97,7 @@
 
 
 <h3 id="screenshots">Screenshots</h3>
-### Screenshots
-<p float="left">
+<p float="center">
   <a href="screenshots/signuppage.png" target="_blank">
     <img src="screenshots/signuppage.png" width="150" style="margin:5px;" />
   </a>
