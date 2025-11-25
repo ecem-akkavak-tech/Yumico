@@ -95,36 +95,55 @@
 </table>
 
 <h3 id="screenshots">Screenshots</h3>
+### Screenshots
+
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-  <!-- Ana Sayfa -->
-  <div style="flex: 1 1 300px; text-align: center;">
-    <img src="screenshots/home.png" alt="Ana Sayfa" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>🏠 Ana Sayfa / Ürün Listesi</p>
-  </div>
 
-  <!-- Ürün Detay -->
-  <div style="flex: 1 1 300px; text-align: center;">
-    <img src="screenshots/product_detail.png" alt="Ürün Detay" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>📦 Ürün Detay Sayfası</p>
-  </div>
+<!-- Signup Page -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/signuppage.png" alt="Signup Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>📝 Signup Page</p>
+</div>
 
-  <!-- Favoriler -->
-  <div style="flex: 1 1 300px; text-align: center;">
-    <img src="screenshots/favorites.png" alt="Favoriler" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>❤️ Favoriler</p>
-  </div>
+<!-- Homepage -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/homepage.png" alt="Homepage" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>🏠 Homepage / Product List</p>
+</div>
 
-  <!-- Sepet / Sipariş Onay -->
-  <div style="flex: 1 1 300px; text-align: center;">
-    <img src="screenshots/cart_order.png" alt="Sepet / Sipariş Onay" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>🛒 Sepet / Sipariş Onay</p>
-  </div>
+<!-- Favorite Page -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/favoritepage.png" alt="Favorites Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>❤️ Favorites Page</p>
+</div>
 
-  <!-- Dark Mode -->
-  <div style="flex: 1 1 300px; text-align: center;">
-    <img src="screenshots/dark_mode.png" alt="Dark Mode" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <p>🌗 Dark Mode / Light Mode Örneği</p>
-  </div>
+<!-- Cart Page -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/sepetpage.png" alt="Cart Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>🛒 Cart Page</p>
+</div>
+
+<!-- Cart / Order Confirmation -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/sepetonay.png" alt="Cart / Order Confirmation" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>✅ Cart / Order Confirmation</p>
+</div>
+
+<!-- Cart Order Notification -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/sepetonaybildirim.png" alt="Cart Order Notification" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>🔔 Cart Order Notification</p>
+</div>
+<!-- Account Page -->
+<div style="flex: 1 1 300px; text-align: center;">
+  <img src="screenshots/hesabimpage.png" alt="Account Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <p>👤 Account Page</p>
+</div>
+
+
+
+
+
 </div>
 
 
