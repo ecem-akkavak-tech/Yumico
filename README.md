@@ -94,57 +94,33 @@
   </tr>
 </table>
 
+
+
 <h3 id="screenshots">Screenshots</h3>
 ### Screenshots
-
-<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-
-<!-- Signup Page -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/signuppage.png" alt="Signup Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>📝 Signup Page</p>
-</div>
-
-<!-- Homepage -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/homepage.png" alt="Homepage" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>🏠 Homepage / Product List</p>
-</div>
-
-<!-- Favorite Page -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/favoritepage.png" alt="Favorites Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>❤️ Favorites Page</p>
-</div>
-
-<!-- Cart Page -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/sepetpage.png" alt="Cart Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>🛒 Cart Page</p>
-</div>
-
-<!-- Cart / Order Confirmation -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/sepetonay.png" alt="Cart / Order Confirmation" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>✅ Cart / Order Confirmation</p>
-</div>
-
-<!-- Cart Order Notification -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/sepetonaybildirim.png" alt="Cart Order Notification" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>🔔 Cart Order Notification</p>
-</div>
-<!-- Account Page -->
-<div style="flex: 1 1 300px; text-align: center;">
-  <img src="screenshots/hesabimpage.png" alt="Account Page" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p>👤 Account Page</p>
-</div>
-
-
-
-
-
-</div>
+<p float="left">
+  <a href="screenshots/signuppage.png" target="_blank">
+    <img src="screenshots/signuppage.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/homepage.png" target="_blank">
+    <img src="screenshots/homepage.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/favoritepage.png" target="_blank">
+    <img src="screenshots/favoritepage.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/sepetpage.png" target="_blank">
+    <img src="screenshots/sepetpage.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/sepetonay.png" target="_blank">
+    <img src="screenshots/sepetonay.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/sepetonaybildirim.png" target="_blank">
+    <img src="screenshots/sepetonaybildirim.png" width="150" style="margin:5px;" />
+  </a>
+  <a href="screenshots/hesabimpage.png" target="_blank">
+    <img src="screenshots/hesabimpage.png" width="150" style="margin:5px;" />
+  </a>
+</p>
 
 
 <h3 id="contributors">Contributors</h3>
