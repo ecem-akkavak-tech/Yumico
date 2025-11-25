@@ -95,12 +95,38 @@
 </table>
 
 <h3 id="screenshots">Screenshots</h3>
-<ul>
-  <li><img src="screenshots/first.png" alt="Screenshot 1"></li>
-  <li><img src="screenshots/second.png" alt="Screenshot 2"></li>
-  <li><img src="screenshots/third.png" alt="Screenshot 3"></li>
-  <li><img src="screenshots/fourth.png" alt="Screenshot 4"></li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <!-- Ana Sayfa -->
+  <div style="flex: 1 1 300px; text-align: center;">
+    <img src="screenshots/home.png" alt="Ana Sayfa" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p>🏠 Ana Sayfa / Ürün Listesi</p>
+  </div>
+
+  <!-- Ürün Detay -->
+  <div style="flex: 1 1 300px; text-align: center;">
+    <img src="screenshots/product_detail.png" alt="Ürün Detay" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p>📦 Ürün Detay Sayfası</p>
+  </div>
+
+  <!-- Favoriler -->
+  <div style="flex: 1 1 300px; text-align: center;">
+    <img src="screenshots/favorites.png" alt="Favoriler" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p>❤️ Favoriler</p>
+  </div>
+
+  <!-- Sepet / Sipariş Onay -->
+  <div style="flex: 1 1 300px; text-align: center;">
+    <img src="screenshots/cart_order.png" alt="Sepet / Sipariş Onay" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p>🛒 Sepet / Sipariş Onay</p>
+  </div>
+
+  <!-- Dark Mode -->
+  <div style="flex: 1 1 300px; text-align: center;">
+    <img src="screenshots/dark_mode.png" alt="Dark Mode" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p>🌗 Dark Mode / Light Mode Örneği</p>
+  </div>
+</div>
+
 
 <h3 id="contributors">Contributors</h3>
 <p><a href="https://github.com/ecem-akkavak-tech/">Ecem Akkavak</a> – Main Developer & Project Owner</p>

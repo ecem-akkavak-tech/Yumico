@@ -40,6 +40,7 @@
             android:id="@+id/manageSepetFill"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView3"
@@ -50,11 +51,12 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:clipToPadding="true"
-                android:paddingBottom="120dp"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/sepetBottomLayout"
+                app:layout_constraintBottom_toTopOf="@+id/sepetBottomLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -79,8 +81,8 @@
                         android:id="@+id/textViewGonderimUcretiLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
                         android:text="Gönderim Ücreti"
+                        android:textColor="@color/textColor"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,10 +90,10 @@
 
                     <TextView
                         android:id="@+id/textViewGonderimUcretiValue"
-                        android:textColor="@color/textColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="₺0"
+                        android:textColor="@color/textColor"
                         android:textSize="14sp"
                         app:layout_constraintBaseline_toBaselineOf="@id/textViewGonderimUcretiLabel"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -106,8 +108,8 @@
                         android:id="@+id/textViewToplamLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
                         android:text="Toplam:"
+                        android:textColor="@color/textColor"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -139,6 +141,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/manageSepetBlank"
             android:layout_width="match_parent"
@@ -149,7 +152,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView3"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/imageViewCartImg"
