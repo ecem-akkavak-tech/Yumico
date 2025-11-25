@@ -15,30 +15,26 @@ class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriReposito
 
     val favoriListesi = MutableLiveData<List<FavoriYemek>>()
 
-    init{
-        // todo: Uygulamanın ilk açıldığı anda veri getirmesi için init gerekir
-        //ViewModel ilk çalıştığı anda kişilerListesini tetikle ve getir
-        favoriYemekleriGetir()
-    }
 
-    fun favoriYemekleriGetir(){
+    fun favoriYemekleriGetir(user_id:String){
         CoroutineScope(Dispatchers.Main).launch {
-            favoriListesi.value = favoriRepository.favoriYemekleriGetir()
+            favoriListesi.value = favoriRepository.favoriYemekleriGetir(user_id)
         }
     }
 
-    fun favoriEkle(yemek_adi:String , yemek_resim_adi:String , yemek_fiyat:Int , rating:Float){
+    fun favoriEkle(user_id:String , yemek_adi:String , yemek_resim_adi:String , yemek_fiyat:Int , rating:Float){
         //fe & be kısımları güncel olmalı
         CoroutineScope(Dispatchers.Main).launch {
             //aynı yemeği tekrar tekrar favorilere eklememek için:
-            val mevcutFavoriler = favoriRepository.favoriYemekleriGetir()
+            val mevcutFavoriler = favoriRepository.favoriYemekleriGetir(user_id)
+
             if (mevcutFavoriler.any { it.yemek_adi == yemek_adi }) {
                 // zaten var, ekleme yapma
                 return@launch
             }
-            favoriRepository.favoriEkle(yemek_adi, yemek_resim_adi, yemek_fiyat, rating)
+            favoriRepository.favoriEkle(user_id, yemek_adi, yemek_resim_adi, yemek_fiyat, rating)
 
-            val guncelListe = favoriRepository.favoriYemekleriGetir()
+            val guncelListe = favoriRepository.favoriYemekleriGetir(user_id)
 
             withContext(Dispatchers.Main){
                 favoriListesi.value = guncelListe //ekleme işleminden sonra ilgili sayfanın ui'ı güncellensin
@@ -46,27 +42,29 @@ class FavoriViewModel  @Inject constructor (var favoriRepository: FavoriReposito
         }
     }
 
-    fun favoriSil(yemek_id: Int){
+    fun favoriSil(yemek_id: Int ,user_id: String) {
         //fe & be kısımları güncel olmalı
-        viewModelScope.launch(Dispatchers.IO){
-            favoriRepository.favoriSil(yemek_id)
-            val guncelListe = favoriRepository.favoriYemekleriGetir()
-            withContext(Dispatchers.Main){
-                favoriListesi.value = guncelListe
-            }
+            viewModelScope.launch(Dispatchers.IO) {
+                favoriRepository.favoriSil(yemek_id, user_id)
+
+                //silme işleminden sonra ui'daki liste güncellenir
+                val guncelListe = favoriRepository.favoriYemekleriGetir(user_id)
+                withContext(Dispatchers.Main) {
+                    favoriListesi.value = guncelListe
+                }
+
         }
     }
 
+    fun favoriRatingGuncelle(yemek_id: Int, user_id: String ,rating: Float) {
 
-    fun favoriRatingGuncelle(yemek_id: Int, rating: Float) {
-        viewModelScope.launch(Dispatchers.IO) {
-            favoriRepository.favoriRatingGuncelle(yemek_id, rating)
-            val guncelListe = favoriRepository.favoriYemekleriGetir()
-            withContext(Dispatchers.Main) {
-                favoriListesi.value = guncelListe
-            }
+            viewModelScope.launch(Dispatchers.IO) {
+                favoriRepository.favoriRatingGuncelle(yemek_id , user_id ,rating)
+                val guncelListe = favoriRepository.favoriYemekleriGetir(user_id)
+                withContext(Dispatchers.Main) {
+                    favoriListesi.value = guncelListe
+                }
+
         }
     }
-
-
 }

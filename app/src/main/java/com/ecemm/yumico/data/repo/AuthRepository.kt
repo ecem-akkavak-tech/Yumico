@@ -94,7 +94,6 @@ class AuthRepository @Inject constructor(private val firebaseAuth:FirebaseAuth) 
              onResult(null)
              return
          }
-
          firestore.collection("users")
              .document(currentUser.uid)
              .get() //

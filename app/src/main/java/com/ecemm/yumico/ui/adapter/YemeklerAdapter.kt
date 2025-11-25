@@ -1,5 +1,6 @@
 package com.ecemm.yumico.ui.adapter
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,15 +12,18 @@ import com.ecemm.yumico.data.entity.Yemekler
 import com.ecemm.yumico.databinding.CardDesignBinding
 import com.ecemm.yumico.ui.fragment.AnasayfaFragmentDirections
 import com.ecemm.yumico.ui.viewmodel.FavoriViewModel
+import com.ecemm.yumico.ui.viewmodel.auth.AuthViewModel
 
 class YemeklerAdapter(
     var mContext:Context ,
     var yemeklerList:List<Yemekler> ,
-    var favoriViewModel: FavoriViewModel
-) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>(){
+    var favoriViewModel: FavoriViewModel,
+    var authViewModel : AuthViewModel
+) : RecyclerView.Adapter<YemeklerAdapter.CardDesignHolder>() {
 
 
-    inner class CardDesignHolder(var cardBinding: CardDesignBinding) : RecyclerView.ViewHolder(cardBinding.root)
+    inner class CardDesignHolder(var cardBinding: CardDesignBinding) :
+        RecyclerView.ViewHolder(cardBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
         //viewBinding kurulumu burada
@@ -44,27 +48,26 @@ class YemeklerAdapter(
         cBinding.yemekObj = yemek  // todo: xml ve fragmenttaki nesneler eşleştirilir
 
 
-
-       /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
+        /*TODO- retrofit & glide ile internete yüklenen resmi alma  */
         val imgUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"
         Glide.with(mContext)
             .load(imgUrl)
-            .override(500,700)
+            .override(500, 700)
             .into(cBinding.imageViewYemekImg)
 
 
-       /*todo-  card View tıklama & veri transferi & sayfa geçişi
+        /*todo-  card View tıklama & veri transferi & sayfa geçişi
         * hatırlatma : cardView yapısı AnasayfaFragment içinde, o yüzden **directions** o sayfa **args** UrunDetayFragment
         * hatırlatma : main_activity_nav içinde yemek nesnesi argument olarak ekli olmalı
         */
 
-       cBinding.cardViewYemekler.setOnClickListener { view ->
-               val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek)
-               Navigation.findNavController(view).navigate(gecis)
-       }
+        cBinding.cardViewYemekler.setOnClickListener { view ->
+            val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek)
+            Navigation.findNavController(view).navigate(gecis)
+        }
 
 
-      /*todo- favori iconu güncellemek */
+        /*todo- favori iconu güncellemek */
         val favoriList = favoriViewModel.favoriListesi.value
 
         if (favoriList?.any { it.yemek_adi == yemek.yemek_adi } == true) {
@@ -74,30 +77,41 @@ class YemeklerAdapter(
         }
 
 
-       //güncel ratingbar ui:
-        val favYemek = favoriList.find { it.yemek_adi == yemek.yemek_adi }
-        cBinding.ratingBarAnasayfa.rating = favYemek?.rating ?:0f
+        //güncel ratingbar ui:
+        val favYemek = favoriList?.find { it.yemek_adi == yemek.yemek_adi }
+        cBinding.ratingBarAnasayfa.rating = favYemek?.rating ?: 0f
 
         cBinding.ratingBarAnasayfa.setOnRatingBarChangeListener { _, rating, _ ->
-            if(favYemek != null){
-                favoriViewModel.favoriRatingGuncelle(favYemek.yemek_id,rating)
+            if (favYemek != null) {
+                favoriViewModel.favoriRatingGuncelle(favYemek.yemek_id, favYemek.user_id, rating)
             }
         }
 
         cBinding.imageViewFav.setOnClickListener {
             val currentRating = cBinding.ratingBarAnasayfa.rating
 
-            if (favYemek != null) {
-                // Eğer favoride varsa, gerçek ID ile sil
-                favoriViewModel.favoriSil(favYemek.yemek_id)
-                cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
-            } else {
-                favoriViewModel.favoriEkle(yemek.yemek_adi, yemek.yemek_resim_adi, yemek.yemek_fiyat, currentRating)
-                cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
-            }
+            authViewModel.getUserFromFirestore() { currentUser ->
+                val uID = currentUser?.userId ?: return@getUserFromFirestore //firestoredaki uid
+                val mevcutFavYemek = favoriList?.find { it.yemek_adi == yemek.yemek_adi }
+
+                        if (mevcutFavYemek != null) {
+                            // Eğer favoride varsa, gerçek ID ile sil
+                            favoriViewModel.favoriSil(mevcutFavYemek.yemek_id , mevcutFavYemek.user_id)
+                            cBinding.imageViewFav.setImageResource(R.drawable.favblank_img)
+                        } else {
+                            favoriViewModel.favoriEkle(
+                                uID,
+                                yemek.yemek_adi,
+                                yemek.yemek_resim_adi,
+                                yemek.yemek_fiyat,
+                                currentRating
+                            )
+                            cBinding.imageViewFav.setImageResource(R.drawable.favfill_img)
+                        }
+
+                Log.e("CURRENT USER:", "${currentUser?.name.toString()}")
+                }
         }
-
-
 
 
         cBinding.imageViewFav.animate().scaleX(1.2f).scaleY(1.2f).setDuration(150).withEndAction {

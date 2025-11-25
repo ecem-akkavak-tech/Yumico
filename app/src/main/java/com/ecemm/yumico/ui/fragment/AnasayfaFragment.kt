@@ -84,7 +84,7 @@ class AnasayfaFragment : Fragment() {
 
         //TODO- adapter & recyclerview arası veri aktarma işlemi & liste gönderimi
         //TODO-RecyclerView’i önce boş bir adapter ile başlat, sonra LiveData geldiğinde veriyi güncelle.
-        val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,favoriViewModel)
+        val yemeklerAdapter = YemeklerAdapter(requireContext(), listOf() ,favoriViewModel,authViewModel)
         binding.recyclerviewYemekler.adapter = yemeklerAdapter
 
         //TODO- LIVE DATA OBSERVE

@@ -10,6 +10,7 @@ import com.ecemm.yumico.retrofit.ApiUtils
 import com.ecemm.yumico.retrofit.YemeklerDao
 import com.ecemm.yumico.room.Database
 import com.ecemm.yumico.room.FavoriDao
+import com.ecemm.yumico.room.MIGRATION_4_5
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -64,6 +65,7 @@ class AppModule {
     fun provideFavoriDao(@ApplicationContext context: Context) : FavoriDao {
         val db = Room.databaseBuilder(context, Database::class.java, "yumicoo.sqlite")
             .createFromAsset("yumicoo.sqlite")
+            .addMigrations(MIGRATION_4_5)
             .build()
         return db.getFavoriDao()
     }

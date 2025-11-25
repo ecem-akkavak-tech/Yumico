@@ -101,41 +101,48 @@ class UrunDetayFragment : Fragment() {
         }
 
 
-        // Favori ve Rating güncelleme tek observer ile
+        //TODO- OBSERVE Favori ve Rating güncelleme
         favoriViewModel.favoriListesi.observe(viewLifecycleOwner) { favList ->
-            val favoriYemek = favList.find { it.yemek_adi == alinanYemek.yemek_adi }
+                val favoriYemek = favList.find { it.yemek_adi == alinanYemek.yemek_adi }
 
-            // Favori ikon ve rating güncelle
-            if (favoriYemek != null) {
-                binding.imageViewFavori.setImageResource(R.drawable.favfill_img)
-                binding.ratingBar.rating = favoriYemek.rating
-            } else {
-                binding.imageViewFavori.setImageResource(R.drawable.favblank_img)
-                binding.ratingBar.rating = 0f
-            }
-
-            // RatingBar tıklama & güncelleme
-            binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+                // Favori ikon ve rating güncelle
                 if (favoriYemek != null) {
-                    favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)
+                    binding.imageViewFavori.setImageResource(R.drawable.favfill_img)
+                    binding.ratingBar.rating = favoriYemek.rating
+                } else {
+                    binding.imageViewFavori.setImageResource(R.drawable.favblank_img)
+                    binding.ratingBar.rating = 0f
                 }
-            }
+
+                // RatingBar tıklama & güncelleme
+                binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+                   val currentFav = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == alinanYemek.yemek_adi }
+                   if (currentFav != null) {
+                       favoriViewModel.favoriRatingGuncelle(currentFav.yemek_id, currentFav.user_id, rating)
+                   }
+                }
         }
 
-        // Favori ekle/kaldır
-        binding.imageViewFavori.setOnClickListener {
-            val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == alinanYemek.yemek_adi }
-            val currentRating = binding.ratingBar.rating
 
-            if (favoriYemek != null) {
-                favoriViewModel.favoriSil(favoriYemek.yemek_id)
-            } else {
-                favoriViewModel.favoriEkle(
-                    alinanYemek.yemek_adi,
-                    alinanYemek.yemek_resim_adi,
-                    alinanYemek.yemek_fiyat,
-                    currentRating
-                )
+        //TODO- Favori ekle/kaldır
+        binding.imageViewFavori.setOnClickListener {
+
+            authViewModel.getUserFromFirestore { currentUser ->
+                val uId = currentUser?.userId ?: return@getUserFromFirestore
+                val favoriYemek = favoriViewModel.favoriListesi.value?.find { it.yemek_adi == alinanYemek.yemek_adi }
+                val currentRating = binding.ratingBar.rating
+
+                if (favoriYemek != null) {
+                    favoriViewModel.favoriSil(favoriYemek.yemek_id , uId)
+                } else {
+                    favoriViewModel.favoriEkle(
+                        uId,
+                        alinanYemek.yemek_adi,
+                        alinanYemek.yemek_resim_adi,
+                        alinanYemek.yemek_fiyat,
+                        currentRating
+                    )
+                }
             }
         }
 

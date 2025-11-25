@@ -38,7 +38,10 @@ class FavorilerFragment : Fragment() {
         //todo- dataBinding kurulum
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoriler , container, false)
         binding.favorilerObject = this
-        binding.recyclerViewFavoriler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recyclerViewFavoriler.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false)
 
         /*
         TODO
@@ -76,17 +79,19 @@ class FavorilerFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-
-
         return binding.root
     }
 
 
     //TODO-3-: GÜNCEL LİSTE İÇİN
     override fun onResume() {
-        //ekleme yaptıktan sonra **bu sayfaya geri döndüğümüzde** güncel favori listesini görmemizi sağlar
-        loadingDialog.show()
         super.onResume()
-        favoriViewModel.favoriYemekleriGetir()
+        loadingDialog.show()
+
+        authViewModel.getUserFromFirestore { currentUser ->
+            val uId = currentUser?.userId ?: return@getUserFromFirestore
+            favoriViewModel.favoriYemekleriGetir(uId)
+        }
     }
+
 }

@@ -59,7 +59,7 @@ class FavoriAdapter(
         cBinding.textViewRating.text = favoriYemek.rating.toString()
 
         cBinding.ratingBarFavori.setOnRatingBarChangeListener { _, rating, _ ->
-            favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, rating)
+            favoriViewModel.favoriRatingGuncelle(favoriYemek.yemek_id, favoriYemek.yemek_adi,rating)
         }
 
         //todo- sepete favorilenen yemeği ekleme
