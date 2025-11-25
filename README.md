@@ -102,6 +102,9 @@
   <a href="screenshots/signuppage.png" target="_blank">
     <img src="screenshots/signuppage.png" width="150" style="margin:5px;" />
   </a>
+  <a href="screenshots/profilDetaypage.png" target="_blank">
+    <img src="screenshots/profildetay.png" width="150" style="margin:5px;" />
+  </a>
   <a href="screenshots/homepage.png" target="_blank">
     <img src="screenshots/homepage.png" width="150" style="margin:5px;" />
   </a>
