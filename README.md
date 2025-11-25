@@ -97,32 +97,63 @@
 
 
 <h3 id="screenshots">Screenshots</h3>
-<p float="center">
-  <a href="screenshots/signuppage.png" target="_blank">
-    <img src="screenshots/signuppage.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/profilDetaypage.png" target="_blank">
-    <img src="screenshots/profildetay.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/homepage.png" target="_blank">
-    <img src="screenshots/homepage.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/favoritepage.png" target="_blank">
-    <img src="screenshots/favoritepage.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/sepetpage.png" target="_blank">
-    <img src="screenshots/sepetpage.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/sepetonay.png" target="_blank">
-    <img src="screenshots/sepetonay.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/sepetonaybildirim.png" target="_blank">
-    <img src="screenshots/sepetonaybildirim.png" width="150" style="margin:5px;" />
-  </a>
-  <a href="screenshots/hesabimpage.png" target="_blank">
-    <img src="screenshots/hesabimpage.png" width="150" style="margin:5px;" />
-  </a>
-</p>
+### Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="screenshots/signuppage.png" target="_blank">
+        <img src="screenshots/signuppage.png" width="150" style="margin:5px;" />
+      </a>
+      <p>📝 Signup Page</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/profildetay.png" target="_blank">
+        <img src="screenshots/profildetay.png" width="150" style="margin:5px;" />
+      </a>
+      <p>👤 Profile Detail</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/homepage.png" target="_blank">
+        <img src="screenshots/homepage.png" width="150" style="margin:5px;" />
+      </a>
+      <p>🏠 Homepage</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/favoritepage.png" target="_blank">
+        <img src="screenshots/favoritepage.png" width="150" style="margin:5px;" />
+      </a>
+      <p>❤️ Favorites</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="screenshots/sepetpage.png" target="_blank">
+        <img src="screenshots/sepetpage.png" width="150" style="margin:5px;" />
+      </a>
+      <p>🛒 Cart Page</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/sepetonay.png" target="_blank">
+        <img src="screenshots/sepetonay.png" width="150" style="margin:5px;" />
+      </a>
+      <p>✅ Cart / Order Confirmation</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/sepetonaybildirim.png" target="_blank">
+        <img src="screenshots/sepetonaybildirim.png" width="150" style="margin:5px;" />
+      </a>
+      <p>🔔 Cart Order Notification</p>
+    </td>
+    <td align="center">
+      <a href="screenshots/hesabimpage.png" target="_blank">
+        <img src="screenshots/hesabimpage.png" width="150" style="margin:5px;" />
+      </a>
+      <p>👤 Account Page</p>
+    </td>
+  </tr>
+</table>
+
 
 
 <h3 id="contributors">Contributors</h3>
