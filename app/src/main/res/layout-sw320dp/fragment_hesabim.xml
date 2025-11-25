@@ -62,7 +62,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="20dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -82,9 +82,9 @@
                             android:id="@+id/textViewIsimLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
                             android:text="İsim:"
                             android:textAlignment="viewStart"
+                            android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -93,9 +93,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:textColor="@color/textColor"
                             android:text="Ecem"
                             android:textAlignment="viewStart"
+                            android:textColor="@color/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -178,7 +178,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:text="Örnek Mah. No:123, Şehir/Ülke"
-                            android:textAlignment="viewStart"
+                            android:textAlignment="textStart"
                             android:textColor="@color/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
