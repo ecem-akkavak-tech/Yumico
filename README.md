@@ -108,8 +108,8 @@
       <p>📝 Signup Page</p>
     </td>
     <td align="center">
-      <a href="screenshots/profil.png" target="_blank">
-        <img src="screenshots/profil.png" width="150" style="margin:5px;" />
+      <a href="screenshots/profiltamamla.png" target="_blank">
+        <img src="screenshots/profiltamamla.png" width="150" style="margin:5px;" />
       </a>
       <p>👤 Profile Detail</p>
     </td>
