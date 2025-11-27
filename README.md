@@ -99,8 +99,6 @@
 
 
 <h3 id="screenshots">Screenshots</h3>
-### Screenshots
-
 <table>
   <tr>
     <td align="center">
