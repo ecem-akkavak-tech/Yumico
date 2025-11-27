@@ -92,7 +92,7 @@ class SepetFragment : Fragment() {
 
 
                 // toplam güncelle
-                binding.textViewSepetToplam.text = "₺" + viewModel.toplamSepetHesapla()
+                binding.textViewSepetToplam.text = "${getString(R.string.currencyText)}${viewModel.toplamSepetHesapla()}"
 
                 // adapter update
                 sepetAdapter.sepettekiYemeklerListesi = liste

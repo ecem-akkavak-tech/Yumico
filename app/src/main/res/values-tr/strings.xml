@@ -23,9 +23,9 @@
     <string name="sepetpagetitle">Sepetim</string>
     <string name="emptyCartText">Sepetiniz boş 🛒😞\n Lezzetli ürünleri keşfedin!</string>
     <string name="deliveryFee">Gönderim Ücreti</string>
-
-
-
+    <string name="sepetText">SEPETİ ONAYLA</string>
+    <string name="sepetcartPrice">Fiyat:</string>
+    <string name="sepetcartAmount">Adet:</string>
 
 
 

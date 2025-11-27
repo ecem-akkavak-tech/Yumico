@@ -24,6 +24,10 @@
     <string name="emptyCartText">Your cart is empty 🛒😞\nDiscover delicious products!</string>
     <string name="deliveryFee">Delivery Fee</string>
     <string name="string_currencytext_0">${@string/currencyText} 0</string>
+    <string name="sepetText">CONFIRM CART</string>
+    <string name="sepetcartPrice">Price:</string>
+    <string name="sepetcartAmount">Quantity:</string>
+
 
 
 </resources>

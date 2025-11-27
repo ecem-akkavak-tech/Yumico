@@ -121,7 +121,7 @@
                         android:id="@+id/textViewSepetToplam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₺DÜZENLE"
+                        android:text="DÜZENLE"
                         android:textColor="@color/textColor"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:backgroundTint="#FFCC00"
-                    android:text="SEPETİ ONAYLA"
+                    android:text="@string/sepetText"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>

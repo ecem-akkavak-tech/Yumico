@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:backgroundTint="#FFCC00"
-                    android:text="SEPETİ ONAYLA"
+                    android:text="@string/sepetText"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>

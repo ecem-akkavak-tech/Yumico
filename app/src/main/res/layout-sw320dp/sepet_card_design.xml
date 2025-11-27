@@ -82,12 +82,13 @@
 
                     <TextView
                         android:id="@+id/textViewFiyatAdet"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text='@{"Fiyat: " + yemekSepetiObj.yemek_fiyat + " ₺\nAdet: " + yemekSepetiObj.yemek_siparis_adet}'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{String.format("%s %s\n%s %s", @string/sepetcartPrice, String.valueOf(yemekSepetiObj.yemek_fiyat), @string/sepetcartAmount, String.valueOf(yemekSepetiObj.yemek_siparis_adet))}'
                         android:textSize="14sp"
                         android:textColor="@color/textColor"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
 
@@ -95,7 +96,7 @@
                     android:id="@+id/textViewUrunToplamUcret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{(yemekSepetiObj.yemek_fiyat * yemekSepetiObj.yemek_siparis_adet) + " ₺"}'
+                    android:text='@{String.format("%s %s", String.valueOf(yemekSepetiObj.yemek_fiyat * yemekSepetiObj.yemek_siparis_adet), @string/currencyText)}'
                     android:textColor="@color/textColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
