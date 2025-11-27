@@ -23,7 +23,9 @@
   <li>🖼️ <strong>Image Handling</strong> – Glide ensures fast image loading, caching, and performance optimization.</li>
   <li>🔔 <strong>Interactive Notifications</strong> – Real-time feedback via Snackbar, AlertDialog, and system notifications.</li>
   <li>🌗 <strong>Dark Mode / Light Mode</strong> – Automatic theme adaptation based on the system’s appearance settings, providing visual comfort and a modern look.</li>
+  <li>🌐 <strong>Multilingual Support</strong> – The application now supports both Turkish and English languages, providing a seamless experience for users in their preferred language.</li>
 </ul>
+
 
 <h3 id="technologies">Technologies Used</h3>
 <table>
