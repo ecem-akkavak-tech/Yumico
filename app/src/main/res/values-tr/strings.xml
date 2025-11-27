@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Yumico</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signupTitleButton">Kayıt Ol</string>
+    <string name="emailHint">Email adresinizi girin</string>
+    <string name="passwordHint">Şifrenizi girin</string>
+    <string name="signupDescr">Zaten üye misiniz? Giriş yapın</string>
+    <string name="loginTextButton">Giriş Yap</string>
+    <string name="loginTitleButton">Giriş Yap</string>
+    <string name="loginDescr">Hesabın yok mu?</string>
+    <string name="signupTextButton">Kayıt Ol</string>
+    <string name="homepagetitle">Hoşgeldin, </string>
+    <string name="freeShippingText">Ücretsiz Gönderim</string>
+    <string name="urunDetayTitle">Ürün Detayı</string>
+    <string name="saleText">İndirim %10</string>
+    <string name="deliveryTimeText">20-30 dk</string>
+    <string name="freeDeliveryText">Ücretsiz Teslimat</string>
+    <string name="sepetButtonText">Sepete Ekle</string>
+    <string name="totalText">Toplam: </string>
+    <string name="currencyText"> ₺ </string>
+    <string name="favoriTitle">Favorilerim</string>
+    <string name="favoriText">Henüz favoriniz yok 😞\nEklemeye başlayın!</string>
+    <string name="sepetpagetitle">Sepetim</string>
+    <string name="emptyCartText">Sepetiniz boş 🛒😞\n Lezzetli ürünleri keşfedin!</string>
+    <string name="deliveryFee">Gönderim Ücreti</string>
+
+
+
+
+
+
+
+
+
+
+
+</resources>

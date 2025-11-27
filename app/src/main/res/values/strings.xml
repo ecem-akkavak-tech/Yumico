@@ -1,5 +1,29 @@
 <resources>
     <string name="app_name">Yumico</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signupTitleButton">Sign Up</string>
+    <string name="emailHint">Enter your email address</string>
+    <string name="passwordHint">Enter your password</string>
+    <string name="signupDescr">Already have an account? Log in</string>
+    <string name="loginTextButton">Log In</string>
+    <string name="loginTitleButton">Log In</string>
+    <string name="loginDescr">Dont have an account?</string>
+    <string name="signupTextButton">Sign Up</string>
+    <string name="homepagetitle">Welcome, </string>
+    <string name="freeShippingText">Free Delivery</string>
+    <string name="urunDetayTitle">Product Details</string>
+    <string name="saleText">10% Discount</string>
+    <string name="deliveryTimeText"> 20-30 min</string>
+    <string name="freeDeliveryText">Free Delivery</string>
+    <string name="sepetButtonText">Add to Cart</string>
+    <string name="totalText">Total: </string>
+    <string name="currencyText"> $ </string>
+    <string name="favoriTitle">My Favorites</string>
+    <string name="favoriText">You have no favorites yet 😞\nStart adding some!</string>
+    <string name="sepetpagetitle">My Cart</string>
+    <string name="emptyCartText">Your cart is empty 🛒😞\nDiscover delicious products!</string>
+    <string name="deliveryFee">Delivery Fee</string>
+    <string name="string_currencytext_0">${@string/currencyText} 0</string>
+
+
 </resources>

@@ -47,7 +47,8 @@ class AnasayfaFragment : Fragment() {
 
 
         authViewModel.getUserFromFirestore() { user->
-            binding.toolbarAnasayfa.title = "Hoşgeldin ${user?.name ?: "Misafir"}"
+            val titleText = getString(R.string.homepagetitle) + " " + (user?.name ?: "")
+            binding.toolbarAnasayfa.title = titleText
         }
 
 

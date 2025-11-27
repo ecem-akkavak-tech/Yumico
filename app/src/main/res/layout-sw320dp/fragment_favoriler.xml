@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Favorilerim"
+            android:text="@string/favoriTitle"
             android:textColor="@color/favTitleColor"
             android:textSize="21sp"
             android:textStyle="bold"

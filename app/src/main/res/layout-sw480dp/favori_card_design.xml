@@ -114,7 +114,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="#83BA45"
-                    android:text="Sepete Ekle"
+                    android:text="@string/sepetButtonText"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"

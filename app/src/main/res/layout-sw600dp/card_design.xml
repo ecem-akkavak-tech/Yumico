@@ -105,7 +105,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ücretsiz Gönderim"
+                        android:text="@string/freeShippingText"
                         android:textColor="#6A6A73"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
