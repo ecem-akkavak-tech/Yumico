@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Lütfen tüm alanları eksiksiz doldurunuz"
+        android:text="@string/profiltamamla_warning"
         android:textColor="#673AB7"
         android:textSize="20sp"
         android:textStyle="bold|italic"
@@ -38,7 +38,7 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ad"
+            android:hint="@string/profile_label_name"
             android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +60,7 @@
             android:id="@+id/editTextUserSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Soyad"
+            android:hint="@string/profile_label_surname"
             android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
             android:id="@+id/editTextUserTelefon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefon"
+            android:hint="@string/profile_label_phone"
             android:inputType="phone"
             android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
             android:id="@+id/editTextUserAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Adres"
+            android:hint="@string/profile_label_address"
             android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
 

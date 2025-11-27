@@ -43,6 +43,12 @@
     <string name="profile_label_address">Adres:</string>
     <string name="profile_label_phone">Telefon:</string>
     <string name="logoutTextButton">Çıkış Yap</string>
+    <string name="profiltamamla_warning">Lütfen tüm alanları eksiksiz doldurunuz</string>
+    <string name="profiltamamla_hint_name">Ad</string>
+    <string name="profiltamamla_hint_surname">Soyad</string>
+    <string name="profiltamamla_hint_phone">Telefon</string>
+    <string name="profiltamamla_hint_address">Adres</string>
+    <string name="profiltamamla_button_save">Kaydet</string>
 
 
 </resources>

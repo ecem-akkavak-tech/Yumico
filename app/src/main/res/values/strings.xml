@@ -43,6 +43,12 @@
     <string name="profile_label_address">Address:</string>
     <string name="profile_label_phone">Phone:</string>
     <string name="logoutTextButton">Log out</string>
+    <string name="profiltamamla_warning">Please fill in all fields completely</string>
+    <string name="profiltamamla_hint_name">First Name</string>
+    <string name="profiltamamla_hint_surname">Last Name</string>
+    <string name="profiltamamla_hint_phone">Phone</string>
+    <string name="profiltamamla_hint_address">Address</string>
+    <string name="profiltamamla_button_save">Save</string>
 
 
 </resources>
