@@ -51,12 +51,11 @@
                     android:layout_width="120dp"
                     android:layout_height="160dp"
                     android:clipToOutline="true"
-                    android:contentDescription="@string/profile_image_desc"
                     android:scaleType="centerCrop"
                     android:src="@drawable/yumico_logo_img"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Bilgi Satırları -->
                 <LinearLayout
