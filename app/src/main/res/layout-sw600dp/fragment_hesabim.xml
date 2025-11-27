@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Hesabım"
+            android:text="@string/profile_page_title"
             android:textColor="@color/favTitleColor"
             android:textSize="21sp"
             android:textStyle="bold"
@@ -51,7 +51,7 @@
                     android:layout_width="120dp"
                     android:layout_height="160dp"
                     android:clipToOutline="true"
-                    android:contentDescription="Profil Resmi"
+                    android:contentDescription="@string/profile_image_desc"
                     android:scaleType="centerCrop"
                     android:src="@drawable/yumico_logo_img"
                     app:layout_constraintTop_toTopOf="parent"
@@ -81,7 +81,7 @@
                             android:id="@+id/textViewIsimLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="İsim:"
+                            android:text="@string/profile_label_name"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/black"/>
@@ -109,7 +109,7 @@
                             android:id="@+id/textViewSoyisimLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soyisim:"
+                            android:text="@string/profile_label_surname"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/black"/>
@@ -137,7 +137,7 @@
                             android:id="@+id/textViewEmailLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email:"
+                            android:text="@string/profile_label_email"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/black"/>
@@ -165,7 +165,7 @@
                             android:id="@+id/textViewAdresLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Adres:"
+                            android:text="@string/profile_label_address"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/black"/>
@@ -193,7 +193,7 @@
                             android:id="@+id/textViewTelefonLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Telefon:"
+                            android:text="@string/profile_label_phone"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/black"/>
@@ -215,9 +215,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-
-
-
         <!-- Signout Container -->
         <FrameLayout
             android:id="@+id/signoutFragmentContainer"
@@ -234,7 +231,7 @@
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:contentDescription="Geri"
+            android:contentDescription="@string/profile_page_title"
             android:padding="8dp"
             android:src="@drawable/back_img"
             app:layout_constraintStart_toStartOf="parent"

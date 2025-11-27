@@ -106,44 +106,55 @@ class SepetFragment : Fragment() {
 
 
         //sepeti onayla
+        // sepeti onayla
         binding.buttonSepetiOnayla.setOnClickListener {
             val total = viewModel.toplamSepetHesapla()
             val sepetListesi = viewModel.sepetListesi.value?.toMutableList() ?: mutableListOf()
 
             MaterialAlertDialogBuilder(requireContext(), R.style.PopupStyle)
-                .setTitle("Sipariş Onayı")
-                .setMessage("\uD83D\uDECD\uFE0F Sepetinizdeki yemekleri onaylıyor musunuz?\n\nToplam: ₺$total")
-                //todo- Başarı popup
-                .setPositiveButton("Onayla") { d, _ ->
+                .setTitle(getString(R.string.dialog_order_title))
+                .setMessage(
+                    getString(R.string.dialog_order_message, total.toString())
+                )
+                .setPositiveButton(getString(R.string.dialog_confirm)) { d, _ ->
 
                     loading.show()
                     d.dismiss()
 
-                    //loadingi 2 sn beklet:
+                    // Loading 2 sn
                     binding.root.postDelayed({
                         loading.hide()
 
-                         MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
+                        MaterialAlertDialogBuilder(requireContext(), R.style.PopupTextStyle)
                             .setMessage(
-                                "\uD83D\uDED2 Siparişiniz başarıyla alındı! \uD83C\uDF89\n\n" +
-                                 sepetListesi.joinToString(separator = "\n") { "${it.yemek_adi} - (${it.yemek_siparis_adet})" }
+                                getString(R.string.dialog_success_message) +
+                                        "\n\n" +
+                                        sepetListesi.joinToString(separator = "\n") {
+                                            getString(
+                                                R.string.dialog_success_item_format,
+                                                it.yemek_adi,
+                                                it.yemek_siparis_adet.toString()
+                                            )
+                                        }
                             )
-                            .setPositiveButton("Tamam") { ok, _ ->
+                            .setPositiveButton(getString(R.string.dialog_success_ok)) { ok, _ ->
                                 ok.dismiss()
                                 viewModel.sepetListesi.value = null
-
                             }
-                        .show()
+                            .show()
 
                     }, 2000)
 
-                    //TODO- Notification - Bildirim gönderme
+                    // Notification gönderme
                     val channelId = "siparis_channel"
 
                     // Android 13+ izin
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
-                            != PackageManager.PERMISSION_GRANTED) {
+                        if (ContextCompat.checkSelfPermission(
+                                requireContext(),
+                                android.Manifest.permission.POST_NOTIFICATIONS
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
                             requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 101)
                             return@setPositiveButton
                         }
@@ -158,9 +169,9 @@ class SepetFragment : Fragment() {
                     )
 
                     val builder = NotificationCompat.Builder(requireContext(), channelId)
-                        .setSmallIcon(R.drawable.shop_img) // kendi iconunu kullan
-                        .setContentTitle("Siparişiniz Alındı")
-                        .setContentText("Siparişiniz alındı ve hazırlanıyor! \uD83D\uDED2\uD83C\uDF72\uD83D\uDE0B\uD83E\uDD73⏳️")
+                        .setSmallIcon(R.drawable.shop_img)
+                        .setContentTitle(getString(R.string.notification_title))
+                        .setContentText(getString(R.string.notification_message))
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
@@ -169,11 +180,10 @@ class SepetFragment : Fragment() {
                         notify(1001, builder.build())
                     }
                 }
-
-                 //todo- başarısız popup
-                .setNegativeButton("Vazgeç") { d, _ -> d.dismiss() }
+                .setNegativeButton(getString(R.string.dialog_cancel)) { d, _ -> d.dismiss() }
                 .show()
         }
+
 
 
         return binding.root

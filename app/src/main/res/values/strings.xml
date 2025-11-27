@@ -23,10 +23,27 @@
     <string name="sepetpagetitle">My Cart</string>
     <string name="emptyCartText">Your cart is empty 🛒😞\nDiscover delicious products!</string>
     <string name="deliveryFee">Delivery Fee</string>
-    <string name="string_currencytext_0">${@string/currencyText} 0</string>
     <string name="sepetText">CONFIRM CART</string>
     <string name="sepetcartPrice">Price:</string>
     <string name="sepetcartAmount">Quantity:</string>
+    <string name="dialog_order_title">Order Confirmation</string>
+    <string name="dialog_order_message">🛒 Do you confirm the items in your cart?\n\nTotal: ₺%1$s</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_success_message">🛒 Your order has been received successfully! 🎉</string>
+    <string name="dialog_success_item_format">%1$s - (%2$s)</string>
+    <string name="dialog_success_ok">OK</string>
+    <string name="notification_title">Your Order Has Been Received</string>
+    <string name="notification_message">Your order has been received and is being prepared! 🛒🍲😋🥳⏳️</string>
+    <string name="basket_confirm_button">Confirm Cart</string>
+    <string name="profile_page_title">My Account</string>
+    <string name="profile_label_name">Name:</string>
+    <string name="profile_label_surname">Surname:</string>
+    <string name="profile_label_email">Email:</string>
+    <string name="profile_label_address">Address:</string>
+    <string name="profile_label_phone">Phone:</string>
+    <string name="logoutTextButton">Log out</string>
+
 
 
 

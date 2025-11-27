@@ -26,6 +26,23 @@
     <string name="sepetText">SEPETİ ONAYLA</string>
     <string name="sepetcartPrice">Fiyat:</string>
     <string name="sepetcartAmount">Adet:</string>
+    <string name="dialog_order_title">Sipariş Onayı</string>
+    <string name="dialog_order_message">🛒 Sepetinizdeki yemekleri onaylıyor musunuz?\n\nToplam: ₺%1$s</string>
+    <string name="dialog_confirm">Onayla</string>
+    <string name="dialog_cancel">Vazgeç</string>
+    <string name="dialog_success_message">🛒 Siparişiniz başarıyla alındı! 🎉</string>
+    <string name="dialog_success_item_format">%1$s - (%2$s)</string>
+    <string name="dialog_success_ok">Tamam</string>
+    <string name="notification_title">Siparişiniz Alındı</string>
+    <string name="notification_message">Siparişiniz alındı ve hazırlanıyor! 🛒🍲😋🥳⏳️</string>
+    <string name="basket_confirm_button">Sepeti Onayla</string>
+    <string name="profile_page_title">Hesabım</string>
+    <string name="profile_label_name">İsim:</string>
+    <string name="profile_label_surname">Soyisim:</string>
+    <string name="profile_label_email">Email:</string>
+    <string name="profile_label_address">Adres:</string>
+    <string name="profile_label_phone">Telefon:</string>
+    <string name="logoutTextButton">Çıkış Yap</string>
 
 
 
